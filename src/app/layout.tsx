@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
+import { defaultMetadata } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,18 +14,7 @@ const syne = Syne({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Hijaz.ai — Toronto AI & Digital Services",
-    template: "%s | Hijaz.ai",
-  },
-  description:
-    "Hijaz.ai provides AI automation, web development, Shopify e-commerce, and printing services in Toronto and the GTA.",
-  openGraph: {
-    type: "website",
-    siteName: "Hijaz.ai",
-  },
-};
+export const metadata = defaultMetadata;
 
 export default function RootLayout({
   children,

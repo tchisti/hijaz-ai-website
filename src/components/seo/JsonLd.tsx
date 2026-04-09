@@ -1,3 +1,5 @@
+import { SITE_CONFIG } from "@/lib/constants"
+
 type JsonLdProps = {
   data: Record<string, unknown>
 }
@@ -15,37 +17,25 @@ export function LocalBusinessJsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "Hijaz.ai",
+    name: SITE_CONFIG.name,
     description:
       "AI automation, web development, Shopify e-commerce, and printing services in Toronto and Durham Region",
-    url: "https://hijaz.ai",
-    telephone: "+1 (416) 555-0123",
-    email: "hello@hijaz.ai",
+    url: SITE_CONFIG.url,
+    telephone: SITE_CONFIG.phone,
+    email: SITE_CONFIG.email,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Toronto",
       addressRegion: "Ontario",
       addressCountry: "CA",
     },
-    areaServed: [
-      "Toronto", "North York", "Durham Region", "Scarborough",
-      "Pickering", "Ajax", "Oshawa", "GTA",
-    ],
+    areaServed: SITE_CONFIG.serviceAreas,
     serviceType: [
       "AI Automation", "Web Development", "Shopify E-Commerce",
       "Logo Design", "Printing Services", "Digital Marketing",
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "30",
-    },
     openingHours: "Mo-Fr 09:00-18:00",
-    sameAs: [
-      "https://instagram.com/hijaz.ai",
-      "https://linkedin.com/company/hijaz-ai",
-      "https://facebook.com/hijaz.ai",
-    ],
+    sameAs: Object.values(SITE_CONFIG.social),
   }
   return <JsonLd data={data} />
 }
@@ -74,8 +64,8 @@ export function ServiceJsonLd({ name, description, url }: { name: string; descri
     description,
     provider: {
       "@type": "LocalBusiness",
-      name: "Hijaz.ai",
-      url: "https://hijaz.ai",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
     },
     areaServed: "Greater Toronto Area",
     url,

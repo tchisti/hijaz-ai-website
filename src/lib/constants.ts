@@ -1,11 +1,88 @@
+export interface SiteConfig {
+  name: string
+  tagline: string
+  url: string
+  email: string
+  phone: string
+  whatsappNumber: string
+  address: string
+  businessHours: string
+  serviceAreas: string[]
+  social: {
+    instagram: string
+    linkedin: string
+    facebook: string
+    whatsapp: string
+  }
+}
+
+export interface NavLink {
+  label: string
+  href: string
+}
+
+export interface Service {
+  id: string
+  icon: string
+  title: string
+  shortDesc: string
+  fullDesc: string
+  benefits: string[]
+  useCases: string[]
+  slug: string
+  pricingTeaser: string
+  href: string
+}
+
+export interface Testimonial {
+  name: string
+  role: string
+  company: string
+  avatar: string
+  rating: number
+  text: string
+}
+
+export interface PortfolioProject {
+  id: string
+  title: string
+  industry: string
+  tags: string[]
+  image: string
+  outcome: string
+  description: string
+}
+
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
+export interface Stat {
+  value: number
+  suffix: string
+  label: string
+}
+
+export interface BlogPost {
+  slug: string
+  title: string
+  excerpt: string
+  date: string
+  author: string
+  tags: string[]
+  readTime: string
+  image: string
+}
+
 // Site configuration
-export const SITE_CONFIG = {
+export const SITE_CONFIG: SiteConfig = {
   name: "Hijaz.ai",
   tagline: "Smart Solutions. Powerful Presence.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://hijaz.ai",
   email: "hello@hijaz.ai",
   phone: "+1 (416) 555-0123",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "14165550123",
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "14165550123",
   address: "Toronto, Ontario, Canada",
   businessHours: "Mon–Fri: 9am–6pm EST",
   serviceAreas: [
@@ -21,7 +98,7 @@ export const SITE_CONFIG = {
 }
 
 // Navigation links
-export const NAV_LINKS = [
+export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
@@ -31,7 +108,7 @@ export const NAV_LINKS = [
 ]
 
 // Services data
-export const SERVICES = [
+export const SERVICES: Service[] = [
   {
     id: "ai-automation",
     icon: "Bot",
@@ -125,7 +202,7 @@ export const SERVICES = [
 ]
 
 // Testimonials data
-export const TESTIMONIALS = [
+export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Sara M.",
     role: "Owner",
@@ -153,7 +230,7 @@ export const TESTIMONIALS = [
 ]
 
 // Portfolio projects
-export const PORTFOLIO_PROJECTS = [
+export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
     id: "bloom-cafe",
     title: "Bloom Café",
@@ -211,7 +288,7 @@ export const PORTFOLIO_PROJECTS = [
 ]
 
 // FAQ data
-export const FAQ_ITEMS = [
+export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "How long does it take to build a website?",
     answer: "Most business websites are delivered within 3–7 business days. Complex web applications or e-commerce stores may take 2–4 weeks depending on scope.",
@@ -235,7 +312,7 @@ export const FAQ_ITEMS = [
 ]
 
 // Stats
-export const STATS = [
+export const STATS: Stat[] = [
   { value: 50, suffix: "+", label: "Projects Delivered" },
   { value: 3, suffix: "-Day", label: "Website Turnaround" },
   { value: 100, suffix: "%", label: "Satisfaction Guarantee" },
@@ -243,7 +320,7 @@ export const STATS = [
 ]
 
 // Blog posts metadata
-export const BLOG_POSTS = [
+export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "ai-receptionists-saving-toronto-businesses-time",
     title: "How AI Receptionists Are Saving Toronto Businesses 20 Hours/Week",

@@ -1,2 +1,2 @@
 export { JsonLd, LocalBusinessJsonLd, FAQJsonLd, ServiceJsonLd } from "./JsonLd"
-export { SiteDefaultSeo, PageSEO } from "./PageSEO"
+// PageSEO removed — use buildMetadata() from @/lib/seo instead
