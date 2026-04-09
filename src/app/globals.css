@@ -6,9 +6,9 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222 84% 5%;
-    --primary: 230 70% 11%;      /* midnight blue */
+    --primary: 231 63% 11%;      /* midnight blue */
     --primary-foreground: 0 0% 100%;
-    --accent: 43 58% 54%;         /* gold */
+    --accent: 44 54% 54%;         /* gold */
     --accent-foreground: 0 0% 100%;
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
@@ -18,7 +18,7 @@
     --destructive-foreground: 0 0% 100%;
     --input: 214 32% 91%;
     --border: 214 32% 91%;
-    --ring: 230 70% 11%;
+    --ring: 231 63% 11%;
     --radius: 0.75rem;
     --popover: 0 0% 100%;
     --popover-foreground: 222 84% 5%;
@@ -30,6 +30,8 @@
     --foreground: 0 0% 98%;
     --primary: 43 58% 54%;
     --primary-foreground: 230 70% 11%;
+    --accent: 44 54% 54%;
+    --accent-foreground: 230 70% 11%;
     --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
     --destructive: 0 63% 31%;
@@ -38,6 +40,8 @@
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
     --border: 217 33% 17%;
+    --ring: 43 58% 54%;
+    --radius: 0.75rem;
     --popover: 230 70% 11%;
     --popover-foreground: 0 0% 98%;
     --card: 217 33% 17%;
