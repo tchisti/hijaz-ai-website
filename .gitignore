@@ -43,3 +43,6 @@ yarn-error.log*
 
 # Claude
 .claude/
+
+# Git worktrees
+.worktrees/
