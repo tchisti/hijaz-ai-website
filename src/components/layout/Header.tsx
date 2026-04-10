@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { Menu, X, Sun, Moon } from "lucide-react"
-import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants"
+import { NAV_LINKS } from "@/lib/constants"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -20,9 +20,22 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  // Read preference on mount
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark)
-  }, [dark])
+    const saved = localStorage.getItem("theme")
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    const isDark = saved === "dark" || (!saved && prefersDark)
+    setDark(isDark)
+    document.documentElement.classList.toggle("dark", isDark)
+  }, [])
+
+  // Apply + persist on toggle
+  const toggleDark = () => {
+    const next = !dark
+    setDark(next)
+    document.documentElement.classList.toggle("dark", next)
+    localStorage.setItem("theme", next ? "dark" : "light")
+  }
 
   const navLinks = NAV_LINKS.filter((l) => l.href !== "/")
 
@@ -59,7 +72,7 @@ export default function Header() {
           {/* Right side actions */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setDark(!dark)}
+              onClick={toggleDark}
               className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               aria-label="Toggle dark mode"
             >
@@ -72,6 +85,8 @@ export default function Header() {
               className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -80,7 +95,7 @@ export default function Header() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-border py-4 space-y-1 animate-in slide-in-from-top-2">
+          <div id="mobile-nav" className="md:hidden border-t border-border py-4 space-y-1 animate-in slide-in-from-top-2">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
