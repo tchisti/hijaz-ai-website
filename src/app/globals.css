@@ -4,51 +4,136 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 84% 5%;
-    --primary: 231 63% 11%;      /* midnight blue */
-    --primary-foreground: 0 0% 100%;
-    --accent: 44 54% 54%;         /* gold */
-    --accent-foreground: 0 0% 100%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
-    --destructive: 0 84% 60%;
+    /* ── Core palette: deep void + gold + cyber-cyan ── */
+    --background: 236 75% 4%;       /* #03050F — deep void */
+    --foreground: 0 0% 95%;         /* near-white */
+
+    /* Brand primaries */
+    --primary: 43 54% 54%;          /* gold #C9A84C */
+    --primary-foreground: 236 75% 4%;
+
+    /* Accent: cyber cyan */
+    --accent: 193 64% 60%;          /* #52C1DC */
+    --accent-foreground: 236 75% 4%;
+
+    /* Muted */
+    --muted: 230 30% 12%;
+    --muted-foreground: 220 15% 55%;
+
+    /* Secondary */
+    --secondary: 230 40% 10%;
+    --secondary-foreground: 0 0% 85%;
+
+    /* Surfaces */
+    --card: 230 50% 7%;
+    --card-foreground: 0 0% 92%;
+    --popover: 230 50% 7%;
+    --popover-foreground: 0 0% 92%;
+
+    /* Functional */
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-    --input: 214 32% 91%;
-    --border: 214 32% 91%;
-    --ring: 231 63% 11%;
+    --input: 230 30% 14%;
+    --border: 230 25% 14%;
+    --ring: 43 54% 54%;
+
+    /* Shape */
     --radius: 0.75rem;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 84% 5%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 84% 5%;
-  }
-  .dark {
-    --background: 230 70% 11%;
-    --foreground: 0 0% 98%;
-    --primary: 43 58% 54%;
-    --primary-foreground: 230 70% 11%;
-    --accent: 44 54% 54%;
-    --accent-foreground: 230 70% 11%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 100%;
-    --input: 217 33% 17%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --border: 217 33% 17%;
-    --ring: 43 58% 54%;
-    --radius: 0.75rem;
-    --popover: 230 70% 11%;
-    --popover-foreground: 0 0% 98%;
-    --card: 217 33% 17%;
-    --card-foreground: 0 0% 98%;
+
+    /* Custom tokens */
+    --glow-gold: rgba(201, 168, 76, 0.2);
+    --glow-cyan: rgba(82, 193, 220, 0.15);
+    --surface-glass: rgba(255, 255, 255, 0.04);
+    --surface-glass-border: rgba(255, 255, 255, 0.08);
   }
 }
 
-* { @apply border-border; }
-html { scroll-behavior: smooth; }
-body { @apply bg-background text-foreground font-sans; }
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+* {
+  @apply border-border;
+}
+
+html {
+  scroll-behavior: smooth;
+  @apply bg-background;
+  /* Improve font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  @apply bg-background text-foreground font-sans;
+  /* Ensure body is always transparent so the fixed background shows through */
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Typography helpers ───────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display tracking-tight;
+}
+
+/* ── Glass surface utility ────────────────────────────────────────────────── */
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-glass-border);
+}
+
+.glass-gold {
+  background: rgba(201, 168, 76, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+/* ── Glow utilities ───────────────────────────────────────────────────────── */
+.glow-gold {
+  box-shadow: 0 0 24px var(--glow-gold), 0 0 48px rgba(201, 168, 76, 0.08);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 24px var(--glow-cyan), 0 0 48px rgba(82, 193, 220, 0.06);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+}
+
+/* ── Gradient text ────────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #C9A84C 0%, #E8C46A 50%, #52C1DC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Scrollbar styling ────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #03050F;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 168, 76, 0.4);
+}
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(201, 168, 76, 0.2);
+  color: #E8C46A;
+}
+
+/* ── Focus ring ───────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(201, 168, 76, 0.5);
+  outline-offset: 2px;
+}
