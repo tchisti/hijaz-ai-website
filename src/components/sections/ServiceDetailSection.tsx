@@ -25,7 +25,7 @@ export default function ServiceDetailSection({ service, index }: Props) {
       id={service.slug}
       className={cn(
         "py-20 border-b border-border last:border-0",
-        !isEven && "bg-[#F8F9FB] -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
+        !isEven && "bg-muted/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
       )}
     >
       <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -38,12 +38,12 @@ export default function ServiceDetailSection({ service, index }: Props) {
           className={cn(!isEven && "lg:order-2")}
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-midnight/5 flex items-center justify-center">
-              <Icon size={20} className="text-midnight" />
+            <div className="w-10 h-10 rounded-xl bg-foreground/5 flex items-center justify-center">
+              <Icon size={20} className="text-foreground" />
             </div>
             <span className="text-gold font-medium text-sm uppercase tracking-widest">Service</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-midnight mb-4">{service.title}</h2>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">{service.title}</h2>
           <p className="text-muted-foreground leading-relaxed mb-6">{service.fullDesc}</p>
 
           {/* Benefits */}
@@ -67,7 +67,7 @@ export default function ServiceDetailSection({ service, index }: Props) {
 
           {/* Pricing teaser */}
           <p className="text-sm text-muted-foreground mb-6">
-            <span className="font-semibold text-midnight">{service.pricingTeaser}</span> · Free consultation included
+            <span className="font-semibold text-foreground">{service.pricingTeaser}</span> · Free consultation included
           </p>
 
           <Button asChild className="bg-midnight text-white hover:bg-midnight/90">

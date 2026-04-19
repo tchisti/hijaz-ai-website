@@ -46,7 +46,7 @@ export default function ContactForm() {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const inputClass = "w-full px-4 py-3 rounded-xl border border-border bg-[#F8F9FB] text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-midnight/20 focus:border-midnight transition-colors"
+  const inputClass = "w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring transition-colors"
 
   const onSubmit = async (data: FormData) => {
     setStatus("loading")
@@ -79,11 +79,11 @@ export default function ContactForm() {
         <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
           <CheckCircle size={32} className="text-green-600" />
         </div>
-        <h3 className="font-display text-xl font-bold text-midnight">Message Sent!</h3>
+        <h3 className="font-display text-xl font-bold text-foreground">Message Sent!</h3>
         <p className="text-muted-foreground max-w-sm">
           Thanks! We&apos;ll get back to you within 2 business hours. Check your inbox for a confirmation.
         </p>
-        <Button variant="outline" onClick={() => setStatus("idle")} className="mt-2 border-midnight/20">
+        <Button variant="outline" onClick={() => setStatus("idle")} className="mt-2 border-border">
           Send Another Message
         </Button>
       </div>
@@ -95,12 +95,12 @@ export default function ContactForm() {
       {/* Name + Email row */}
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-midnight mb-1.5">Name <span className="text-destructive">*</span></label>
+          <label className="block text-sm font-medium text-foreground mb-1.5">Name <span className="text-destructive">*</span></label>
           <input {...register("name")} placeholder="John Smith" className={cn(inputClass, errors.name && "border-destructive")} />
           <FieldError message={errors.name?.message} />
         </div>
         <div>
-          <label className="block text-sm font-medium text-midnight mb-1.5">Email <span className="text-destructive">*</span></label>
+          <label className="block text-sm font-medium text-foreground mb-1.5">Email <span className="text-destructive">*</span></label>
           <input {...register("email")} type="email" placeholder="john@company.com" className={cn(inputClass, errors.email && "border-destructive")} />
           <FieldError message={errors.email?.message} />
         </div>
@@ -108,13 +108,13 @@ export default function ContactForm() {
 
       {/* Phone */}
       <div>
-        <label className="block text-sm font-medium text-midnight mb-1.5">Phone <span className="text-muted-foreground font-normal">(optional)</span></label>
+        <label className="block text-sm font-medium text-foreground mb-1.5">Phone <span className="text-muted-foreground font-normal">(optional)</span></label>
         <input {...register("phone")} type="tel" placeholder="+1 (416) 555-0123" className={inputClass} />
       </div>
 
       {/* Service dropdown */}
       <div>
-        <label className="block text-sm font-medium text-midnight mb-1.5">Service Interested In <span className="text-destructive">*</span></label>
+        <label className="block text-sm font-medium text-foreground mb-1.5">Service Interested In <span className="text-destructive">*</span></label>
         <select {...register("service")} className={cn(inputClass, errors.service && "border-destructive")}>
           <option value="">Select a service…</option>
           {SERVICES.map((s) => (
@@ -127,7 +127,7 @@ export default function ContactForm() {
 
       {/* Project details */}
       <div>
-        <label className="block text-sm font-medium text-midnight mb-1.5">Project Details <span className="text-destructive">*</span></label>
+        <label className="block text-sm font-medium text-foreground mb-1.5">Project Details <span className="text-destructive">*</span></label>
         <textarea
           {...register("details")}
           rows={4}
@@ -139,7 +139,7 @@ export default function ContactForm() {
 
       {/* Budget (optional) */}
       <div>
-        <label className="block text-sm font-medium text-midnight mb-1.5">Budget Range <span className="text-muted-foreground font-normal">(optional)</span></label>
+        <label className="block text-sm font-medium text-foreground mb-1.5">Budget Range <span className="text-muted-foreground font-normal">(optional)</span></label>
         <select {...register("budget")} className={inputClass}>
           <option value="">Prefer not to say</option>
           {BUDGET_OPTIONS.map((b) => (

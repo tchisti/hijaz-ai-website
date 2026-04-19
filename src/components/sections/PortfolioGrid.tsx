@@ -37,7 +37,7 @@ function ProjectCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="group bg-white rounded-2xl overflow-hidden border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+      className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
       onClick={onClick}
       id={project.id}
     >
@@ -60,7 +60,7 @@ function ProjectCard({
         </div>
         <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{project.description}</p>
         <p className="text-gold font-semibold text-sm mb-4">{project.outcome}</p>
-        <span className="inline-flex items-center gap-1 text-sm font-medium text-midnight group-hover:text-gold transition-colors group-hover:gap-2">
+        <span className="inline-flex items-center gap-1 text-sm font-medium text-foreground group-hover:text-gold transition-colors group-hover:gap-2">
           View Case Study <ArrowRight size={14} />
         </span>
       </div>
@@ -90,7 +90,7 @@ function ProjectModal({
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="bg-white rounded-3xl overflow-hidden max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+        className="bg-card rounded-3xl overflow-hidden max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal header image */}
@@ -126,7 +126,7 @@ function ProjectModal({
             <Button asChild className="bg-midnight text-white hover:bg-midnight/90">
               <Link href="/contact" onClick={onClose}>Start a Similar Project <ArrowRight size={14} className="ml-2" /></Link>
             </Button>
-            <Button variant="outline" onClick={onClose} className="border-midnight/20">
+            <Button variant="outline" onClick={onClose} className="border-border">
               Close
             </Button>
           </div>
@@ -146,7 +146,7 @@ export default function PortfolioGrid() {
     : PORTFOLIO_PROJECTS.filter((p) => p.tags.includes(activeFilter))
 
   return (
-    <section className="py-20 bg-[#F8F9FB]">
+    <section className="py-20 bg-muted/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Filter tabs */}
         <div className="flex flex-wrap gap-2 justify-center mb-12">
@@ -158,7 +158,7 @@ export default function PortfolioGrid() {
                 "px-4 py-2 rounded-full text-sm font-medium transition-all",
                 activeFilter === filter
                   ? "bg-midnight text-white shadow-md"
-                  : "bg-white text-muted-foreground border border-border hover:border-midnight/30 hover:text-midnight"
+                  : "bg-card text-muted-foreground border border-border hover:border-foreground/30 hover:text-foreground"
               )}
             >
               {filter}
@@ -188,8 +188,8 @@ export default function PortfolioGrid() {
         )}
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16 p-10 bg-white rounded-3xl border border-border">
-          <h3 className="font-display text-2xl font-bold text-midnight mb-3">
+        <div className="text-center mt-16 p-10 bg-card rounded-3xl border border-border">
+          <h3 className="font-display text-2xl font-bold text-foreground mb-3">
             Want results like these?
           </h3>
           <p className="text-muted-foreground mb-6">Start your project with Toronto&apos;s leading AI &amp; digital agency.</p>

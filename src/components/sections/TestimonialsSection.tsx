@@ -5,11 +5,11 @@ import { TESTIMONIALS } from "@/lib/constants"
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <span className="text-gold font-medium text-sm uppercase tracking-widest">Client Love</span>
-          <h2 className="font-display text-4xl font-bold text-midnight mt-2">What Our Clients Say</h2>
+          <h2 className="font-display text-4xl font-bold text-foreground mt-2">What Our Clients Say</h2>
           <p className="mt-4 text-muted-foreground">Real results from real Toronto businesses.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -20,7 +20,7 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="bg-[#F8F9FB] rounded-2xl p-8 border border-border flex flex-col"
+              className="bg-card rounded-2xl p-8 border border-border flex flex-col"
             >
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: t.rating }).map((_, j) => (
@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
                   {t.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-semibold text-midnight text-sm">{t.name}</p>
+                  <p className="font-semibold text-foreground text-sm">{t.name}</p>
                   <p className="text-xs text-muted-foreground">{t.role}, {t.company}</p>
                 </div>
               </div>

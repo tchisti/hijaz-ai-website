@@ -66,12 +66,12 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-gold font-medium text-sm uppercase tracking-widest">Our Story</span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-midnight mt-2 mb-6">
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mt-2 mb-6">
                 We Started with a Simple Belief
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -82,7 +82,7 @@ export default function AboutPage() {
                   We watched too many great local businesses fall behind online — not because of a lack of quality, but because the technology gap was too wide. Clunky websites, no automation, zero digital presence. We knew we could change that.
                 </p>
                 <p>
-                  Today, we&apos;ve helped <strong className="text-midnight">50+ businesses</strong> across Toronto, North York, Durham Region, and the broader GTA automate their operations, build stunning digital presences, and generate consistent leads online.
+                  Today, we&apos;ve helped <strong className="text-foreground">50+ businesses</strong> across Toronto, North York, Durham Region, and the broader GTA automate their operations, build stunning digital presences, and generate consistent leads online.
                 </p>
               </div>
             </div>
@@ -93,8 +93,8 @@ export default function AboutPage() {
                 { value: "3-Day", label: "Avg. Turnaround" },
                 { value: "4.9★", label: "Client Rating" },
               ].map((stat) => (
-                <div key={stat.label} className="bg-[#F8F9FB] rounded-2xl p-6 text-center border border-border">
-                  <p className="font-display text-3xl font-bold text-midnight">{stat.value}</p>
+                <div key={stat.label} className="bg-card rounded-2xl p-6 text-center border border-border">
+                  <p className="font-display text-3xl font-bold text-foreground">{stat.value}</p>
                   <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
                 </div>
               ))}
@@ -104,19 +104,19 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-24 bg-[#F8F9FB]">
+      <section className="py-24 bg-muted/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <span className="text-gold font-medium text-sm uppercase tracking-widest">What Drives Us</span>
-            <h2 className="font-display text-4xl font-bold text-midnight mt-2">Our Core Values</h2>
+            <h2 className="font-display text-4xl font-bold text-foreground mt-2">Our Core Values</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {VALUES.map((value) => (
-              <div key={value.title} className="bg-white rounded-2xl p-8 border border-border text-center hover:shadow-md hover:border-gold/30 transition-all">
+              <div key={value.title} className="bg-card rounded-2xl p-8 border border-border text-center hover:shadow-md hover:border-gold/30 transition-all">
                 <div className="w-14 h-14 rounded-2xl bg-midnight/5 flex items-center justify-center mx-auto mb-4">
-                  <value.icon size={24} className="text-midnight" />
+                  <value.icon size={24} className="text-foreground" />
                 </div>
-                <h3 className="font-display font-semibold text-lg text-midnight mb-2">{value.title}</h3>
+                <h3 className="font-display font-semibold text-lg text-foreground mb-2">{value.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{value.desc}</p>
               </div>
             ))}
@@ -125,11 +125,11 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <span className="text-gold font-medium text-sm uppercase tracking-widest">The Team</span>
-            <h2 className="font-display text-4xl font-bold text-midnight mt-2">People Behind the Work</h2>
+            <h2 className="font-display text-4xl font-bold text-foreground mt-2">People Behind the Work</h2>
             <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
               A tight-knit team of AI engineers, designers, and digital strategists — all based in the Greater Toronto Area.
             </p>
@@ -140,7 +140,7 @@ export default function AboutPage() {
                 <div className={`w-24 h-24 rounded-full ${member.bg} flex items-center justify-center mx-auto mb-4 text-white text-2xl font-display font-bold shadow-lg group-hover:scale-105 transition-transform`}>
                   {member.initials}
                 </div>
-                <p className="font-semibold text-midnight">{member.name}</p>
+                <p className="font-semibold text-foreground">{member.name}</p>
                 <p className="text-sm text-muted-foreground">{member.role}</p>
               </div>
             ))}
@@ -165,19 +165,19 @@ export default function AboutPage() {
               </span>
             ))}
           </div>
-          <Button asChild className="bg-gold text-midnight hover:bg-gold/90 font-semibold">
+          <Button asChild className="bg-gold text-foreground hover:bg-gold/90 font-semibold">
             <Link href="/contact">Work With a Team That Actually Cares <ArrowRight size={16} className="ml-2" /></Link>
           </Button>
         </div>
       </section>
 
       {/* Trust logos row (placeholder) */}
-      <section className="py-12 bg-[#F8F9FB] border-y border-border">
+      <section className="py-12 bg-muted/50 border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm text-muted-foreground mb-8 uppercase tracking-widest font-medium">Trusted by businesses across the GTA</p>
           <div className="flex flex-wrap items-center justify-center gap-8">
             {["Bloom Café", "GTA Realty", "Wellness Clinic", "North Print Co.", "Spice Bazaar", "Durham Dental"].map((name) => (
-              <div key={name} className="px-6 py-3 bg-white border border-border rounded-xl text-muted-foreground text-sm font-medium hover:border-gold/30 transition-colors">
+              <div key={name} className="px-6 py-3 bg-card border border-border rounded-xl text-muted-foreground text-sm font-medium hover:border-gold/30 transition-colors">
                 {name}
               </div>
             ))}

@@ -19,8 +19,8 @@ export default function ServicesSidebar() {
       </div>
 
       {/* Quick jump links */}
-      <div className="bg-[#F8F9FB] rounded-2xl p-6 border border-border">
-        <h3 className="font-semibold text-midnight text-sm mb-4 uppercase tracking-wider">Our Services</h3>
+      <div className="bg-card rounded-2xl p-6 border border-border">
+        <h3 className="font-semibold text-foreground text-sm mb-4 uppercase tracking-wider">Our Services</h3>
         <ul className="space-y-2">
           {SERVICES.map((s) => (
             <li key={s.id}>

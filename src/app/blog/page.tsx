@@ -32,14 +32,14 @@ export default function BlogPage() {
       </section>
 
       {/* Posts grid */}
-      <section className="py-20 bg-[#F8F9FB]">
+      <section className="py-20 bg-muted/50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ALL_POSTS.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group bg-white rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Image placeholder */}
                 <div className="h-44 bg-gradient-to-br from-midnight to-blue-800 flex items-end p-5">

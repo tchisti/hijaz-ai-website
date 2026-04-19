@@ -14,11 +14,11 @@ const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, trans
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <span className="text-gold font-medium text-sm uppercase tracking-widest">Why Hijaz.ai</span>
-          <h2 className="font-display text-4xl font-bold text-midnight mt-2">Built for Toronto Businesses</h2>
+          <h2 className="font-display text-4xl font-bold text-foreground mt-2">Built for Toronto Businesses</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
             Enterprise-level technology with the personal touch of a local partner who actually picks up the phone.
           </p>
@@ -33,10 +33,10 @@ export default function WhyChooseUs() {
           {reasons.map((r) => (
             <motion.div key={r.title} variants={item}
               className="text-center p-6 rounded-2xl border border-border hover:border-gold/30 hover:shadow-md transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-midnight/5 flex items-center justify-center mx-auto mb-4">
-                <r.icon size={26} className="text-midnight" />
+              <div className="w-14 h-14 rounded-2xl bg-foreground/5 flex items-center justify-center mx-auto mb-4">
+                <r.icon size={26} className="text-foreground" />
               </div>
-              <h3 className="font-display font-semibold text-lg text-midnight mb-2">{r.title}</h3>
+              <h3 className="font-display font-semibold text-lg text-foreground mb-2">{r.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{r.desc}</p>
             </motion.div>
           ))}

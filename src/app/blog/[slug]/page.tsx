@@ -36,7 +36,7 @@ function renderContent(content: string) {
 
     if (trimmed.startsWith("## ")) {
       elements.push(
-        <h2 key={key++} className="font-display text-2xl font-bold text-midnight mt-10 mb-4">
+        <h2 key={key++} className="font-display text-2xl font-bold text-foreground mt-10 mb-4">
           {trimmed.slice(3)}
         </h2>
       )
@@ -46,7 +46,7 @@ function renderContent(content: string) {
       if (match) {
         elements.push(
           <li key={key++} className="text-muted-foreground mb-2">
-            <strong className="text-midnight">{match[1]}</strong>{match[2]}
+            <strong className="text-foreground">{match[1]}</strong>{match[2]}
           </li>
         )
       }
@@ -61,7 +61,7 @@ function renderContent(content: string) {
       const parts = trimmed.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/)
       const renderedParts = parts.map((part, i) => {
         const boldMatch = part.match(/^\*\*(.+)\*\*$/)
-        if (boldMatch) return <strong key={i} className="text-midnight font-semibold">{boldMatch[1]}</strong>
+        if (boldMatch) return <strong key={i} className="text-foreground font-semibold">{boldMatch[1]}</strong>
         const linkMatch = part.match(/^\[(.+)\]\((.+)\)$/)
         if (linkMatch) return <Link key={i} href={linkMatch[2]} className="text-gold hover:underline font-medium">{linkMatch[1]}</Link>
         return part
@@ -98,7 +98,7 @@ export default async function BlogPostPage({ params }: Props) {
       </div>
 
       {/* Title */}
-      <h1 className="font-display text-3xl sm:text-4xl font-bold text-midnight mb-6 leading-tight">{post.title}</h1>
+      <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-6 leading-tight">{post.title}</h1>
 
       {/* Meta row */}
       <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mb-10 pb-8 border-b border-border">
@@ -116,7 +116,7 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="my-12 bg-midnight rounded-2xl p-8 text-center">
         <h3 className="font-display text-xl font-bold text-white mb-2">Want this done for your business?</h3>
         <p className="text-white/60 text-sm mb-6">Book a free consultation with the Hijaz.ai team — Toronto&apos;s local AI &amp; digital agency.</p>
-        <Button asChild className="bg-gold text-midnight hover:bg-gold/90 font-semibold">
+        <Button asChild className="bg-gold text-foreground hover:bg-gold/90 font-semibold">
           <Link href="/contact">Get Started <ArrowRight size={14} className="ml-2" /></Link>
         </Button>
       </div>
@@ -124,15 +124,15 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Related posts */}
       {relatedPosts.length > 0 && (
         <div className="mt-16 pt-10 border-t border-border">
-          <h3 className="font-display text-2xl font-bold text-midnight mb-8">Related Articles</h3>
+          <h3 className="font-display text-2xl font-bold text-foreground mb-8">Related Articles</h3>
           <div className="grid sm:grid-cols-2 gap-6">
             {relatedPosts.map((related) => (
               <Link key={related.slug} href={`/blog/${related.slug}`}
-                className="group bg-[#F8F9FB] rounded-2xl p-6 border border-border hover:border-gold/30 hover:shadow-md transition-all">
+                className="group bg-card rounded-2xl p-6 border border-border hover:border-gold/30 hover:shadow-md transition-all">
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {related.tags.slice(0, 2).map((tag) => <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>)}
                 </div>
-                <h4 className="font-display font-semibold text-midnight text-sm mb-2 group-hover:text-gold transition-colors">{related.title}</h4>
+                <h4 className="font-display font-semibold text-foreground text-sm mb-2 group-hover:text-gold transition-colors">{related.title}</h4>
                 <p className="text-xs text-muted-foreground line-clamp-2">{related.excerpt}</p>
               </Link>
             ))}

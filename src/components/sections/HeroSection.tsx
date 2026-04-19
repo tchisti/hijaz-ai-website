@@ -8,7 +8,7 @@ const fadeUp = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden">
       {/* Subtle gradient bg */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(10,15,44,0.06)_0%,_transparent_60%)]" />
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
@@ -29,7 +29,7 @@ export default function HeroSection() {
           <motion.h1
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-midnight leading-tight tracking-tight"
+            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-tight tracking-tight"
           >
             Toronto&apos;s AI &amp;{" "}
             <span className="text-gold">Digital Growth</span>{" "}
@@ -43,7 +43,7 @@ export default function HeroSection() {
           >
             Stop losing customers to competitors. Hijaz.ai automates your workflows,
             builds your digital presence, and drives real growth —{" "}
-            <span className="text-midnight font-medium">all from one trusted Toronto team.</span>
+            <span className="text-foreground font-medium">all from one trusted Toronto team.</span>
           </motion.p>
 
           <motion.div
@@ -54,7 +54,7 @@ export default function HeroSection() {
             <Button asChild size="lg" className="w-full sm:w-auto bg-midnight text-white hover:bg-midnight/90 shadow-lg shadow-midnight/20 text-base px-8">
               <Link href="/contact">Book Free Consultation <ArrowRight size={16} className="ml-2" /></Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-midnight/20 text-midnight hover:bg-midnight/5 text-base px-8">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-border text-foreground hover:bg-foreground/5 text-base px-8">
               <Link href="/services">See Our Services</Link>
             </Button>
           </motion.div>
