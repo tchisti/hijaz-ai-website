@@ -13,7 +13,7 @@ export default function CTABanner() {
           Join 50+ Toronto businesses already using Hijaz.ai to automate, scale, and dominate their market.
         </p>
         <Button asChild size="lg" className="bg-gold text-midnight hover:bg-gold/90 font-semibold text-base px-10 shadow-lg shadow-gold/20">
-          <Link href="/contact">Let&apos;s Talk <ArrowRight size={16} className="ml-2" /></Link>
+          <Link href="/contact">Book Free Consultation <ArrowRight size={16} className="ml-2" /></Link>
         </Button>
         <p className="mt-4 text-white/40 text-sm">⚡ Limited spots available this month</p>
       </div>

@@ -1,10 +1,11 @@
 "use client"
 import Link from "next/link"
+import type { ElementType } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Plus, Bot, Code2, ShoppingBag, Printer, TrendingUp } from "lucide-react"
 import { SERVICES } from "@/lib/constants"
 
-const ICON_MAP: Record<string, React.ElementType> = { Bot, Code2, ShoppingBag, Printer, TrendingUp }
+const ICON_MAP: Record<string, ElementType> = { Bot, Code2, ShoppingBag, Printer, TrendingUp }
 
 const container = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }
 const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }
