@@ -79,7 +79,7 @@ export default function Header() {
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <Button asChild className="hidden md:inline-flex bg-midnight text-white hover:bg-midnight/90 dark:bg-gold dark:text-midnight dark:hover:bg-gold/90">
-              <Link href="/contact">Book a Free Call</Link>
+              <a href="https://cal.com/tchisti/15min" target="_blank" rel="noopener noreferrer">Book a Free Call</a>
             </Button>
             <button
               className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
@@ -113,7 +113,7 @@ export default function Header() {
             ))}
             <div className="pt-2">
               <Button asChild className="w-full bg-midnight text-white dark:bg-gold dark:text-midnight">
-                <Link href="/contact" onClick={() => setMobileOpen(false)}>Book a Free Call</Link>
+                <a href="https://cal.com/tchisti/15min" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>Book a Free Call</a>
               </Button>
             </div>
           </div>
