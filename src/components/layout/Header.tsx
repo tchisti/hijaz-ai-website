@@ -41,16 +41,24 @@ export default function Header() {
 
   return (
     <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      "bg-white/90 dark:bg-midnight/95 backdrop-blur-md",
-      scrolled ? "border-b border-border shadow-sm" : "border-b border-transparent"
-    )}>
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+      scrolled
+        ? "backdrop-blur-xl border-b"
+        : "border-b border-transparent",
+    )}
+    style={{
+      background: scrolled
+        ? "rgba(3,5,15,0.85)"
+        : "rgba(3,5,15,0.2)",
+      borderColor: scrolled ? "rgba(201,168,76,0.12)" : "transparent",
+      boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.4)" : "none",
+    }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center font-display text-xl font-bold">
-            <span className="text-foreground">Hijaz</span>
-            <span className="text-gold">.ai</span>
+            <span style={{ color: "rgba(255,255,255,0.9)" }}>Hijaz</span>
+            <span style={{ color: "#C9A84C" }}>.ai</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -60,8 +68,10 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-gold",
-                  pathname === link.href ? "text-gold" : "text-muted-foreground"
+                  "text-sm font-medium transition-all duration-200 hover:text-[#C9A84C]",
+                  pathname === link.href
+                    ? "text-[#C9A84C]"
+                    : "text-white/50"
                 )}
               >
                 {link.label}
@@ -78,7 +88,16 @@ export default function Header() {
             >
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <Button asChild className="hidden md:inline-flex bg-midnight text-white hover:bg-midnight/90 dark:bg-gold dark:text-midnight dark:hover:bg-gold/90">
+            <Button
+              asChild
+              className="hidden md:inline-flex font-semibold text-sm"
+              style={{
+                background: "linear-gradient(135deg, #C9A84C, #E8C46A)",
+                color: "#03050F",
+                border: "none",
+                boxShadow: "0 0 20px rgba(201,168,76,0.25)",
+              }}
+            >
               <a href="https://cal.com/tchisti/15min" target="_blank" rel="noopener noreferrer">Book a Free Call</a>
             </Button>
             <button
