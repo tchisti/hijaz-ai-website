@@ -81,7 +81,7 @@ export const SITE_CONFIG: SiteConfig = {
   tagline: "Smart Solutions. Powerful Presence.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://hijaz.ai",
   email: "hello@hijaz.ai",
-  phone: "+1 (416) 555-0123",
+  phone: "+1 (437) 580-9680",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "14165550123",
   address: "Toronto, Ontario, Canada",
   businessHours: "Mon–Fri: 9am–6pm EST",
