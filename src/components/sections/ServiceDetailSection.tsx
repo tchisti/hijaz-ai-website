@@ -28,7 +28,7 @@ export default function ServiceDetailSection({ service, index }: Props) {
         !isEven && "bg-[#F8F9FB] -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
       )}
     >
-      <div className={cn("grid lg:grid-cols-2 gap-12 items-center", !isEven && "lg:flex-row-reverse")}>
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
         {/* Content side */}
         <motion.div
           initial={{ opacity: 0, x: isEven ? -20 : 20 }}
