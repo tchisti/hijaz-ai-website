@@ -27,23 +27,50 @@ interface Particle {
 /* ─── Constants ──────────────────────────────────────────────────────────── */
 const PARTICLE_COUNT = 70
 const CONNECTION_DISTANCE = 155
-const GOLD = "201,168,76"
-const CYAN = "82,193,220"
-const INDIGO = "80,60,200"
+
+const DARK_PALETTE = {
+  GOLD: "201,168,76",
+  CYAN: "82,193,220",
+  ACCENT: "80,60,200",
+  base: "#03050F",
+} as const
+
+const LIGHT_PALETTE = {
+  GOLD: "140,100,30",     // warm deep gold on light
+  CYAN: "26,100,140",     // deep teal on light
+  ACCENT: "90,70,190",    // indigo on light
+  base: "#F8F7F3",
+} as const
+
+/* ─── useDarkMode hook ────────────────────────────────────────────────────── */
+function useDarkMode() {
+  const [isDark, setIsDark] = useState(true)
+  useEffect(() => {
+    const check = () =>
+      setIsDark(document.documentElement.classList.contains("dark"))
+    check()
+    const observer = new MutationObserver(check)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+    return () => observer.disconnect()
+  }, [])
+  return isDark
+}
 
 /* ─── Aurora Bands ────────────────────────────────────────────────────────── */
-function AuroraBands() {
+function AuroraBands({ isDark }: { isDark: boolean }) {
+  const d = isDark
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
       <motion.div
         className="absolute"
         style={{
-          width: "130%",
-          height: "45%",
-          left: "-15%",
-          top: "-8%",
-          background:
-            "radial-gradient(ellipse 55% 80% at 50% 50%, rgba(82,193,220,0.07) 0%, transparent 70%)",
+          width: "130%", height: "45%", left: "-15%", top: "-8%",
+          background: d
+            ? "radial-gradient(ellipse 55% 80% at 50% 50%, rgba(82,193,220,0.07) 0%, transparent 70%)"
+            : "radial-gradient(ellipse 55% 80% at 50% 50%, rgba(26,122,154,0.06) 0%, transparent 70%)",
           filter: "blur(50px)",
         }}
         animate={{ x: [0, 70, -50, 0], y: [0, 35, -20, 0], scale: [1, 1.1, 0.95, 1] }}
@@ -52,12 +79,10 @@ function AuroraBands() {
       <motion.div
         className="absolute"
         style={{
-          width: "85%",
-          height: "65%",
-          left: "-20%",
-          top: "18%",
-          background:
-            "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(201,168,76,0.055) 0%, transparent 70%)",
+          width: "85%", height: "65%", left: "-20%", top: "18%",
+          background: d
+            ? "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(201,168,76,0.055) 0%, transparent 70%)"
+            : "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(184,146,42,0.07) 0%, transparent 70%)",
           filter: "blur(70px)",
         }}
         animate={{ x: [0, -55, 25, 0], y: [0, -45, 18, 0], scale: [1, 1.06, 1.1, 1] }}
@@ -66,12 +91,10 @@ function AuroraBands() {
       <motion.div
         className="absolute"
         style={{
-          width: "75%",
-          height: "75%",
-          right: "-12%",
-          top: "8%",
-          background:
-            "radial-gradient(ellipse 55% 65% at 50% 50%, rgba(40,30,130,0.13) 0%, transparent 70%)",
+          width: "75%", height: "75%", right: "-12%", top: "8%",
+          background: d
+            ? "radial-gradient(ellipse 55% 65% at 50% 50%, rgba(40,30,130,0.13) 0%, transparent 70%)"
+            : "radial-gradient(ellipse 55% 65% at 50% 50%, rgba(100,80,210,0.05) 0%, transparent 70%)",
           filter: "blur(90px)",
         }}
         animate={{ x: [0, 45, -35, 0], y: [0, 55, -30, 0], scale: [1, 0.9, 1.1, 1] }}
@@ -80,12 +103,10 @@ function AuroraBands() {
       <motion.div
         className="absolute"
         style={{
-          width: "100%",
-          height: "55%",
-          left: "0%",
-          bottom: "-12%",
-          background:
-            "radial-gradient(ellipse 75% 55% at 50% 85%, rgba(82,193,220,0.04) 0%, transparent 60%)",
+          width: "100%", height: "55%", left: "0%", bottom: "-12%",
+          background: d
+            ? "radial-gradient(ellipse 75% 55% at 50% 85%, rgba(82,193,220,0.04) 0%, transparent 60%)"
+            : "radial-gradient(ellipse 75% 55% at 50% 85%, rgba(26,122,154,0.04) 0%, transparent 60%)",
           filter: "blur(70px)",
         }}
         animate={{ y: [0, -25, 10, 0], scale: [1, 1.08, 0.96, 1] }}
@@ -179,7 +200,7 @@ function PulseRings() {
           key={i}
           className="absolute rounded-full"
           style={{
-            border: `1px solid rgba(${i % 2 === 0 ? GOLD : CYAN},0.09)`,
+            border: `1px solid rgba(${i % 2 === 0 ? DARK_PALETTE.GOLD : DARK_PALETTE.CYAN},0.09)`,
             width: 220 + i * 200,
             height: 220 + i * 200,
           }}
@@ -200,7 +221,10 @@ function PulseRings() {
 }
 
 /* ─── Geometric Shapes ────────────────────────────────────────────────────── */
-function GeometricShapes() {
+function GeometricShapes({ isDark }: { isDark: boolean }) {
+  const G = isDark ? DARK_PALETTE.GOLD : LIGHT_PALETTE.GOLD
+  const C = isDark ? DARK_PALETTE.CYAN : LIGHT_PALETTE.CYAN
+  const A = isDark ? DARK_PALETTE.ACCENT : LIGHT_PALETTE.ACCENT
   const shapes = useMemo(
     () => [
       { type: "hex", x: "7%", y: "16%", size: 58, delay: 0, duration: 16 },
@@ -237,13 +261,13 @@ function GeometricShapes() {
               <polygon
                 points="30,3 55,17.5 55,46.5 30,57 5,46.5 5,17.5"
                 fill="none"
-                stroke={`rgba(${GOLD},0.65)`}
+                stroke={`rgba(${G},0.65)`}
                 strokeWidth="1.2"
               />
               <polygon
                 points="30,12 46,21 46,39 30,48 14,39 14,21"
                 fill="none"
-                stroke={`rgba(${GOLD},0.25)`}
+                stroke={`rgba(${G},0.25)`}
                 strokeWidth="0.6"
               />
             </svg>
@@ -253,13 +277,13 @@ function GeometricShapes() {
               <polygon
                 points="20,2 38,20 20,38 2,20"
                 fill="none"
-                stroke={`rgba(${CYAN},0.55)`}
+                stroke={`rgba(${C},0.55)`}
                 strokeWidth="1"
               />
               <polygon
                 points="20,9 31,20 20,31 9,20"
                 fill="none"
-                stroke={`rgba(${CYAN},0.2)`}
+                stroke={`rgba(${C},0.2)`}
                 strokeWidth="0.5"
               />
             </svg>
@@ -269,7 +293,7 @@ function GeometricShapes() {
               <polygon
                 points="25,3 47,43 3,43"
                 fill="none"
-                stroke={`rgba(${INDIGO},0.5)`}
+                stroke={`rgba(${A},0.5)`}
                 strokeWidth="1"
               />
             </svg>
@@ -321,17 +345,31 @@ function FloatingLines() {
 }
 
 /* ─── Particle Canvas ────────────────────────────────────────────────────── */
-function ParticleCanvas({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
+function ParticleCanvas({
+  mouseX,
+  mouseY,
+  isDark,
+}: {
+  mouseX: number
+  mouseY: number
+  isDark: boolean
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
   const animFrameRef = useRef<number>(0)
   const mouseRef = useRef({ x: mouseX, y: mouseY })
+  const isDarkRef = useRef(isDark)
+
+  useEffect(() => {
+    isDarkRef.current = isDark
+  }, [isDark])
 
   useEffect(() => {
     mouseRef.current = { x: mouseX, y: mouseY }
   }, [mouseX, mouseY])
 
   const initParticles = useCallback((w: number, h: number) => {
+    const p = isDarkRef.current ? DARK_PALETTE : LIGHT_PALETTE
     particlesRef.current = Array.from({ length: PARTICLE_COUNT }, (_, i) => {
       const rng = Math.random()
       return {
@@ -342,7 +380,7 @@ function ParticleCanvas({ mouseX, mouseY }: { mouseX: number; mouseY: number }) 
         vy: (Math.random() - 0.5) * 0.38,
         radius: Math.random() * 1.8 + 0.5,
         opacity: Math.random() * 0.42 + 0.1,
-        color: rng > 0.55 ? GOLD : rng > 0.2 ? CYAN : INDIGO,
+        color: rng > 0.55 ? p.GOLD : rng > 0.2 ? p.CYAN : p.ACCENT,
         pulse: Math.random() * Math.PI * 2,
         pulseSpeed: 0.006 + Math.random() * 0.009,
       }
@@ -404,6 +442,7 @@ function ParticleCanvas({ mouseX, mouseY }: { mouseX: number; mouseY: number }) 
       })
 
       // Connections
+      const pal = isDarkRef.current ? DARK_PALETTE : LIGHT_PALETTE
       for (let i = 0; i < particlesRef.current.length; i++) {
         for (let j = i + 1; j < particlesRef.current.length; j++) {
           const a = particlesRef.current[i]
@@ -412,9 +451,9 @@ function ParticleCanvas({ mouseX, mouseY }: { mouseX: number; mouseY: number }) 
           const dy = a.y - b.y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < CONNECTION_DISTANCE) {
-            const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.11
+            const alpha = (1 - dist / CONNECTION_DISTANCE) * (isDarkRef.current ? 0.11 : 0.14)
             const lineColor =
-              a.color === GOLD || b.color === GOLD ? GOLD : CYAN
+              a.color === pal.GOLD || b.color === pal.GOLD ? pal.GOLD : pal.CYAN
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -439,7 +478,7 @@ function ParticleCanvas({ mouseX, mouseY }: { mouseX: number; mouseY: number }) 
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ opacity: 0.82 }}
+      style={{ opacity: isDark ? 0.82 : 0.65 }}
       aria-hidden="true"
     />
   )
@@ -488,12 +527,13 @@ function MouseGlow({
 }
 
 /* ─── Dot Grid ───────────────────────────────────────────────────────────── */
-function DotGrid() {
+function DotGrid({ isDark }: { isDark: boolean }) {
+  const dotColor = isDark ? "rgba(201,168,76,0.11)" : "rgba(140,100,30,0.13)"
   return (
     <div
       className="absolute inset-0 w-full h-full"
       style={{
-        backgroundImage: `radial-gradient(circle, rgba(201,168,76,0.11) 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(circle, ${dotColor} 1px, transparent 1px)`,
         backgroundSize: "44px 44px",
         maskImage: `radial-gradient(ellipse 85% 75% at 50% 50%, black 15%, transparent 100%)`,
         WebkitMaskImage: `radial-gradient(ellipse 85% 75% at 50% 50%, black 15%, transparent 100%)`,
@@ -583,76 +623,62 @@ function CornerBrackets() {
 
 /* ─── Ambient Orbs ────────────────────────────────────────────────────────── */
 function AmbientOrbs({
-  orbY1,
-  orbY2,
-  orbY3,
-  orbOpacity,
+  orbY1, orbY2, orbY3, orbOpacity, isDark,
 }: {
   orbY1: MotionValue<number>
   orbY2: MotionValue<number>
   orbY3: MotionValue<number>
   orbOpacity: MotionValue<number>
+  isDark: boolean
 }) {
   return (
     <motion.div style={{ opacity: orbOpacity }} className="absolute inset-0">
-      {/* Top-left — deep cyan */}
       <motion.div
         className="absolute rounded-full"
         style={{
-          width: 820,
-          height: 820,
-          left: "-22%",
-          top: "-18%",
-          background:
-            "radial-gradient(circle at 40% 40%, rgba(82,193,220,0.13) 0%, rgba(10,15,80,0.18) 50%, transparent 70%)",
+          width: 820, height: 820, left: "-22%", top: "-18%",
+          background: isDark
+            ? "radial-gradient(circle at 40% 40%, rgba(82,193,220,0.13) 0%, rgba(10,15,80,0.18) 50%, transparent 70%)"
+            : "radial-gradient(circle at 40% 40%, rgba(26,122,154,0.08) 0%, rgba(220,235,248,0.4) 50%, transparent 70%)",
           filter: "blur(65px)",
           y: orbY1,
         }}
         animate={{ scale: [1, 1.06, 1], rotate: [0, 6, 0] }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* Top-right — gold */}
       <motion.div
         className="absolute rounded-full"
         style={{
-          width: 620,
-          height: 620,
-          right: "-12%",
-          top: "-10%",
-          background:
-            "radial-gradient(circle at 60% 40%, rgba(201,168,76,0.15) 0%, transparent 65%)",
+          width: 620, height: 620, right: "-12%", top: "-10%",
+          background: isDark
+            ? "radial-gradient(circle at 60% 40%, rgba(201,168,76,0.15) 0%, transparent 65%)"
+            : "radial-gradient(circle at 60% 40%, rgba(184,146,42,0.1) 0%, rgba(252,246,228,0.5) 50%, transparent 70%)",
           filter: "blur(85px)",
           y: orbY2,
         }}
         animate={{ scale: [1, 1.09, 1], rotate: [0, -9, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
       />
-      {/* Center — cyan */}
       <motion.div
         className="absolute rounded-full"
         style={{
-          width: 720,
-          height: 720,
-          left: "22%",
-          top: "18%",
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(82,193,220,0.07) 0%, transparent 70%)",
+          width: 720, height: 720, left: "22%", top: "18%",
+          background: isDark
+            ? "radial-gradient(circle at 50% 50%, rgba(82,193,220,0.07) 0%, transparent 70%)"
+            : "radial-gradient(circle at 50% 50%, rgba(26,122,154,0.05) 0%, transparent 70%)",
           filter: "blur(110px)",
           y: orbY3,
         }}
         animate={{ scale: [1, 1.13, 1] }}
         transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 7 }}
       />
-      {/* Bottom-left — deep void */}
       <motion.div
         className="absolute rounded-full"
         style={{
-          width: 950,
-          height: 950,
-          left: "-28%",
-          bottom: "-28%",
-          background:
-            "radial-gradient(circle at 40% 60%, rgba(10,15,80,0.75) 0%, rgba(82,193,220,0.055) 55%, transparent 70%)",
+          width: 950, height: 950, left: "-28%", bottom: "-28%",
+          background: isDark
+            ? "radial-gradient(circle at 40% 60%, rgba(10,15,80,0.75) 0%, rgba(82,193,220,0.055) 55%, transparent 70%)"
+            : "radial-gradient(circle at 40% 60%, rgba(230,240,252,0.6) 0%, rgba(26,122,154,0.04) 55%, transparent 70%)",
           filter: "blur(90px)",
           y: orbY1,
         }}
@@ -664,6 +690,7 @@ function AmbientOrbs({
 /* ─── Main Component ──────────────────────────────────────────────────────── */
 export default function AnimatedBackground() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const isDark = useDarkMode()
   const { scrollY } = useScroll()
 
   const orbY1 = useTransform(scrollY, [0, 1000], [0, -130])
@@ -696,21 +723,25 @@ export default function AnimatedBackground() {
       style={{ zIndex: 0 }}
       aria-hidden="true"
     >
-      {/* Base void */}
-      <div className="absolute inset-0 bg-[#03050F]" />
+      {/* Base */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{ backgroundColor: isDark ? "#03050F" : "#F8F7F3" }}
+        transition={{ duration: 0.5 }}
+      />
 
       {/* Film grain noise */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-          opacity: 0.028,
+          opacity: isDark ? 0.028 : 0.018,
           mixBlendMode: "overlay",
         }}
       />
 
       {/* Aurora light fields */}
-      <AuroraBands />
+      <AuroraBands isDark={isDark} />
 
       {/* Ambient depth orbs */}
       <AmbientOrbs
@@ -718,25 +749,26 @@ export default function AnimatedBackground() {
         orbY2={orbY2}
         orbY3={orbY3}
         orbOpacity={orbOpacity}
+        isDark={isDark}
       />
 
       {/* Perspective grid floor */}
       <PerspectiveGrid />
 
       {/* Dot grid */}
-      <DotGrid />
+      <DotGrid isDark={isDark} />
 
       {/* Radial breathing rings */}
       <PulseRings />
 
       {/* Floating geometric wireframes */}
-      <GeometricShapes />
+      <GeometricShapes isDark={isDark} />
 
       {/* Diagonal accent lines */}
       <FloatingLines />
 
       {/* Particle network canvas */}
-      <ParticleCanvas mouseX={mousePos.x} mouseY={mousePos.y} />
+      <ParticleCanvas mouseX={mousePos.x} mouseY={mousePos.y} isDark={isDark} />
 
       {/* Mouse proximity glow */}
       <MouseGlow smoothMouseX={smoothMouseX} smoothMouseY={smoothMouseY} />
@@ -751,8 +783,9 @@ export default function AnimatedBackground() {
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 42%, rgba(3,5,15,0.72) 100%)",
+          background: isDark
+            ? "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 42%, rgba(3,5,15,0.72) 100%)"
+            : "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 42%, rgba(248,247,243,0.72) 100%)",
         }}
       />
 
@@ -760,8 +793,9 @@ export default function AnimatedBackground() {
       <div
         className="absolute top-0 left-0 right-0 h-44"
         style={{
-          background:
-            "linear-gradient(to bottom, rgba(3,5,15,0.55), transparent)",
+          background: isDark
+            ? "linear-gradient(to bottom, rgba(3,5,15,0.55), transparent)"
+            : "linear-gradient(to bottom, rgba(248,247,243,0.55), transparent)",
         }}
       />
 
@@ -769,8 +803,9 @@ export default function AnimatedBackground() {
       <div
         className="absolute bottom-0 left-0 right-0 h-44"
         style={{
-          background:
-            "linear-gradient(to top, rgba(3,5,15,0.72), transparent)",
+          background: isDark
+            ? "linear-gradient(to top, rgba(3,5,15,0.72), transparent)"
+            : "linear-gradient(to top, rgba(248,247,243,0.72), transparent)",
         }}
       />
     </div>

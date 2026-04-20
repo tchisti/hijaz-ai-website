@@ -31,8 +31,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${syne.variable}`}
-      style={{ background: "#03050F" }}
+      className={`${inter.variable} ${syne.variable} dark`}
+      style={{ background: "var(--bg-base)" }}
       suppressHydrationWarning
     >
       <body className="min-h-screen flex flex-col relative" style={{ background: "transparent" }}>

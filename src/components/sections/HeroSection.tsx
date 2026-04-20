@@ -122,15 +122,15 @@ function StatPill({
       variants={fadeUp}
       className="flex items-center gap-2 text-sm px-4 py-2 rounded-full"
       style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        color: "rgba(255,255,255,0.55)",
+        background: "var(--surface-subtle)",
+        border: "1px solid var(--surface-border)",
+        color: "var(--text-subtle)",
         backdropFilter: "blur(8px)",
       }}
       whileHover={{
-        background: "rgba(201,168,76,0.08)",
-        borderColor: "rgba(201,168,76,0.2)",
-        color: "rgba(201,168,76,0.9)",
+        background: "rgba(201,168,76,0.09)",
+        borderColor: "rgba(201,168,76,0.22)",
+        color: "var(--gold-primary)",
         scale: 1.04,
         transition: { duration: 0.2 },
       }}
@@ -206,13 +206,13 @@ export default function HeroSection() {
           <motion.h1
             variants={fadeUp}
             className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight text-pretty"
-            style={{ color: "rgba(255,255,255,0.94)" }}
+            style={{ color: "var(--text-strong)" }}
           >
             Toronto&apos;s AI &amp;{" "}
             <br className="hidden sm:block" />
             <WordCycler />
             <br className="hidden sm:block" />
-            <span style={{ color: "rgba(255,255,255,0.7)", fontWeight: 400 }}>
+            <span style={{ color: "var(--text-medium)", fontWeight: 400 }}>
               Partner
             </span>
           </motion.h1>
@@ -221,10 +221,10 @@ export default function HeroSection() {
           <motion.p
             variants={fadeUp}
             className="max-w-2xl text-lg sm:text-xl leading-relaxed font-sans"
-            style={{ color: "rgba(255,255,255,0.45)" }}
+            style={{ color: "var(--text-subtle)" }}
           >
             Stop losing customers to competitors.{" "}
-            <span style={{ color: "rgba(255,255,255,0.75)" }}>Hijaz.ai</span> automates
+            <span style={{ color: "var(--text-medium)" }}>Hijaz.ai</span> automates
             your workflows, builds your digital presence, and drives real growth —
             all from one trusted Toronto team.
           </motion.p>
@@ -279,9 +279,9 @@ export default function HeroSection() {
                 variant="outline"
                 className="text-base px-8 h-12 font-medium"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  color: "rgba(255,255,255,0.75)",
+                  background: "var(--surface-subtle)",
+                  border: "1px solid var(--surface-border)",
+                  color: "var(--text-medium)",
                   backdropFilter: "blur(8px)",
                 }}
               >

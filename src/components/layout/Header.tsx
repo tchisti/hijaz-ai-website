@@ -48,17 +48,17 @@ export default function Header() {
     )}
     style={{
       background: scrolled
-        ? "rgba(3,5,15,0.85)"
-        : "rgba(3,5,15,0.2)",
-      borderColor: scrolled ? "rgba(201,168,76,0.12)" : "transparent",
-      boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.4)" : "none",
+        ? "var(--header-bg-scrolled)"
+        : "var(--header-bg-rest)",
+      borderColor: scrolled ? "var(--header-border)" : "transparent",
+      boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.15)" : "none",
     }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center font-display text-xl font-bold">
-            <span style={{ color: "rgba(255,255,255,0.9)" }}>Hijaz</span>
-            <span style={{ color: "#C9A84C" }}>.ai</span>
+            <span style={{ color: "var(--text-strong)" }}>Hijaz</span>
+            <span style={{ color: "var(--gold-primary)" }}>.ai</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -68,10 +68,10 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-all duration-200 hover:text-[#C9A84C]",
+                  "text-sm font-medium transition-all duration-200",
                   pathname === link.href
                     ? "text-[#C9A84C]"
-                    : "text-white/50"
+                    : "text-foreground/50 hover:text-[#C9A84C]"
                 )}
               >
                 {link.label}

@@ -3,48 +3,107 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Light theme (default) ─────────────────────────────────────────────── */
   :root {
-    /* ── Core palette: deep void + gold + cyber-cyan ── */
-    --background: 236 75% 4%;       /* #03050F — deep void */
-    --foreground: 0 0% 95%;         /* near-white */
+    /* shadcn/ui semantic tokens */
+    --background: 40 20% 97%;            /* #F8F7F3 warm parchment */
+    --foreground: 236 40% 8%;            /* #0D0F1A deep navy */
 
-    /* Brand primaries */
-    --primary: 43 54% 54%;          /* gold #C9A84C */
+    --primary: 43 54% 42%;               /* richer gold for contrast */
+    --primary-foreground: 0 0% 100%;
+
+    --accent: 193 64% 36%;               /* deeper cyan for contrast */
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 40 15% 91%;
+    --muted-foreground: 230 15% 40%;
+
+    --secondary: 40 10% 89%;
+    --secondary-foreground: 236 40% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 236 40% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 236 40% 8%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --input: 40 10% 87%;
+    --border: 40 10% 84%;
+    --ring: 43 54% 42%;
+    --radius: 0.75rem;
+
+    /* ── Semantic color tokens for components ────────────────────────────── */
+    --text-strong: rgba(10, 12, 22, 0.92);
+    --text-medium: rgba(10, 12, 22, 0.72);
+    --text-subtle: rgba(10, 12, 22, 0.45);
+    --text-muted-custom: rgba(10, 12, 22, 0.32);
+
+    --surface-subtle: rgba(0, 0, 0, 0.04);
+    --surface-border: rgba(0, 0, 0, 0.09);
+    --surface-glass: rgba(255, 255, 255, 0.75);
+    --surface-glass-border: rgba(0, 0, 0, 0.1);
+
+    --glow-gold: rgba(180, 140, 42, 0.18);
+    --glow-cyan: rgba(26, 122, 154, 0.14);
+
+    --header-bg-scrolled: rgba(248, 247, 243, 0.92);
+    --header-bg-rest: rgba(248, 247, 243, 0.25);
+    --header-border: rgba(0, 0, 0, 0.1);
+
+    --bg-base: #F8F7F3;
+    --gold-primary: #B8922A;
+    --cyan-primary: #1A7A9A;
+  }
+
+  /* ── Dark theme ────────────────────────────────────────────────────────── */
+  html.dark {
+    --background: 236 75% 4%;
+    --foreground: 0 0% 95%;
+
+    --primary: 43 54% 54%;
     --primary-foreground: 236 75% 4%;
 
-    /* Accent: cyber cyan */
-    --accent: 193 64% 60%;          /* #52C1DC */
+    --accent: 193 64% 60%;
     --accent-foreground: 236 75% 4%;
 
-    /* Muted */
     --muted: 230 30% 12%;
     --muted-foreground: 220 15% 55%;
 
-    /* Secondary */
     --secondary: 230 40% 10%;
     --secondary-foreground: 0 0% 85%;
 
-    /* Surfaces */
     --card: 230 50% 7%;
     --card-foreground: 0 0% 92%;
     --popover: 230 50% 7%;
     --popover-foreground: 0 0% 92%;
 
-    /* Functional */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     --input: 230 30% 14%;
     --border: 230 25% 14%;
     --ring: 43 54% 54%;
 
-    /* Shape */
-    --radius: 0.75rem;
+    --text-strong: rgba(255, 255, 255, 0.94);
+    --text-medium: rgba(255, 255, 255, 0.75);
+    --text-subtle: rgba(255, 255, 255, 0.45);
+    --text-muted-custom: rgba(255, 255, 255, 0.32);
 
-    /* Custom tokens */
-    --glow-gold: rgba(201, 168, 76, 0.2);
-    --glow-cyan: rgba(82, 193, 220, 0.15);
+    --surface-subtle: rgba(255, 255, 255, 0.04);
+    --surface-border: rgba(255, 255, 255, 0.08);
     --surface-glass: rgba(255, 255, 255, 0.04);
     --surface-glass-border: rgba(255, 255, 255, 0.08);
+
+    --glow-gold: rgba(201, 168, 76, 0.2);
+    --glow-cyan: rgba(82, 193, 220, 0.15);
+
+    --header-bg-scrolled: rgba(3, 5, 15, 0.88);
+    --header-bg-rest: rgba(3, 5, 15, 0.2);
+    --header-border: rgba(201, 168, 76, 0.12);
+
+    --bg-base: #03050F;
+    --gold-primary: #C9A84C;
+    --cyan-primary: #52C1DC;
   }
 }
 
@@ -55,16 +114,14 @@
 
 html {
   scroll-behavior: smooth;
-  @apply bg-background;
-  /* Improve font rendering */
+  background: var(--bg-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 body {
-  @apply bg-background text-foreground font-sans;
-  /* Ensure body is always transparent so the fixed background shows through */
+  @apply text-foreground font-sans;
   background: transparent;
   position: relative;
   z-index: 1;
@@ -83,29 +140,22 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--surface-glass-border);
 }
 
-.glass-gold {
-  background: rgba(201, 168, 76, 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 168, 76, 0.15);
-}
-
 /* ── Glow utilities ───────────────────────────────────────────────────────── */
 .glow-gold {
-  box-shadow: 0 0 24px var(--glow-gold), 0 0 48px rgba(201, 168, 76, 0.08);
+  box-shadow: 0 0 24px var(--glow-gold), 0 0 48px rgba(201, 168, 76, 0.06);
 }
 
 .glow-cyan {
-  box-shadow: 0 0 24px var(--glow-cyan), 0 0 48px rgba(82, 193, 220, 0.06);
+  box-shadow: 0 0 24px var(--glow-cyan), 0 0 48px rgba(82, 193, 220, 0.05);
 }
 
 .text-glow-gold {
-  text-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+  text-shadow: 0 0 20px var(--glow-gold);
 }
 
 /* ── Gradient text ────────────────────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #C9A84C 0%, #E8C46A 50%, #52C1DC 100%);
+  background: linear-gradient(135deg, var(--gold-primary) 0%, #E8C46A 50%, var(--cyan-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -116,7 +166,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #03050F;
+  background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(201, 168, 76, 0.2);
@@ -129,7 +179,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Selection ────────────────────────────────────────────────────────────── */
 ::selection {
   background: rgba(201, 168, 76, 0.2);
-  color: #E8C46A;
+  color: var(--gold-primary);
 }
 
 /* ── Focus ring ───────────────────────────────────────────────────────────── */
