@@ -11,7 +11,6 @@ import {
 import { useRef, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Star, MapPin, ShieldCheck } from "lucide-react"
-import VideoBackground from "@/components/ui/VideoBackground"
 
 /* ─── Animation variants ──────────────────────────────────────────────────── */
 const fadeUp = {
@@ -32,8 +31,6 @@ const stagger = {
 /* ─── Typewriter word cycler ─────────────────────────────────────────────── */
 const CYCLE_WORDS = ["Automation", "Web Design", "Shopify", "Marketing", "Growth"]
 
-const HLS_SRC = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8"
-
 function WordCycler() {
   const [index, setIndex] = useState(0)
 
@@ -46,7 +43,8 @@ function WordCycler() {
     <span className="relative inline-block">
       <motion.span
         key={index}
-        className="text-[#C9A84C]"
+        className="text-[#C9A84C] dark:text-[#C9A84C]"
+        style={{ color: "var(--gold-primary)" }}
         initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
@@ -58,24 +56,108 @@ function WordCycler() {
   )
 }
 
+/* ─── Animated background orbs ───────────────────────────────────────────── */
+function HeroBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+      {/* Warm gold orb — top right */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{
+          width: 700,
+          height: 700,
+          top: "-15%",
+          right: "-10%",
+          background:
+            "radial-gradient(circle, rgba(184,146,42,0.13) 0%, rgba(184,146,42,0.05) 50%, transparent 70%)",
+          filter: "blur(1px)",
+        }}
+        animate={{
+          x: [0, 30, -20, 0],
+          y: [0, -25, 15, 0],
+          scale: [1, 1.06, 0.97, 1],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Cyan orb — bottom left */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{
+          width: 600,
+          height: 600,
+          bottom: "-10%",
+          left: "-8%",
+          background:
+            "radial-gradient(circle, rgba(26,122,154,0.10) 0%, rgba(26,122,154,0.04) 50%, transparent 70%)",
+          filter: "blur(1px)",
+        }}
+        animate={{
+          x: [0, -20, 25, 0],
+          y: [0, 20, -15, 0],
+          scale: [1, 0.95, 1.05, 1],
+        }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+      />
+
+      {/* Small warm accent — center left */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{
+          width: 320,
+          height: 320,
+          top: "35%",
+          left: "5%",
+          background:
+            "radial-gradient(circle, rgba(184,146,42,0.08) 0%, transparent 65%)",
+        }}
+        animate={{
+          x: [0, 15, -10, 0],
+          y: [0, -18, 10, 0],
+        }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 6 }}
+      />
+
+      {/* Dot grid — light theme only */}
+      <div
+        className="absolute inset-0 dark:opacity-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(10,12,22,0.07) 1px, transparent 1px)",
+          backgroundSize: "36px 36px",
+          maskImage:
+            "radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)",
+        }}
+      />
+
+      {/* Top-edge soft gradient wash — lifts the section cleanly */}
+      <div
+        className="absolute inset-x-0 top-0 h-64"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, transparent 100%)",
+        }}
+      />
+    </div>
+  )
+}
+
 /* ─── Glowing badge ───────────────────────────────────────────────────────── */
 function GlowBadge() {
   return (
-    <motion.div
-      variants={fadeUp}
-      className="inline-flex items-center gap-2 relative"
-    >
-      {/* Glow */}
+    <motion.div variants={fadeUp} className="inline-flex items-center gap-2 relative">
       <span
         className="absolute inset-0 rounded-full blur-md"
-        style={{ background: "rgba(201,168,76,0.15)" }}
+        style={{ background: "var(--glow-gold)" }}
       />
       <span
         className="relative inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-5 py-2 rounded-full"
         style={{
-          background: "rgba(201,168,76,0.08)",
-          border: "1px solid rgba(201,168,76,0.25)",
-          color: "#C9A84C",
+          background: "rgba(184,146,42,0.08)",
+          border: "1px solid rgba(184,146,42,0.22)",
+          color: "var(--gold-primary)",
           letterSpacing: "0.12em",
         }}
       >
@@ -98,13 +180,16 @@ function ScrollIndicator() {
     >
       <span
         className="text-xs tracking-[0.2em] uppercase"
-        style={{ color: "rgba(201,168,76,0.4)" }}
+        style={{ color: "rgba(184,146,42,0.4)" }}
       >
         Scroll
       </span>
       <motion.div
         className="w-px h-8"
-        style={{ background: "linear-gradient(to bottom, rgba(201,168,76,0.4), transparent)" }}
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(184,146,42,0.4), transparent)",
+        }}
         animate={{ scaleY: [1, 0.4, 1], opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -131,14 +216,14 @@ function StatPill({
         backdropFilter: "blur(8px)",
       }}
       whileHover={{
-        background: "rgba(201,168,76,0.09)",
-        borderColor: "rgba(201,168,76,0.22)",
+        background: "rgba(184,146,42,0.09)",
+        borderColor: "rgba(184,146,42,0.22)",
         color: "var(--gold-primary)",
         scale: 1.04,
         transition: { duration: 0.2 },
       }}
     >
-      <span style={{ color: "#C9A84C" }}>{icon}</span>
+      <span style={{ color: "var(--gold-primary)" }}>{icon}</span>
       {children}
     </motion.span>
   )
@@ -148,7 +233,10 @@ function StatPill({
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true })
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  })
 
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 80])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
@@ -158,39 +246,28 @@ export default function HeroSection() {
     <section
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "transparent" }}
+      style={{ background: "var(--bg-base)" }}
     >
-      {/* Mux video background */}
-      <VideoBackground
-        src={HLS_SRC}
-        overlayClassName="absolute inset-0 bg-background/70 backdrop-blur-[1px]"
-      />
-
-      {/* Hero-specific layered glass panel */}
-      <div
-        className="absolute inset-x-0 top-0 h-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(10,15,44,0.3) 0%, transparent 70%)",
-        }}
-      />
+      <HeroBackground />
 
       {/* Horizontal accent lines */}
       <motion.div
-        className="absolute left-0 right-0 h-px"
+        className="absolute left-0 right-0 h-px pointer-events-none"
         style={{
           top: "calc(50% - 160px)",
-          background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.08), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, rgba(184,146,42,0.1), transparent)",
         }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 2, delay: 0.5 }}
       />
       <motion.div
-        className="absolute left-0 right-0 h-px"
+        className="absolute left-0 right-0 h-px pointer-events-none"
         style={{
           top: "calc(50% + 160px)",
-          background: "linear-gradient(90deg, transparent, rgba(82,193,220,0.06), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, rgba(26,122,154,0.08), transparent)",
         }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
@@ -208,10 +285,8 @@ export default function HeroSection() {
           variants={stagger}
           className="flex flex-col items-center gap-6"
         >
-          {/* Badge */}
           <GlowBadge />
 
-          {/* Headline */}
           <motion.h1
             variants={fadeUp}
             className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight text-pretty"
@@ -226,7 +301,6 @@ export default function HeroSection() {
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
             variants={fadeUp}
             className="max-w-2xl text-lg sm:text-xl leading-relaxed font-sans"
@@ -238,24 +312,21 @@ export default function HeroSection() {
             all from one trusted Toronto team.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div
             variants={fadeUp}
             className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2"
           >
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Button
                 asChild
                 size="lg"
                 className="relative overflow-hidden group text-base px-8 h-12 font-semibold"
                 style={{
-                  background: "linear-gradient(135deg, #C9A84C, #E8C46A)",
-                  color: "#03050F",
+                  background: "linear-gradient(135deg, #B8922A, #D4A83A)",
+                  color: "#fff",
                   border: "none",
-                  boxShadow: "0 0 30px rgba(201,168,76,0.3), 0 4px 16px rgba(0,0,0,0.4)",
+                  boxShadow:
+                    "0 0 28px rgba(184,146,42,0.25), 0 4px 14px rgba(0,0,0,0.12)",
                 }}
               >
                 <Link href="/contact">
@@ -263,12 +334,11 @@ export default function HeroSection() {
                     Book Free Consultation
                     <ArrowRight size={16} />
                   </span>
-                  {/* Shimmer */}
                   <motion.span
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)",
+                        "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
                     }}
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
@@ -278,17 +348,14 @@ export default function HeroSection() {
               </Button>
             </motion.div>
 
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
                 className="text-base px-8 h-12 font-medium"
                 style={{
-                  background: "var(--surface-subtle)",
+                  background: "rgba(255,255,255,0.6)",
                   border: "1px solid var(--surface-border)",
                   color: "var(--text-medium)",
                   backdropFilter: "blur(8px)",
@@ -299,7 +366,6 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Stats row */}
           <motion.div
             variants={stagger}
             className="flex flex-wrap items-center justify-center gap-3 mt-4"
@@ -315,7 +381,6 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <ScrollIndicator />
     </section>
   )
