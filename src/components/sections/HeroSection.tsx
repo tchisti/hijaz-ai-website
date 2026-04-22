@@ -11,6 +11,7 @@ import {
 import { useRef, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Star, MapPin, ShieldCheck } from "lucide-react"
+import VideoBackground from "@/components/ui/VideoBackground"
 
 /* ─── Animation variants ──────────────────────────────────────────────────── */
 const fadeUp = {
@@ -30,6 +31,8 @@ const stagger = {
 
 /* ─── Typewriter word cycler ─────────────────────────────────────────────── */
 const CYCLE_WORDS = ["Automation", "Web Design", "Shopify", "Marketing", "Growth"]
+
+const HLS_SRC = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8"
 
 function WordCycler() {
   const [index, setIndex] = useState(0)
@@ -157,6 +160,12 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ background: "transparent" }}
     >
+      {/* Mux video background */}
+      <VideoBackground
+        src={HLS_SRC}
+        overlayClassName="absolute inset-0 bg-background/70 backdrop-blur-[1px]"
+      />
+
       {/* Hero-specific layered glass panel */}
       <div
         className="absolute inset-x-0 top-0 h-full pointer-events-none"
