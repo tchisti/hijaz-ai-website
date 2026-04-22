@@ -46,3 +46,4 @@ yarn-error.log*
 
 # Git worktrees
 .worktrees/
+package-lock.json
