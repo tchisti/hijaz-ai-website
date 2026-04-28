@@ -1,8 +1,8 @@
 import { buildMetadata } from "@/lib/seo"
 import { LocalBusinessJsonLd } from "@/components/seo/JsonLd"
-import HeroSection from "@/components/sections/HeroSection"
-import StatsBar from "@/components/sections/StatsBar"
-import ServicesGrid from "@/components/sections/ServicesGrid"
+import AIAutomationHero from "@/components/sections/AIAutomationHero"
+import KPIStrip from "@/components/sections/KPIStrip"
+import ServicePipelineCards from "@/components/sections/ServicePipelineCards"
 import WhyChooseUs from "@/components/sections/WhyChooseUs"
 import PortfolioPreview from "@/components/sections/PortfolioPreview"
 import TestimonialsSection from "@/components/sections/TestimonialsSection"
@@ -11,9 +11,9 @@ import FAQAccordion from "@/components/sections/FAQAccordion"
 import CTABanner from "@/components/sections/CTABanner"
 
 export const metadata = buildMetadata({
-  title: "Hijaz.ai — Toronto AI & Digital Growth Partner",
+  title: "Hijaz.ai — AI Automation Pipeline for Toronto Businesses",
   description:
-    "Toronto's leading AI automation, web development, Shopify e-commerce, and digital marketing agency. Serving GTA businesses in North York, Durham Region, and beyond.",
+    "Turn raw data into automated action with Hijaz.ai. AI receptionists, conversion-ready websites, Shopify, and performance marketing — measurable ROI for GTA businesses.",
   canonical: "/",
 })
 
@@ -21,9 +21,9 @@ export default function HomePage() {
   return (
     <>
       <LocalBusinessJsonLd />
-      <HeroSection />
-      <StatsBar />
-      <ServicesGrid />
+      <AIAutomationHero />
+      <KPIStrip />
+      <ServicePipelineCards />
       <WhyChooseUs />
       <PortfolioPreview />
       <TestimonialsSection />
