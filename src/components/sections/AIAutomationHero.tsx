@@ -38,7 +38,7 @@ function StageChip({
   sublabel,
   variant,
 }: {
-  icon: React.ElementType
+  icon: React.ComponentType<{ size?: number | string }>
   label: string
   sublabel: string
   variant: "cyan" | "gold"

@@ -19,7 +19,7 @@ type ServiceCard = {
   id: string
   title: string
   pitch: string
-  icon: React.ElementType
+  icon: React.ComponentType<{ size?: number | string }>
   variant: "gold" | "cyan"
   href: string
   outcomes: Outcome[]

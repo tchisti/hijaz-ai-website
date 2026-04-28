@@ -13,7 +13,7 @@ type KPI = {
   value: number
   decimals?: number
   caption: string
-  icon: React.ElementType
+  icon: React.ComponentType<{ size?: number | string }>
   variant: "gold" | "cyan"
 }
 

@@ -3,13 +3,13 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Check, ArrowRight } from "lucide-react"
 import { Bot, Code2, ShoppingBag, Printer, TrendingUp } from "lucide-react"
-import type { ElementType } from "react"
+import type { ComponentType } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { Service } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-const ICON_MAP: Record<string, ElementType> = { Bot, Code2, ShoppingBag, Printer, TrendingUp }
+const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className?: string }>> = { Bot, Code2, ShoppingBag, Printer, TrendingUp }
 
 interface Props {
   service: Service
