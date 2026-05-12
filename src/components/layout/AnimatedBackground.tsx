@@ -200,17 +200,17 @@ function PulseRings() {
           key={i}
           className="absolute rounded-full"
           style={{
-            border: `1px solid rgba(${i % 2 === 0 ? DARK_PALETTE.GOLD : DARK_PALETTE.CYAN},0.09)`,
+            border: `1px solid rgba(${i % 2 === 0 ? DARK_PALETTE.GOLD : DARK_PALETTE.CYAN},0.06)`,
             width: 220 + i * 200,
             height: 220 + i * 200,
           }}
           animate={{
-            scale: [1, 1.25, 1],
-            opacity: [0.09, 0.025, 0.09],
+            scale: [1, 1.22, 1],
+            opacity: [0.06, 0.015, 0.06],
           }}
           transition={{
-            duration: 7 + i * 1.8,
-            delay: i * 1.8,
+            duration: 8 + i * 2,
+            delay: i * 2,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -227,13 +227,13 @@ function GeometricShapes({ isDark }: { isDark: boolean }) {
   const A = isDark ? DARK_PALETTE.ACCENT : LIGHT_PALETTE.ACCENT
   const shapes = useMemo(
     () => [
-      { type: "hex", x: "7%", y: "16%", size: 58, delay: 0, duration: 16 },
-      { type: "diamond", x: "88%", y: "11%", size: 42, delay: 2.2, duration: 19 },
-      { type: "triangle", x: "91%", y: "54%", size: 48, delay: 1, duration: 13 },
-      { type: "hex", x: "4%", y: "63%", size: 46, delay: 3.5, duration: 21 },
-      { type: "diamond", x: "50%", y: "84%", size: 36, delay: 1.5, duration: 17 },
-      { type: "triangle", x: "71%", y: "33%", size: 32, delay: 0.8, duration: 15 },
-      { type: "hex", x: "35%", y: "5%", size: 28, delay: 4, duration: 18 },
+      { type: "hex",      x: "4%",  y: "12%", size: 52, delay: 0,   duration: 16 },
+      { type: "diamond",  x: "90%", y: "8%",  size: 40, delay: 2.2, duration: 19 },
+      { type: "triangle", x: "93%", y: "56%", size: 44, delay: 1,   duration: 13 },
+      { type: "hex",      x: "2%",  y: "68%", size: 42, delay: 3.5, duration: 21 },
+      { type: "diamond",  x: "50%", y: "88%", size: 34, delay: 1.5, duration: 17 },
+      { type: "triangle", x: "76%", y: "30%", size: 30, delay: 0.8, duration: 15 },
+      { type: "hex",      x: "14%", y: "4%",  size: 26, delay: 4,   duration: 18 },
     ],
     []
   )
@@ -246,9 +246,9 @@ function GeometricShapes({ isDark }: { isDark: boolean }) {
           className="absolute"
           style={{ left: shape.x, top: shape.y }}
           animate={{
-            y: [0, -22, 0],
+            y: [0, -18, 0],
             rotate: [0, 360],
-            opacity: [0.045, 0.1, 0.045],
+            opacity: [0.035, 0.075, 0.035],
           }}
           transition={{
             y: { duration: shape.duration, repeat: Infinity, ease: "easeInOut", delay: shape.delay },
@@ -316,7 +316,7 @@ function FloatingLines() {
   return (
     <svg
       className="absolute inset-0 w-full h-full"
-      style={{ opacity: 0.055 }}
+      style={{ opacity: 0.038 }}
       aria-hidden="true"
       preserveAspectRatio="none"
     >

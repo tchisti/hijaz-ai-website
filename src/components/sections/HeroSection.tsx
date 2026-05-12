@@ -3,6 +3,7 @@
 import Link from "next/link"
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
   useSpring,
@@ -14,18 +15,18 @@ import { ArrowRight, Star, MapPin, ShieldCheck } from "lucide-react"
 
 /* ─── Animation variants ──────────────────────────────────────────────────── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 32, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
+  visible: { transition: { staggerChildren: 0.11, delayChildren: 0.25 } },
 }
 
 /* ─── Typewriter word cycler ─────────────────────────────────────────────── */
@@ -40,107 +41,30 @@ function WordCycler() {
   }, [])
 
   return (
-    <span className="relative inline-block">
-      <motion.span
-        key={index}
-        className="text-[#C9A84C] dark:text-[#C9A84C]"
-        style={{ color: "var(--gold-primary)" }}
-        initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {CYCLE_WORDS[index]}
-      </motion.span>
+    <span
+      className="relative inline-block"
+      /* Reserve width for the longest word so the line never reflows */
+      style={{ minWidth: "10ch" }}
+    >
+      {/* Invisible spacer keeps the row height stable */}
+      <span aria-hidden className="invisible select-none">
+        {CYCLE_WORDS.reduce((a, b) => (a.length >= b.length ? a : b))}
+      </span>
+
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ color: "var(--gold-primary)" }}
+          initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: -14, filter: "blur(6px)" }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {CYCLE_WORDS[index]}
+        </motion.span>
+      </AnimatePresence>
     </span>
-  )
-}
-
-/* ─── Animated background orbs ───────────────────────────────────────────── */
-function HeroBackground() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
-      {/* Warm gold orb — top right */}
-      <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: 700,
-          height: 700,
-          top: "-15%",
-          right: "-10%",
-          background:
-            "radial-gradient(circle, rgba(184,146,42,0.13) 0%, rgba(184,146,42,0.05) 50%, transparent 70%)",
-          filter: "blur(1px)",
-        }}
-        animate={{
-          x: [0, 30, -20, 0],
-          y: [0, -25, 15, 0],
-          scale: [1, 1.06, 0.97, 1],
-        }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Cyan orb — bottom left */}
-      <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: 600,
-          height: 600,
-          bottom: "-10%",
-          left: "-8%",
-          background:
-            "radial-gradient(circle, rgba(26,122,154,0.10) 0%, rgba(26,122,154,0.04) 50%, transparent 70%)",
-          filter: "blur(1px)",
-        }}
-        animate={{
-          x: [0, -20, 25, 0],
-          y: [0, 20, -15, 0],
-          scale: [1, 0.95, 1.05, 1],
-        }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-      />
-
-      {/* Small warm accent — center left */}
-      <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: 320,
-          height: 320,
-          top: "35%",
-          left: "5%",
-          background:
-            "radial-gradient(circle, rgba(184,146,42,0.08) 0%, transparent 65%)",
-        }}
-        animate={{
-          x: [0, 15, -10, 0],
-          y: [0, -18, 10, 0],
-        }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-      />
-
-      {/* Dot grid — light theme only */}
-      <div
-        className="absolute inset-0 dark:opacity-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(10,12,22,0.07) 1px, transparent 1px)",
-          backgroundSize: "36px 36px",
-          maskImage:
-            "radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)",
-        }}
-      />
-
-      {/* Top-edge soft gradient wash — lifts the section cleanly */}
-      <div
-        className="absolute inset-x-0 top-0 h-64"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, transparent 100%)",
-        }}
-      />
-    </div>
   )
 }
 
@@ -173,10 +97,10 @@ function GlowBadge() {
 function ScrollIndicator() {
   return (
     <motion.div
-      className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 2, duration: 0.8 }}
+      transition={{ delay: 2.2, duration: 0.8 }}
     >
       <span
         className="text-xs tracking-[0.2em] uppercase"
@@ -214,6 +138,7 @@ function StatPill({
         border: "1px solid var(--surface-border)",
         color: "var(--text-subtle)",
         backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
       }}
       whileHover={{
         background: "rgba(184,146,42,0.09)",
@@ -238,43 +163,37 @@ export default function HeroSection() {
     offset: ["start start", "end start"],
   })
 
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 80])
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
-  const smoothY = useSpring(heroY, { stiffness: 80, damping: 20 })
+  /*
+   * Gentle parallax: the content drifts up only 40 px over the full scroll
+   * distance, staying well within the visible viewport so text never escapes
+   * its readable zone. Spring is heavily damped to prevent springy overshoot.
+   */
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 40])
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0])
+  const smoothY = useSpring(heroY, { stiffness: 60, damping: 28, mass: 0.8 })
 
   return (
     <section
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "var(--bg-base)" }}
+      /* The global AnimatedBackground handles the base colour — keep transparent */
+      style={{ background: "transparent" }}
     >
-      <HeroBackground />
-
-      {/* Horizontal accent lines */}
-      <motion.div
-        className="absolute left-0 right-0 h-px pointer-events-none"
+      {/*
+       * Soft radial wash centred on the content column.
+       * This creates a subtle "stage light" effect that lifts text off the
+       * animated background without adding competing motion elements.
+       */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden
         style={{
-          top: "calc(50% - 160px)",
           background:
-            "linear-gradient(90deg, transparent, rgba(184,146,42,0.1), transparent)",
+            "radial-gradient(ellipse 68% 55% at 50% 48%, rgba(var(--hero-wash-rgb, 248,247,243), 0.18) 0%, transparent 75%)",
         }}
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 2, delay: 0.5 }}
-      />
-      <motion.div
-        className="absolute left-0 right-0 h-px pointer-events-none"
-        style={{
-          top: "calc(50% + 160px)",
-          background:
-            "linear-gradient(90deg, transparent, rgba(26,122,154,0.08), transparent)",
-        }}
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 2, delay: 0.8 }}
       />
 
-      {/* Main content */}
+      {/* Main content — only this block moves on scroll */}
       <motion.div
         className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         style={{ y: smoothY, opacity: heroOpacity }}
@@ -283,14 +202,28 @@ export default function HeroSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={stagger}
-          className="flex flex-col items-center gap-6"
+          className="flex flex-col items-center gap-7"
         >
           <GlowBadge />
 
+          {/*
+           * Heading: line-height is bumped to 1.05 so the descenders of
+           * animated words don't overlap the next line.
+           */}
           <motion.h1
             variants={fadeUp}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight text-pretty"
-            style={{ color: "var(--text-strong)" }}
+            className="font-display font-bold tracking-tight text-pretty"
+            style={{
+              fontSize: "clamp(2.75rem, 8vw, 5.5rem)",
+              lineHeight: 1.05,
+              color: "var(--text-strong)",
+              /*
+               * Backdrop blur behind the heading text prevents particle /
+               * orb animation from rendering through letterforms.
+               */
+              textShadow:
+                "0 2px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+            }}
           >
             Toronto&apos;s AI &amp;{" "}
             <br className="hidden sm:block" />
@@ -314,7 +247,7 @@ export default function HeroSection() {
 
           <motion.div
             variants={fadeUp}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-1"
           >
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Button
@@ -326,7 +259,7 @@ export default function HeroSection() {
                   color: "#fff",
                   border: "none",
                   boxShadow:
-                    "0 0 28px rgba(184,146,42,0.25), 0 4px 14px rgba(0,0,0,0.12)",
+                    "0 0 28px rgba(184,146,42,0.3), 0 4px 14px rgba(0,0,0,0.14)",
                 }}
               >
                 <Link href="/contact">
@@ -355,10 +288,11 @@ export default function HeroSection() {
                 variant="outline"
                 className="text-base px-8 h-12 font-medium"
                 style={{
-                  background: "rgba(255,255,255,0.6)",
+                  background: "rgba(255,255,255,0.06)",
                   border: "1px solid var(--surface-border)",
                   color: "var(--text-medium)",
-                  backdropFilter: "blur(8px)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
                 }}
               >
                 <Link href="/services">See Our Services</Link>
@@ -368,7 +302,7 @@ export default function HeroSection() {
 
           <motion.div
             variants={stagger}
-            className="flex flex-wrap items-center justify-center gap-3 mt-4"
+            className="flex flex-wrap items-center justify-center gap-3 mt-3"
           >
             <StatPill icon={<Star size={13} fill="currentColor" />}>
               4.9 / 5 &nbsp;·&nbsp; 30+ Reviews
