@@ -4,11 +4,41 @@ type JsonLdProps = {
   data: Record<string, unknown>
 }
 
+/**
+ * Sanitize JSON-LD data to prevent script injection
+ * Removes any script-like content from string values
+ */
+function sanitizeJsonLdData(obj: unknown): unknown {
+  if (typeof obj === "string") {
+    // Remove any potential script tags or event handlers
+    return obj
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+      .replace(/<[^>]+on\w+\s*=/gi, "")
+      .replace(/javascript:/gi, "")
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(sanitizeJsonLdData)
+  }
+
+  if (typeof obj === "object" && obj !== null) {
+    const sanitized: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(obj)) {
+      sanitized[key] = sanitizeJsonLdData(value)
+    }
+    return sanitized
+  }
+
+  return obj
+}
+
 export function JsonLd({ data }: JsonLdProps) {
+  const sanitizedData = sanitizeJsonLdData(data)
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(sanitizedData) }}
     />
   )
 }
@@ -31,8 +61,12 @@ export function LocalBusinessJsonLd() {
     },
     areaServed: SITE_CONFIG.serviceAreas,
     serviceType: [
-      "AI Automation", "Web Development", "Shopify E-Commerce",
-      "Logo Design", "Printing Services", "Digital Marketing",
+      "AI Automation",
+      "Web Development",
+      "Shopify E-Commerce",
+      "Logo Design",
+      "Printing Services",
+      "Digital Marketing",
     ],
     openingHours: "Mo-Fr 09:00-18:00",
     sameAs: Object.values(SITE_CONFIG.social),
@@ -56,7 +90,15 @@ export function FAQJsonLd({ items }: { items: { question: string; answer: string
   return <JsonLd data={data} />
 }
 
-export function ServiceJsonLd({ name, description, url }: { name: string; description: string; url: string }) {
+export function ServiceJsonLd({
+  name,
+  description,
+  url,
+}: {
+  name: string
+  description: string
+  url: string
+}) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Service",
