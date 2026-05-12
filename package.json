@@ -23,7 +23,7 @@
     "framer-motion": "^11.0.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.460.0",
-    "next": "15.x",
+    "next": "^15.5.16",
     "next-sitemap": "^4.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -31,6 +31,11 @@
     "tailwind-merge": "^2.5.5",
     "three": "^0.184.0",
     "zod": "^3.22.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": "^8.5.10"
+    }
   },
   "devDependencies": {
     "@types/mdx": "^2.0.13",
@@ -40,7 +45,7 @@
     "@types/three": "^0.184.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^9",
-    "eslint-config-next": "15.x",
+    "eslint-config-next": "^15.5.16",
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
