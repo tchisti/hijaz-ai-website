@@ -21,38 +21,38 @@ export const KPIS: KPI[] = [
   {
     id: "time-saved",
     label: "Hours saved / week",
-    value: 32,
+    value: 28,
     suffix: "h",
-    caption: "Average across active automation clients",
+    caption: "Avg. admin time freed up per local business owner",
     icon: Clock,
     variant: "gold",
   },
   {
     id: "cost-reduction",
     label: "Operating cost reduction",
-    value: 41,
+    value: 38,
     suffix: "%",
-    caption: "Compared to manual workflows in year one",
+    caption: "Vs. manual processes in the first year of AI adoption",
     icon: DollarSign,
     variant: "cyan",
   },
   {
-    id: "lead-conversion",
-    label: "Lead-to-customer lift",
-    value: 2.8,
+    id: "sales-lift",
+    label: "Revenue lift after AI",
+    value: 2.4,
     suffix: "x",
     decimals: 1,
-    caption: "After deploying AI receptionist + CRM sync",
+    caption: "Avg. sales increase reported by businesses we onboarded",
     icon: TrendingUp,
     variant: "gold",
   },
   {
     id: "response-time",
-    label: "Response time",
+    label: "Customer response time",
     prefix: "<",
-    value: 90,
+    value: 60,
     suffix: "s",
-    caption: "From customer message to AI-handled action",
+    caption: "AI handles inquiries instantly — even at 2 AM",
     icon: Zap,
     variant: "cyan",
   },
@@ -219,15 +219,15 @@ export default function KPIStrip() {
             className="font-display text-3xl md:text-5xl font-bold tracking-tight text-balance max-w-3xl"
             style={{ color: "var(--text-strong)" }}
           >
-            Time saved. Cost reduced.{" "}
-            <span className="gradient-text">Real numbers.</span>
+            What AI actually does{" "}
+            <span className="gradient-text">for local businesses.</span>
           </h2>
           <p
             className="max-w-2xl text-sm md:text-base leading-relaxed"
             style={{ color: "var(--text-subtle)" }}
           >
-            Aggregated across our last 50 deployments. Numbers verified by
-            client analytics dashboards, not vanity metrics.
+            Real outcomes from businesses we've helped — restaurants, clinics,
+            retail shops, and service providers across the GTA.
           </p>
         </div>
 

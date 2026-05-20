@@ -67,9 +67,8 @@ export default function AIAutomationHero() {
       className="relative min-h-screen overflow-hidden"
       style={{ background: "transparent" }}
     >
-      {/* ── Ambient background elements (pushed to edges) ─────────────────── */}
+      {/* ── Ambient background elements ───────────────────────────────────── */}
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Top-right gold glow */}
         <div
           className="absolute rounded-full"
           style={{
@@ -82,7 +81,6 @@ export default function AIAutomationHero() {
             filter: "blur(60px)",
           }}
         />
-        {/* Bottom-left cyan glow */}
         <div
           className="absolute rounded-full"
           style={{
@@ -95,7 +93,6 @@ export default function AIAutomationHero() {
             filter: "blur(60px)",
           }}
         />
-        {/* Subtle center radial for depth */}
         <div
           className="absolute inset-0"
           style={{
@@ -127,7 +124,7 @@ export default function AIAutomationHero() {
             }}
           >
             <Sparkles size={12} />
-            AI Automation Pipeline
+            AI for Local Businesses
           </motion.span>
 
           {/* Headline */}
@@ -141,12 +138,11 @@ export default function AIAutomationHero() {
               color: "var(--text-strong)",
             }}
           >
-            From raw data to
-            <br />
-            <span className="gradient-text">automated action</span>
+            Learn AI for{" "}
+            <span className="gradient-text">your business</span>
             <br />
             <span style={{ color: "var(--text-medium)", fontWeight: 400 }}>
-              — in one pipeline.
+              — practical tools, real results.
             </span>
           </motion.h1>
 
@@ -156,9 +152,9 @@ export default function AIAutomationHero() {
             className="max-w-2xl text-base sm:text-lg leading-relaxed"
             style={{ color: "var(--text-subtle)" }}
           >
-            Hijaz.ai connects your messy inputs to intelligent processing and
-            real-world actions. Less manual work. Faster decisions. Measurable
-            ROI for Toronto businesses.
+            We help local businesses in Toronto and across Canada discover, learn,
+            and implement AI tools that save time, reduce costs, and drive more
+            sales — no tech background required.
           </motion.p>
 
           {/* CTAs */}
@@ -179,9 +175,9 @@ export default function AIAutomationHero() {
                     "0 0 24px rgba(201,168,76,0.3), 0 4px 14px rgba(0,0,0,0.2)",
                 }}
               >
-                <Link href="/contact?intent=demo">
+                <Link href="/contact?intent=call">
                   <span className="relative z-10 inline-flex items-center gap-2">
-                    Request a 15-min demo
+                    Book a free 15-min call
                     <ArrowRight size={16} aria-hidden />
                   </span>
                 </Link>
@@ -202,7 +198,7 @@ export default function AIAutomationHero() {
                   WebkitBackdropFilter: "blur(8px)",
                 }}
               >
-                <Link href="#services">See the pipeline in action</Link>
+                <Link href="#use-cases">See how AI helps your business</Link>
               </Button>
             </motion.div>
           </motion.div>

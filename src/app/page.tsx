@@ -2,7 +2,10 @@ import { buildMetadata } from "@/lib/seo"
 import { LocalBusinessJsonLd } from "@/components/seo/JsonLd"
 import AIAutomationHero from "@/components/sections/AIAutomationHero"
 import KPIStrip from "@/components/sections/KPIStrip"
+import LocalBusinessUseCases from "@/components/sections/LocalBusinessUseCases"
 import ServicePipelineCards from "@/components/sections/ServicePipelineCards"
+import AIFluencySection from "@/components/sections/AIFluencySection"
+import HowWeHelpSection from "@/components/sections/HowWeHelpSection"
 import WhyChooseUs from "@/components/sections/WhyChooseUs"
 import PortfolioPreview from "@/components/sections/PortfolioPreview"
 import TestimonialsSection from "@/components/sections/TestimonialsSection"
@@ -11,9 +14,9 @@ import FAQAccordion from "@/components/sections/FAQAccordion"
 import CTABanner from "@/components/sections/CTABanner"
 
 export const metadata = buildMetadata({
-  title: "Hijaz.ai — AI Automation Pipeline for Toronto Businesses",
+  title: "Hijaz.ai — Learn AI for Your Local Business | Toronto",
   description:
-    "Turn raw data into automated action with Hijaz.ai. AI receptionists, conversion-ready websites, Shopify, and performance marketing — measurable ROI for GTA businesses.",
+    "Hijaz.ai helps local businesses in Toronto and across Canada discover, learn, and implement AI tools that save time, reduce costs, and drive more sales. Book a free 15-min call today.",
   canonical: "/",
 })
 
@@ -23,7 +26,10 @@ export default function HomePage() {
       <LocalBusinessJsonLd />
       <AIAutomationHero />
       <KPIStrip />
+      <LocalBusinessUseCases />
       <ServicePipelineCards />
+      <AIFluencySection />
+      <HowWeHelpSection />
       <WhyChooseUs />
       <PortfolioPreview />
       <TestimonialsSection />

@@ -29,78 +29,78 @@ type ServiceCard = {
 const SERVICES: ServiceCard[] = [
   {
     id: "ai-automation",
-    title: "AI Receptionist & Workflow",
-    pitch: "24/7 conversational AI that books, qualifies, and routes — wired to your CRM.",
+    title: "AI Workflow Automation",
+    pitch: "Automate the repetitive daily tasks eating up your hours — bookings, follow-ups, reminders, and more.",
     icon: Bot,
     variant: "gold",
     href: "/services#ai-automation",
     outcomes: [
-      { metric: "−18h", label: "manual phone work / week" },
-      { metric: "+212%", label: "after-hours leads captured" },
-      { metric: "<90s", label: "avg. response time" },
+      { metric: "−20h", label: "admin work saved / week" },
+      { metric: "+180%", label: "after-hours leads captured" },
+      { metric: "7 days", label: "to live deployment" },
     ],
     steps: [
-      "Discovery & intent mapping",
-      "Custom training on your data",
-      "Calendar / CRM integration",
-      "Live deployment in 7 days",
+      "Map your repetitive daily tasks",
+      "Build AI workflows around them",
+      "Connect to your tools (email, calendar, CRM)",
+      "Train your team in under an hour",
     ],
   },
   {
     id: "web-development",
-    title: "Conversion-Ready Web",
-    pitch: "Next.js sites that load in under 1.5s and turn traffic into measurable revenue.",
+    title: "AI-Powered Website",
+    pitch: "A fast, modern website with AI chat built in — so it answers customers and books appointments 24/7.",
     icon: Code2,
     variant: "cyan",
     href: "/services#web-development",
     outcomes: [
-      { metric: "1.4s", label: "avg. LCP, mobile" },
-      { metric: "+64%", label: "conversion vs. previous site" },
+      { metric: "+64%", label: "more leads vs. old site" },
+      { metric: "24/7", label: "AI handles inquiries" },
       { metric: "100", label: "Lighthouse SEO score" },
     ],
     steps: [
-      "UX audit & wireframes",
-      "Server-rendered build (Next.js)",
-      "CMS for non-technical edits",
+      "Design & copywriting for your niche",
+      "AI chat trained on your business",
+      "CMS so you update content yourself",
       "Launch & analytics handoff",
     ],
   },
   {
     id: "shopify",
-    title: "Shopify Growth Stack",
-    pitch: "Stores designed to convert and scale — from product strategy to checkout.",
+    title: "AI-Enhanced Online Store",
+    pitch: "Sell online with an AI store that recommends products, recovers abandoned carts, and handles customer questions.",
     icon: ShoppingBag,
     variant: "gold",
     href: "/services#shopify",
     outcomes: [
       { metric: "+47%", label: "checkout completion" },
-      { metric: "$40K", label: "avg. first-quarter revenue" },
+      { metric: "−30%", label: "support emails weekly" },
       { metric: "5 days", label: "store launch time" },
     ],
     steps: [
-      "Brand & product strategy",
-      "Theme + custom sections",
-      "Payment & shipping setup",
-      "Post-launch optimization",
+      "Product catalogue & pricing strategy",
+      "AI product recommendations",
+      "Automated cart recovery sequences",
+      "Post-launch growth optimization",
     ],
   },
   {
-    id: "marketing",
-    title: "Performance Marketing",
-    pitch: "Local SEO and paid acquisition tuned for the GTA — only metrics that move revenue.",
+    id: "ai-training",
+    title: "AI Fluency Training",
+    pitch: "Hands-on workshops that teach you and your staff how to use AI tools confidently in daily business operations.",
     icon: TrendingUp,
     variant: "cyan",
-    href: "/services#digital-marketing",
+    href: "/services#ai-training",
     outcomes: [
-      { metric: "3.4x", label: "ROAS on Google Ads" },
-      { metric: "Top 3", label: "local map pack ranking" },
-      { metric: "−38%", label: "cost per qualified lead" },
+      { metric: "1 day", label: "workshop to get started" },
+      { metric: "10+", label: "AI tools covered" },
+      { metric: "100%", label: "tailored to your industry" },
     ],
     steps: [
-      "Keyword & competitor audit",
-      "Local SEO foundation",
-      "Paid campaign launch",
-      "Monthly reporting & iteration",
+      "Audit of your current workflow",
+      "Identify highest-impact AI tools",
+      "Live hands-on practice session",
+      "Playbook & ongoing Q&A support",
     ],
   },
 ]
@@ -273,7 +273,7 @@ function Card({ service, index }: { service: ServiceCard; index: number }) {
         {/* CTAs */}
         <div className="flex items-center gap-2 mt-4 pt-4 border-t" style={{ borderColor: "var(--surface-border)" }}>
           <Link
-            href={`/contact?intent=demo&service=${service.id}`}
+            href={`/contact?intent=call&service=${service.id}`}
             className="inline-flex items-center gap-2 px-4 h-10 rounded-full text-sm font-semibold transition-all"
             style={{
               background: color,
@@ -284,7 +284,7 @@ function Card({ service, index }: { service: ServiceCard; index: number }) {
             aria-expanded={expanded}
           >
             <PlayCircle size={15} aria-hidden />
-            Request demo
+            Book a free call
           </Link>
           <Link
             href={service.href}
@@ -325,15 +325,15 @@ export default function ServicePipelineCards() {
               className="font-display text-3xl md:text-5xl font-bold tracking-tight text-balance"
               style={{ color: "var(--text-strong)" }}
             >
-              Four services. One{" "}
-              <span className="gradient-text">end-to-end stack.</span>
+              Four ways we help your{" "}
+              <span className="gradient-text">business grow with AI.</span>
             </h2>
             <p
               className="text-sm md:text-base leading-relaxed"
               style={{ color: "var(--text-subtle)" }}
             >
-              Hover any card for the full delivery flow — or request a focused
-              15-minute demo for the service that matters today.
+              Hover any card to see exactly how we deliver it — or book a free
+              15-min call to find out which one fits your business today.
             </p>
           </div>
           <Link
