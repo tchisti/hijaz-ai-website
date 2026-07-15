@@ -28,12 +28,12 @@ type ServiceCard = {
 
 const SERVICES: ServiceCard[] = [
   {
-    id: "ai-automation",
+    id: "ai-workflows",
     title: "AI Workflow Automation",
     pitch: "Automate the repetitive daily tasks eating up your hours — bookings, follow-ups, reminders, and more.",
     icon: Bot,
     variant: "gold",
-    href: "/services#ai-automation",
+    href: "/services#ai-workflows",
     outcomes: [
       { metric: "−20h", label: "admin work saved / week" },
       { metric: "+180%", label: "after-hours leads captured" },
@@ -193,7 +193,7 @@ function Card({ service, index }: { service: ServiceCard; index: number }) {
           {service.pitch}
         </p>
 
-        {/* Outcomes — visible always, animated emphasis on hover */}
+        {/* Outcomes — illustrative projections, visible always */}
         <ul
           className="grid grid-cols-3 gap-2 mt-2"
           aria-label="Typical outcomes"
@@ -222,6 +222,12 @@ function Card({ service, index }: { service: ServiceCard; index: number }) {
             </li>
           ))}
         </ul>
+        <p
+          className="text-[10px] leading-tight"
+          style={{ color: "var(--text-subtle)" }}
+        >
+          Typical results — vary by business.
+        </p>
 
         {/* Expanded panel — hover/focus reveals steps + demo CTA */}
         <motion.div

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Instagram, Linkedin, Facebook, MessageCircle, MapPin, Phone, Mail, Clock } from "lucide-react"
-import { SITE_CONFIG, NAV_LINKS, SERVICES } from "@/lib/constants"
+import { SITE_CONFIG, NAV_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/constants"
 
 export default function Footer() {
   return (
@@ -62,10 +62,10 @@ export default function Footer() {
           <div>
             <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-gold mb-4">Services</h3>
             <ul className="space-y-2">
-              {SERVICES.map((s) => (
-                <li key={s.id}>
+              {FOOTER_SERVICE_LINKS.map((s) => (
+                <li key={s.href}>
                   <Link href={s.href} className="text-white/60 hover:text-gold text-sm transition-colors">
-                    {s.title}
+                    {s.label}
                   </Link>
                 </li>
               ))}

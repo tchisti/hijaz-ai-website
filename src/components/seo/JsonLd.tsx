@@ -61,12 +61,16 @@ export function LocalBusinessJsonLd() {
     },
     areaServed: SITE_CONFIG.serviceAreas,
     serviceType: [
-      "AI Automation",
+      "AI Consulting",
+      "AI Chatbots & Receptionists",
+      "AI Workflow Automation",
+      "AI Training",
+      "Business Intelligence Dashboards",
+      "AI Marketing & Local SEO",
       "Web Development",
       "Shopify E-Commerce",
       "Logo Design",
       "Printing Services",
-      "Digital Marketing",
     ],
     openingHours: "Mo-Fr 09:00-18:00",
     sameAs: Object.values(SITE_CONFIG.social),
@@ -94,10 +98,12 @@ export function ServiceJsonLd({
   name,
   description,
   url,
+  startingPrice,
 }: {
   name: string
   description: string
   url: string
+  startingPrice?: number
 }) {
   const data = {
     "@context": "https://schema.org",
@@ -109,8 +115,21 @@ export function ServiceJsonLd({
       name: SITE_CONFIG.name,
       url: SITE_CONFIG.url,
     },
-    areaServed: "Greater Toronto Area",
+    areaServed: ["Toronto", "Greater Toronto Area", ...SITE_CONFIG.serviceAreas],
     url,
+    ...(startingPrice !== undefined && {
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "CAD",
+        price: startingPrice,
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          minPrice: startingPrice,
+          priceCurrency: "CAD",
+        },
+        url,
+      },
+    }),
   }
   return <JsonLd data={data} />
 }

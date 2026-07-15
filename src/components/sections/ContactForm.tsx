@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { SERVICES } from "@/lib/constants"
+import { SERVICES, AI_SERVICES, FOUNDATION_SERVICES, BUNDLES } from "@/lib/constants"
 import { Send, CheckCircle, AlertCircle, Loader2, Shield } from "lucide-react"
 
 const BUDGET_OPTIONS = [
@@ -60,8 +60,19 @@ export default function ContactForm() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
+
+  // Preselect the service when arriving via a "?service=<id>" CTA link
+  useEffect(() => {
+    const serviceId = new URLSearchParams(window.location.search).get("service")
+    if (!serviceId) return
+    const service = SERVICES.find((s) => s.id === serviceId)
+    const bundle = BUNDLES.find((b) => b.id === serviceId)
+    const value = service?.title ?? (bundle ? `${bundle.name} Package` : null)
+    if (value) setValue("service", value)
+  }, [setValue])
 
   const inputClass =
     "w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring transition-colors"
@@ -199,11 +210,27 @@ export default function ContactForm() {
           className={cn(inputClass, errors.service && "border-destructive")}
         >
           <option value="">Select a service…</option>
-          {SERVICES.map((s) => (
-            <option key={s.id} value={s.title}>
-              {s.title}
-            </option>
-          ))}
+          <optgroup label="AI Services">
+            {AI_SERVICES.map((s) => (
+              <option key={s.id} value={s.title}>
+                {s.title}
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label="Packages">
+            {BUNDLES.map((b) => (
+              <option key={b.id} value={`${b.name} Package`}>
+                {b.name} Package
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label="Digital Foundations">
+            {FOUNDATION_SERVICES.map((s) => (
+              <option key={s.id} value={s.title}>
+                {s.title}
+              </option>
+            ))}
+          </optgroup>
           <option value="Not sure yet">Not sure yet — I need advice</option>
         </select>
         <FieldError message={errors.service?.message} />

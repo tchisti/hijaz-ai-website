@@ -2,14 +2,36 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Check, ArrowRight } from "lucide-react"
-import { Bot, Code2, ShoppingBag, Printer, TrendingUp } from "lucide-react"
+import {
+  Bot,
+  Code2,
+  ShoppingBag,
+  Printer,
+  TrendingUp,
+  ClipboardCheck,
+  Workflow,
+  GraduationCap,
+  BarChart3,
+  ShieldCheck,
+} from "lucide-react"
 import type { ComponentType } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { Service } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className?: string }>> = { Bot, Code2, ShoppingBag, Printer, TrendingUp }
+const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className?: string }>> = {
+  Bot,
+  Code2,
+  ShoppingBag,
+  Printer,
+  TrendingUp,
+  ClipboardCheck,
+  Workflow,
+  GraduationCap,
+  BarChart3,
+  ShieldCheck,
+}
 
 interface Props {
   service: Service
@@ -24,10 +46,14 @@ export default function ServiceDetailSection({ service, index }: Props) {
     <section
       id={service.slug}
       className={cn(
-        "py-20 border-b border-border last:border-0",
+        "relative py-20 border-b border-border last:border-0",
         !isEven && "bg-muted/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
       )}
     >
+      {/* Legacy anchors (e.g. #digital-marketing) keep resolving here */}
+      {service.aliasAnchors?.map((anchor) => (
+        <span key={anchor} id={anchor} className="absolute top-0" aria-hidden />
+      ))}
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         {/* Content side */}
         <motion.div
@@ -42,6 +68,11 @@ export default function ServiceDetailSection({ service, index }: Props) {
               <Icon size={20} className="text-foreground" />
             </div>
             <span className="text-gold font-medium text-sm uppercase tracking-widest">Service</span>
+            {service.badge && (
+              <Badge className="bg-gold text-midnight hover:bg-gold font-semibold uppercase tracking-wider text-[10px]">
+                {service.badge}
+              </Badge>
+            )}
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">{service.title}</h2>
           <p className="text-muted-foreground leading-relaxed mb-6">{service.fullDesc}</p>
@@ -67,11 +98,13 @@ export default function ServiceDetailSection({ service, index }: Props) {
 
           {/* Pricing teaser */}
           <p className="text-sm text-muted-foreground mb-6">
-            <span className="font-semibold text-foreground">{service.pricingTeaser}</span> · Free consultation included
+            <span className="font-semibold text-foreground">{service.pricingTeaser}</span> · Free 15-min consultation included
           </p>
 
           <Button asChild className="bg-midnight text-white hover:bg-midnight/90">
-            <Link href="/contact">Get Started <ArrowRight size={16} className="ml-2" /></Link>
+            <Link href={`/contact?intent=call&service=${service.id}`}>
+              Get Started <ArrowRight size={16} className="ml-2" />
+            </Link>
           </Button>
         </motion.div>
 
