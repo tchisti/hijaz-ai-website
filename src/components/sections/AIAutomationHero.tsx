@@ -1,249 +1,190 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import { ArrowRight, Sparkles, Star, MapPin, ShieldCheck } from "lucide-react"
+import {
+  ArrowRight,
+  Bot,
+  Check,
+  MapPin,
+  MousePointer2,
+  Sparkles,
+  TrendingUp,
+  Users,
+  Zap,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-/* ─── Animation primitives ──────────────────────────────────────────────── */
+const AIPipelineScene = dynamic(
+  () => import("@/components/three/AIPipelineScene"),
+  { ssr: false },
+)
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 22, filter: "blur(5px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.08 } },
 }
 
-/* ─── Trust badge ────────────────────────────────────────────────────────── */
-function TrustPill({
-  icon,
-  children,
-}: {
-  icon: React.ReactNode
-  children: React.ReactNode
-}) {
-  return (
-    <span
-      className="flex items-center gap-2 text-sm px-4 py-2 rounded-full"
-      style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid var(--surface-border)",
-        color: "var(--text-subtle)",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
-      }}
-    >
-      <span style={{ color: "var(--gold-primary)" }}>{icon}</span>
-      {children}
-    </span>
-  )
-}
+const outcomes = [
+  { icon: Zap, label: "Save time" },
+  { icon: Users, label: "Win customers" },
+  { icon: TrendingUp, label: "Scale smarter" },
+]
 
-/* ─── Hero ───────────────────────────────────────────────────────────────── */
+const loopSteps = [
+  { icon: Users, label: "Attract", detail: "more qualified leads" },
+  { icon: Bot, label: "Automate", detail: "repetitive work" },
+  { icon: TrendingUp, label: "Grow", detail: "with less overhead" },
+]
+
 export default function AIAutomationHero() {
   const ref = useRef<HTMLElement>(null)
   const reduceMotion = useReducedMotion()
-
-  /* Parallax on scroll */
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   })
-  const yContent = useTransform(scrollYProgress, [0, 1], [0, 80])
-  const fadeOut = useTransform(scrollYProgress, [0, 0.65], [1, 0])
+  const yContent = useTransform(scrollYProgress, [0, 1], [0, 54])
+  const yVisual = useTransform(scrollYProgress, [0, 1], [0, 86])
+  const fadeOut = useTransform(scrollYProgress, [0, 0.75], [1, 0])
 
   return (
     <section
       ref={ref}
       aria-labelledby="hero-heading"
-      className="relative min-h-screen overflow-hidden"
-      style={{ background: "transparent" }}
+      className="relative flex min-h-screen items-center overflow-hidden pt-24 sm:pt-28"
     >
-      {/* ── Ambient background elements ───────────────────────────────────── */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: 600,
-            height: 600,
-            top: "-15%",
-            right: "-10%",
-            background:
-              "radial-gradient(circle, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.03) 50%, transparent 70%)",
-            filter: "blur(60px)",
-          }}
-        />
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: 500,
-            height: 500,
-            bottom: "-12%",
-            left: "-8%",
-            background:
-              "radial-gradient(circle, rgba(82,193,220,0.1) 0%, rgba(82,193,220,0.02) 50%, transparent 70%)",
-            filter: "blur(60px)",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 60% at 50% 45%, rgba(201,168,76,0.03) 0%, transparent 60%)",
-          }}
-        />
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute right-0 top-0 size-[32rem] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-48 -left-48 size-[30rem] rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/.22)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/.22)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       </div>
 
-      {/* ── Main content ──────────────────────────────────────────────────── */}
-      <motion.div
-        className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 pb-24 sm:pb-32 flex flex-col items-center text-center min-h-screen justify-center"
-        style={{ y: reduceMotion ? 0 : yContent, opacity: fadeOut }}
-      >
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1.02fr_.98fr] lg:gap-10 lg:px-8 lg:pb-24">
         <motion.div
-          initial="hidden"
+          className="flex flex-col items-start gap-7"
+          initial={false}
           animate="visible"
           variants={stagger}
-          className="flex flex-col items-center gap-6"
+          style={{ y: reduceMotion ? 0 : yContent, opacity: fadeOut }}
         >
-          {/* Badge */}
-          <motion.span
+          <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.16em] uppercase px-5 py-2 rounded-full"
-            style={{
-              background: "rgba(201,168,76,0.08)",
-              border: "1px solid rgba(201,168,76,0.22)",
-              color: "var(--gold-primary)",
-            }}
+            className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-primary"
           >
-            <Sparkles size={12} />
-            AI for Local Businesses
-          </motion.span>
+            <Sparkles className="size-3.5" aria-hidden />
+            AI-powered growth for local businesses
+          </motion.div>
 
-          {/* Headline */}
           <motion.h1
             id="hero-heading"
             variants={fadeUp}
-            className="font-display font-bold tracking-tight text-balance"
-            style={{
-              fontSize: "clamp(2.5rem, 7vw, 4.5rem)",
-              lineHeight: 1.08,
-              color: "var(--text-strong)",
-            }}
+            className="max-w-3xl text-balance font-display text-5xl font-bold leading-[1.02] tracking-[-0.045em] text-foreground sm:text-6xl lg:text-7xl"
           >
-            Learn AI for{" "}
-            <span className="gradient-text">your business</span>
-            <br />
-            <span style={{ color: "var(--text-medium)", fontWeight: 400 }}>
-              — practical tools, real results.
-            </span>
+            Turn AI into your{" "}
+            <span className="gradient-text text-glow-gold">unfair business advantage.</span>
           </motion.h1>
 
-          {/* Subhead */}
           <motion.p
             variants={fadeUp}
-            className="max-w-2xl text-base sm:text-lg leading-relaxed"
-            style={{ color: "var(--text-subtle)" }}
+            className="max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            We help local businesses in Toronto and across Canada discover, learn,
-            and implement AI tools that save time, reduce costs, and drive more
-            sales — no tech background required.
+            We help local businesses attract more leads, automate repetitive work,
+            and build a stronger digital presence—without the technical overwhelm.
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4"
-          >
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Button
-                asChild
-                size="lg"
-                className="relative overflow-hidden text-base px-8 h-12 font-semibold"
-                style={{
-                  background: "linear-gradient(135deg, #B8922A, #D4A83A)",
-                  color: "#fff",
-                  border: "none",
-                  boxShadow:
-                    "0 0 24px rgba(201,168,76,0.3), 0 4px 14px rgba(0,0,0,0.2)",
-                }}
-              >
+          <motion.div variants={fadeUp} className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <motion.div whileHover={reduceMotion ? undefined : { y: -2 }} whileTap={{ scale: 0.98 }}>
+              <Button asChild size="lg" className="h-12 w-full px-7 text-base font-semibold shadow-[0_12px_40px_hsl(var(--primary)/.24)] sm:w-auto">
                 <Link href="/contact?intent=call">
-                  <span className="relative z-10 inline-flex items-center gap-2">
-                    Book a free 15-min call
-                    <ArrowRight size={16} aria-hidden />
-                  </span>
+                  Book your free strategy call
+                  <ArrowRight data-icon="inline-end" aria-hidden />
                 </Link>
               </Button>
             </motion.div>
-
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="text-base px-8 h-12 font-medium"
-                style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid var(--surface-border)",
-                  color: "var(--text-strong)",
-                  backdropFilter: "blur(8px)",
-                  WebkitBackdropFilter: "blur(8px)",
-                }}
-              >
-                <Link href="#use-cases">See how AI helps your business</Link>
+            <motion.div whileHover={reduceMotion ? undefined : { y: -2 }} whileTap={{ scale: 0.98 }}>
+              <Button asChild size="lg" variant="outline" className="h-12 w-full bg-background/50 px-7 text-base backdrop-blur-md sm:w-auto">
+                <Link href="#use-cases">See how we help</Link>
               </Button>
             </motion.div>
           </motion.div>
 
-          {/* Trust indicators */}
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-wrap items-center justify-center gap-3 mt-6"
-          >
-            <TrustPill icon={<Star size={13} fill="currentColor" />}>
-              4.9 / 5 &nbsp;·&nbsp; 30+ Reviews
-            </TrustPill>
-            <TrustPill icon={<MapPin size={13} />}>Toronto-Based</TrustPill>
-            <TrustPill icon={<ShieldCheck size={13} />}>
-              100% Satisfaction
-            </TrustPill>
+          <motion.div variants={fadeUp} className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border/70 pt-5">
+            {outcomes.map(({ icon: Icon, label }) => (
+              <span key={label} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/75">
+                <span className="flex size-6 items-center justify-center rounded-full bg-accent/10 text-accent">
+                  <Icon className="size-3.5" aria-hidden />
+                </span>
+                {label}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <Check className="size-4 text-primary" aria-hidden /> No tech background needed
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <MapPin className="size-4 text-primary" aria-hidden /> Toronto-based, serving Canada
+            </span>
           </motion.div>
         </motion.div>
-      </motion.div>
 
-      {/* ── Scroll cue ────────────────────────────────────────────────────── */}
-      <motion.div
-        aria-hidden
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
-      >
-        <span
-          className="text-[10px] tracking-[0.22em] uppercase"
-          style={{ color: "rgba(201,168,76,0.45)" }}
+        <motion.div
+          className="relative mx-auto w-full max-w-xl lg:max-w-none"
+          initial={{ opacity: 0, scale: 0.96, x: 18 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          style={{ y: reduceMotion ? 0 : yVisual, opacity: fadeOut }}
         >
-          Scroll
-        </span>
-        <motion.span
-          className="block w-px h-7"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(201,168,76,0.45), transparent)",
-            transformOrigin: "top",
-          }}
-          animate={{ scaleY: [1, 0.4, 1], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </motion.div>
+          <div className="glass relative overflow-hidden rounded-3xl p-3 shadow-2xl shadow-primary/10 sm:p-4">
+            <div aria-hidden className="absolute inset-x-16 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+            <div className="relative h-[370px] overflow-hidden rounded-2xl bg-secondary/55 sm:h-[430px] lg:h-[500px]">
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between p-4 sm:p-5">
+                <div className="rounded-full border border-border/80 bg-background/70 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground backdrop-blur-md">
+                  Your AI growth engine
+                </div>
+                <div className="hidden items-center gap-1.5 text-xs text-muted-foreground sm:flex">
+                  <MousePointer2 className="size-3.5" aria-hidden /> Move to explore
+                </div>
+              </div>
+
+              <AIPipelineScene />
+
+              <div className="pointer-events-none absolute inset-x-3 bottom-3 z-10 grid grid-cols-3 gap-2 sm:inset-x-4 sm:bottom-4">
+                {loopSteps.map(({ icon: Icon, label, detail }, index) => (
+                  <motion.div
+                    key={label}
+                    className="rounded-xl border border-border/80 bg-background/75 p-3 backdrop-blur-lg"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 + index * 0.12 }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Icon className="size-4 text-primary" aria-hidden />
+                      <span className="text-xs font-semibold text-foreground sm:text-sm">{label}</span>
+                    </div>
+                    <p className="mt-1 hidden text-[11px] text-muted-foreground sm:block">{detail}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div aria-hidden className="absolute -inset-4 -z-10 rounded-[2.25rem] bg-gradient-to-br from-primary/15 via-transparent to-accent/15 blur-xl" />
+        </motion.div>
+      </div>
     </section>
   )
 }
