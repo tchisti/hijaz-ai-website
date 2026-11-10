@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { SERVICES, AI_SERVICES, FOUNDATION_SERVICES, BUNDLES } from "@/lib/constants"
+import { SERVICES, AI_SERVICES, FOUNDATION_SERVICES, BUNDLES, SITE_CONFIG } from "@/lib/constants"
 import { Send, CheckCircle, AlertCircle, Loader2, Shield } from "lucide-react"
 
 const BUDGET_OPTIONS = [
@@ -269,7 +269,9 @@ export default function ContactForm() {
       {status === "error" && (
         <div className="flex items-center gap-2 p-4 bg-destructive/10 border border-destructive/20 rounded-none text-sm text-destructive">
           <AlertCircle size={16} className="flex-shrink-0" />
-          <span>{errorMessage || "Something went wrong. Please try again or email us directly at hello@hijaz.ai."}</span>
+          <span>
+            {errorMessage || `Something went wrong. Please try again or email us directly at ${SITE_CONFIG.email}.`}
+          </span>
         </div>
       )}
 

@@ -1,5 +1,8 @@
 export interface SiteConfig {
+  /** The brand, used in titles and the logo */
   name: string
+  /** The business entity that operates the brand */
+  legalName: string
   tagline: string
   positioning: string
   description: string
@@ -75,13 +78,14 @@ const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "14375809680"
 
 export const SITE_CONFIG: SiteConfig = {
   name: "Hijaz.ai",
+  legalName: "Hijaz Technologies",
   tagline: "Technology that earns its keep.",
   positioning: "Business technology partner",
   description:
     "Hijaz.ai is a business technology partner based in Toronto and Durham Region, Ontario. We build websites, online stores, AI assistants and custom software for businesses across Canada, quoted at a fixed price before work starts.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.hijaz.ai",
   bookingUrl: "https://cal.com/tchisti/15min",
-  email: "hello@hijaz.ai",
+  email: "hello@hijaz.ca",
   phone: "+1 (437) 580-9680",
   whatsappNumber: WHATSAPP_NUMBER,
   address: "Toronto, Ontario, Canada",
