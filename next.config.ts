@@ -89,6 +89,12 @@ const nextConfig: NextConfig = {
   // Redirects for common attack patterns
   async redirects() {
     return [
+      // The portfolio moved to /work
+      {
+        source: "/portfolio",
+        destination: "/work",
+        permanent: true,
+      },
       // Block common vulnerability probing paths
       {
         source: "/wp-admin/:path*",

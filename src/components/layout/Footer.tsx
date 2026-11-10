@@ -1,111 +1,146 @@
 import Link from "next/link"
-import { Instagram, Linkedin, Facebook, MessageCircle, MapPin, Phone, Mail, Clock } from "lucide-react"
 import { SITE_CONFIG, NAV_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/constants"
+import { LOCATIONS, LOCATION_GROUPS } from "@/lib/locations"
+import { INDUSTRIES } from "@/lib/industries"
+
+function Column({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h2 className="label mb-4 text-highlight">{title}</h2>
+      <ul className="space-y-2.5 text-sm text-chalk/75">{children}</ul>
+    </div>
+  )
+}
+
+const linkCls = "transition-colors hover:text-white"
 
 export default function Footer() {
+  const year = new Date().getFullYear()
   return (
-    <footer
-      className="text-white relative"
-      style={{
-        background: "rgba(3,5,15,0.85)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        borderTop: "1px solid rgba(201,168,76,0.12)",
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+    <footer className="surface-blueprint">
+      <div className="mx-auto max-w-7xl px-5 pb-8 pt-16 sm:px-8">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
           {/* Brand */}
-          <div className="space-y-4">
-            <Link href="/" className="inline-block font-display text-2xl font-bold">
-              Hijaz<span className="text-gold">.ai</span>
+          <div>
+            <Link href="/" className="font-display text-3xl font-extrabold tracking-tight text-white [font-stretch:118%]">
+              Hijaz<span className="text-highlight">.ai</span>
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed">
-              {SITE_CONFIG.tagline}<br />
-              Smart technology for growing businesses across the GTA.
+            <p className="mt-4 max-w-sm font-display text-2xl font-bold leading-tight tracking-tight text-white">
+              {SITE_CONFIG.tagline}
             </p>
-            <div className="flex items-center gap-3 pt-1">
-              <a href={SITE_CONFIG.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                className="p-2 rounded-lg bg-white/10 hover:bg-gold hover:text-midnight transition-colors">
-                <Instagram size={16} />
-              </a>
-              <a href={SITE_CONFIG.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-                className="p-2 rounded-lg bg-white/10 hover:bg-gold hover:text-midnight transition-colors">
-                <Linkedin size={16} />
-              </a>
-              <a href={SITE_CONFIG.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"
-                className="p-2 rounded-lg bg-white/10 hover:bg-gold hover:text-midnight transition-colors">
-                <Facebook size={16} />
-              </a>
-              <a href={SITE_CONFIG.social.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
-                className="p-2 rounded-lg bg-white/10 hover:bg-gold hover:text-midnight transition-colors">
-                <MessageCircle size={16} />
-              </a>
-            </div>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-chalk/70">
+              A business technology partner in Toronto and Durham Region. Websites, online stores, AI and custom
+              software for businesses across Canada.
+            </p>
+            <address className="mt-6 space-y-1.5 text-sm not-italic text-chalk/80">
+              <p>
+                <a href={`mailto:${SITE_CONFIG.email}`} className={linkCls}>
+                  {SITE_CONFIG.email}
+                </a>
+              </p>
+              <p>
+                <a href={`tel:${SITE_CONFIG.phone.replace(/[^+\d]/g, "")}`} className={linkCls}>
+                  {SITE_CONFIG.phone}
+                </a>
+              </p>
+              <p>{SITE_CONFIG.address}</p>
+              <p className="text-chalk/55">{SITE_CONFIG.businessHours}</p>
+            </address>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-gold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-white/60 hover:text-gold text-sm transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-gold mb-4">Services</h3>
-            <ul className="space-y-2">
+          {/* Link columns */}
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+            <Column title="Services">
               {FOOTER_SERVICE_LINKS.map((s) => (
                 <li key={s.href}>
-                  <Link href={s.href} className="text-white/60 hover:text-gold text-sm transition-colors">
+                  <Link href={s.href} className={linkCls}>
                     {s.label}
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-gold mb-4">Get in Touch</h3>
-            <ul className="space-y-3 text-sm text-white/60">
-              <li className="flex items-start gap-2">
-                <Mail size={14} className="mt-0.5 shrink-0 text-gold" />
-                <a href={`mailto:${SITE_CONFIG.email}`} className="hover:text-gold transition-colors">{SITE_CONFIG.email}</a>
+            </Column>
+            <Column title="Industries">
+              {INDUSTRIES.map((i) => (
+                <li key={i.slug}>
+                  <Link href={`/industries/${i.slug}`} className={linkCls}>
+                    {i.name}
+                  </Link>
+                </li>
+              ))}
+            </Column>
+            <Column title="Company">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={linkCls}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/blog" className={linkCls}>
+                  Blog
+                </Link>
               </li>
-              <li className="flex items-start gap-2">
-                <Phone size={14} className="mt-0.5 shrink-0 text-gold" />
-                <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-gold transition-colors">{SITE_CONFIG.phone}</a>
+              <li>
+                <a href={SITE_CONFIG.social.linkedin} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  LinkedIn
+                </a>
               </li>
-              <li className="flex items-start gap-2">
-                <Clock size={14} className="mt-0.5 shrink-0 text-gold" />
-                <span>{SITE_CONFIG.businessHours}</span>
+              <li>
+                <a href={SITE_CONFIG.social.instagram} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  Instagram
+                </a>
               </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={14} className="mt-0.5 shrink-0 text-gold" />
-                <span>{SITE_CONFIG.address}</span>
-              </li>
-            </ul>
+            </Column>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40">
-          <p>
-            &copy; {new Date().getFullYear()} Hijaz.ai. All rights reserved.{" "}
-            <span className="text-white/60">Proudly Canadian 🍁</span>
-          </p>
-          <p className="text-center">
-            Serving: {SITE_CONFIG.serviceAreas.join(" | ")}
-          </p>
+        {/* Service areas: every location page linked from every page */}
+        <nav aria-label="Service areas" className="mt-14 border-t border-chalk/20 pt-8">
+          <h2 className="label mb-5 text-highlight">Where we work</h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {LOCATION_GROUPS.map((group) => (
+              <div key={group.label}>
+                <h3 className="mb-2 text-sm font-semibold tracking-normal text-white [font-stretch:100%]">
+                  {group.label}
+                </h3>
+                <ul className="flex flex-wrap gap-x-3 gap-y-1.5 text-sm text-chalk/70">
+                  {group.slugs.map((slug) => {
+                    const loc = LOCATIONS.find((l) => l.slug === slug)
+                    return loc ? (
+                      <li key={slug}>
+                        <Link href={`/locations/${slug}`} className={linkCls}>
+                          {loc.name}
+                        </Link>
+                      </li>
+                    ) : null
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </nav>
+
+        {/* Title block */}
+        <div className="label mt-12 grid grid-cols-2 border border-chalk/30 text-chalk/70 sm:grid-cols-4">
+          <div className="border-b border-r border-chalk/30 p-3 sm:border-b-0">
+            <span className="block text-chalk/45">Drawn by</span>Hijaz.ai
+          </div>
+          <div className="border-b border-chalk/30 p-3 sm:border-b-0 sm:border-r">
+            <span className="block text-chalk/45">Location</span>Toronto · Durham, ON
+          </div>
+          <div className="border-r border-chalk/30 p-3">
+            <span className="block text-chalk/45">Revision</span>
+            {year}
+          </div>
+          <div className="p-3">
+            <span className="block text-chalk/45">Status</span>
+            <span className="text-highlight">In production</span>
+          </div>
         </div>
+        <p className="mt-5 text-xs text-chalk/50">
+          &copy; {year} {SITE_CONFIG.name}. All rights reserved. Built and operated in Canada.
+        </p>
       </div>
     </footer>
   )

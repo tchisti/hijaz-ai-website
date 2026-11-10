@@ -11,7 +11,7 @@ export default function WhatsAppFAB() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
       {showTooltip && (
-        <div className="bg-midnight text-white text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap animate-in fade-in slide-in-from-bottom-2">
+        <div className="bg-ink text-paper text-sm px-3 py-2 rounded-none shadow-lg whitespace-nowrap animate-in fade-in slide-in-from-bottom-2">
           Chat with us now
         </div>
       )}
@@ -22,7 +22,7 @@ export default function WhatsAppFAB() {
         aria-label="Chat on WhatsApp"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:scale-110 active:scale-95 transition-transform"
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-[#1FAF57] text-white shadow-[4px_4px_0_0_#11151B] hover:scale-110 active:scale-95 transition-transform"
       >
         <MessageCircle size={26} fill="white" strokeWidth={1.5} />
       </a>

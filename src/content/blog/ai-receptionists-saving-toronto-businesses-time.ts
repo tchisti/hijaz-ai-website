@@ -26,13 +26,13 @@ An AI receptionist isn't just a chatbot that answers "yes" and "no." Modern AI r
 
 For a restaurant, that means handling online reservations 24/7. For a clinic, it means pre-screening patients before they arrive. For a real estate agent, it means qualifying buyer inquiries at 2am.
 
-## Real Results from Toronto Businesses
+## Where the Payback Comes From
 
-At Hijaz.ai, we've deployed AI receptionists for clients across the GTA. Here's what we've seen:
+An AI receptionist earns its cost in three places:
 
-- **Bloom Café (Toronto)**: 3x increase in online reservations within 60 days. The team saves 18 hours/week on phone calls.
-- **Durham Dental**: 80% reduction in missed appointments. The AI sends automated reminders and rescheduling links.
-- **GTA Realty Group**: 200% increase in lead capture rate. Every website visitor who engages gets followed up automatically.
+- **After-hours enquiries**: questions and booking requests that arrive when nobody is at the desk get an answer instead of a voicemail.
+- **Missed appointments**: automated reminders and rescheduling links go out without anyone remembering to send them.
+- **Slow follow-up**: every visitor who starts a conversation is followed up, so leads stop going cold in an inbox.
 
 ## Is AI Reception Right for Your Business?
 

@@ -1,41 +1,46 @@
 import { buildMetadata } from "@/lib/seo"
-import { LocalBusinessJsonLd } from "@/components/seo/JsonLd"
-import AIAutomationHero from "@/components/sections/AIAutomationHero"
-import KPIStrip from "@/components/sections/KPIStrip"
-import LocalBusinessUseCases from "@/components/sections/LocalBusinessUseCases"
-import ServicePipelineCards from "@/components/sections/ServicePipelineCards"
-import AIFluencySection from "@/components/sections/AIFluencySection"
-import HowWeHelpSection from "@/components/sections/HowWeHelpSection"
-import WhyChooseUs from "@/components/sections/WhyChooseUs"
-import PortfolioPreview from "@/components/sections/PortfolioPreview"
-import TestimonialsSection from "@/components/sections/TestimonialsSection"
-import GoogleReviews from "@/components/sections/GoogleReviews"
+import Hero from "@/components/home/Hero"
+import LogoStrip from "@/components/home/LogoStrip"
+import SelectedWork from "@/components/home/SelectedWork"
+import Capabilities from "@/components/home/Capabilities"
+import Industries from "@/components/home/Industries"
+import WhyUs from "@/components/home/WhyUs"
+import Process from "@/components/home/Process"
+import ServiceArea from "@/components/home/ServiceArea"
 import FAQAccordion from "@/components/sections/FAQAccordion"
-import CTABanner from "@/components/sections/CTABanner"
+import EnquirySection from "@/components/sections/EnquirySection"
 
 export const metadata = buildMetadata({
-  title: "Hijaz.ai — Learn AI for Your Local Business | Toronto",
+  title: "Hijaz.ai | Business Technology Partner in Toronto & Durham Region",
+  absoluteTitle: true,
   description:
-    "Hijaz.ai helps local businesses in Toronto and across Canada discover, learn, and implement AI tools that save time, reduce costs, and drive more sales. Book a free 15-min call today.",
+    "Websites, online stores, AI assistants and custom software for businesses in Toronto, Durham Region and across Canada. Fixed prices, live in days.",
   canonical: "/",
+  keywords: [
+    "business technology partner Toronto",
+    "web design Durham Region",
+    "web design Ajax",
+    "AI automation Toronto",
+    "Shopify developer Toronto",
+    "website design Oshawa",
+    "web developer Pickering",
+    "AI automation agency Canada",
+  ],
 })
 
 export default function HomePage() {
   return (
     <>
-      <LocalBusinessJsonLd />
-      <AIAutomationHero />
-      <KPIStrip />
-      <LocalBusinessUseCases />
-      <ServicePipelineCards />
-      <AIFluencySection />
-      <HowWeHelpSection />
-      <WhyChooseUs />
-      <PortfolioPreview />
-      <TestimonialsSection />
-      <GoogleReviews />
-      <FAQAccordion />
-      <CTABanner />
+      <Hero />
+      <LogoStrip />
+      <SelectedWork />
+      <Capabilities />
+      <Industries />
+      <WhyUs />
+      <Process />
+      <ServiceArea />
+      <FAQAccordion number="08" />
+      <EnquirySection context="Homepage enquiry" />
     </>
   )
 }

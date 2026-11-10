@@ -1,6 +1,6 @@
 # Hijaz.ai Website
 
-Official business website for [Hijaz.ai](https://hijaz.ai) — Toronto's AI & Digital Growth Partner.
+Official website for [Hijaz.ai](https://www.hijaz.ai), a business technology partner in Toronto and Durham Region.
 
 ## Tech Stack
 
@@ -9,20 +9,41 @@ Official business website for [Hijaz.ai](https://hijaz.ai) — Toronto's AI & Di
 - **Styling**: Tailwind CSS + shadcn/ui
 - **Animations**: Framer Motion
 - **Forms**: React Hook Form + Zod + EmailJS
-- **Fonts**: Inter (body), Syne (headings) via next/font/google
+- **Fonts**: Archivo (variable width, headings and body), IBM Plex Mono (labels) via next/font/google
 - **Deployment**: Vercel
 
 ## Pages
 
 | Route | Description |
 |-------|-------------|
-| `/` | Home — Hero, Stats, Services, Testimonials, FAQ, CTA |
-| `/services` | Detailed service sections with sidebar |
-| `/portfolio` | Filterable project grid with case study modals |
-| `/about` | Story, values, team, GTA community |
-| `/contact` | Split layout contact form with EmailJS |
-| `/blog` | Blog listing |
-| `/blog/[slug]` | Blog post with related articles |
+| `/` | Home: hero, logo strip, selected work, capabilities, industries, commitments, process, service areas, FAQ, enquiry form |
+| `/industries` | Industries we help |
+| `/industries/[slug]` | One page per industry: problems, what we build, a priced first project, FAQ, enquiry form |
+| `/work` | All selected builds, grouped by type |
+| `/work/[slug]` | One page per build, linked to the live product |
+| `/services` | Services with starting prices, and packages |
+| `/locations` | Service areas |
+| `/locations/[slug]` | One page per city, with its own market notes and FAQ |
+| `/about` | Who we are and how we work |
+| `/contact` | Contact form and booking link |
+| `/blog`, `/blog/[slug]` | Articles |
+| `/sitemap.xml`, `/robots.txt`, `/llms.txt` | Generated at build from the site data |
+
+## Design system
+
+The site is drawn as an engineering sheet: paper and ink, marked up in red, with a blueprint surface for dark sections.
+
+- **Tokens**: `tailwind.config.ts` (`paper`, `ink`, `redline`, `blueprint`, `chalk`, `highlight`) and `src/app/globals.css`
+- **Motion**: `src/components/motion/Redline.tsx` (underline, circle, dimension line, stamp, reveal). All respect `prefers-reduced-motion`
+- **Page furniture**: `src/components/layout/Sheet.tsx` (sheet headers, page hero, buttons)
+
+## Editing content
+
+- **Selected work**: `src/lib/projects.ts`. Set `featured: true` to show a build on the home page and `inLogoStrip: true` to add it to the logo strip. Screenshots live in `public/images/work`, brand marks in `public/images/logos`
+- **Industries**: `src/lib/industries.ts`. Proof on each page is limited to the live builds in `projectSlugs`
+- **Service areas**: `src/lib/locations.ts`. Each city needs its own market notes, proof and FAQ
+- **Services, prices, FAQ, contact details**: `src/lib/constants.ts`
+- **SEO and off-site plan**: `docs/seo-geo-playbook.md`
 
 ## Getting Started
 
@@ -49,12 +70,13 @@ cp .env.example .env.local
 
 | Variable | Description |
 |----------|-------------|
-| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | EmailJS service ID |
-| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | EmailJS template ID |
-| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | EmailJS public key |
+| `EMAILJS_SERVICE_ID` | EmailJS service ID (server side, used by `/api/contact`) |
+| `EMAILJS_TEMPLATE_ID` | EmailJS template ID |
+| `EMAILJS_PUBLIC_KEY` | EmailJS public key |
+| `EMAILJS_PRIVATE_KEY` | EmailJS private key, only if "Use Private Key" is enabled |
 | `NEXT_PUBLIC_GA4_ID` | Google Analytics 4 measurement ID |
 | `NEXT_PUBLIC_CLARITY_ID` | Microsoft Clarity project ID |
-| `NEXT_PUBLIC_SITE_URL` | Production URL (e.g., `https://hijaz.ai`) |
+| `NEXT_PUBLIC_SITE_URL` | Production URL (`https://www.hijaz.ai`) |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp number with country code |
 
 ### Development
@@ -79,44 +101,9 @@ npm run start
 3. Add all environment variables from `.env.example` in Vercel dashboard
 4. Deploy — Vercel auto-detects Next.js
 
-## Project Structure
-
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── page.tsx            # Home
-│   ├── services/page.tsx
-│   ├── portfolio/page.tsx
-│   ├── about/page.tsx
-│   ├── contact/page.tsx
-│   ├── blog/page.tsx
-│   ├── blog/[slug]/page.tsx
-│   ├── not-found.tsx       # 404 page
-│   └── layout.tsx          # Root layout
-├── components/
-│   ├── layout/             # Header, Footer, WhatsApp FAB, Analytics
-│   ├── sections/           # Page sections (HeroSection, ServicesGrid, etc.)
-│   ├── seo/                # JsonLd, schema.org structured data
-│   └── ui/                 # shadcn/ui base components
-├── content/
-│   └── blog/               # Blog post content (TypeScript)
-└── lib/
-    ├── constants.ts         # All site data
-    ├── seo.ts               # buildMetadata helper
-    └── utils.ts             # cn() utility
-```
-
 ## SEO
 
-- JSON-LD LocalBusiness + FAQPage + Service schemas
-- `buildMetadata()` helper for per-page meta
-- Auto-generated sitemap via `next-sitemap` (runs on `npm run build`)
-- `robots.txt` at `/public/robots.txt`
-- Canonical URLs on all pages
-
-## Customisation
-
-- **Brand colours**: Edit `tailwind.config.ts` → `midnight`, `gold`
-- **Site data**: Edit `src/lib/constants.ts` (SITE_CONFIG, SERVICES, etc.)
-- **Blog posts**: Add files to `src/content/blog/` and register in `index.ts`
-- **Analytics**: Set `NEXT_PUBLIC_GA4_ID` and `NEXT_PUBLIC_CLARITY_ID` in `.env.local`
+- One `ProfessionalService` entity with service areas and an offer catalogue, plus `FAQPage`, `BreadcrumbList`, `Service`, `CreativeWork` and `BlogPosting` schema
+- `buildMetadata()` helper for per-page titles, descriptions, canonicals and share images
+- `sitemap.xml`, `robots.txt` and `llms.txt` generated by the app router
+- Full plan in `docs/seo-geo-playbook.md`

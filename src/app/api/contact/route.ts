@@ -133,9 +133,11 @@ export async function POST(request: NextRequest) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          service_id: process.env.EMAILJS_SERVICE_ID,
-          template_id: process.env.EMAILJS_TEMPLATE_ID,
-          user_id: process.env.EMAILJS_PUBLIC_KEY,
+          // The NEXT_PUBLIC_ names are accepted as a fallback so an environment
+          // set up from older documentation still delivers enquiries
+          service_id: process.env.EMAILJS_SERVICE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          template_id: process.env.EMAILJS_TEMPLATE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+          user_id: process.env.EMAILJS_PUBLIC_KEY ?? process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
           accessToken: process.env.EMAILJS_PRIVATE_KEY,
           template_params: {
             from_name: data.name,
