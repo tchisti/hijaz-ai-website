@@ -14,7 +14,7 @@ export default function PopularPackages() {
   return (
     <section id="packages" className="py-20 border-b border-border">
       <div className="text-center mb-12">
-        <span className="text-gold font-medium text-sm uppercase tracking-widest">Popular Packages</span>
+        <span className="text-redline-deep font-medium text-sm uppercase tracking-widest">Popular Packages</span>
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mt-2">
           AI services, bundled for growth
         </h2>
@@ -33,14 +33,14 @@ export default function PopularPackages() {
           <motion.div key={bundle.id} variants={item} className="h-full">
             <div
               className={cn(
-                "relative flex flex-col h-full bg-card rounded-2xl p-7 border transition-all duration-300",
+                "relative flex flex-col h-full bg-card rounded-none p-7 border transition-all duration-300",
                 bundle.popular
-                  ? "border-gold/60 shadow-lg"
-                  : "border-border hover:border-gold/40"
+                  ? "border-redline shadow-[6px_6px_0_0_#11151B]"
+                  : "border-border hover:border-ink"
               )}
             >
               {bundle.popular && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-midnight hover:bg-gold font-semibold uppercase tracking-wider text-[10px]">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-redline text-white hover:bg-redline-deep font-semibold uppercase tracking-wider text-[10px]">
                   Most popular
                 </Badge>
               )}
@@ -50,8 +50,8 @@ export default function PopularPackages() {
               <ul className="space-y-3 mb-6 flex-1">
                 {bundle.includes.map((inclusion) => (
                   <li key={inclusion} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-gold/10 flex items-center justify-center">
-                      <Check size={12} className="text-gold" />
+                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-redline/10 flex items-center justify-center">
+                      <Check size={12} className="text-redline-deep" />
                     </span>
                     <span className="text-sm text-muted-foreground">{inclusion}</span>
                   </li>
@@ -63,8 +63,8 @@ export default function PopularPackages() {
                 className={cn(
                   "w-full font-semibold",
                   bundle.popular
-                    ? "bg-gold text-midnight hover:bg-gold/90"
-                    : "bg-midnight text-white hover:bg-midnight/90"
+                    ? "bg-redline text-white hover:bg-redline-deep"
+                    : "bg-ink text-paper hover:bg-redline"
                 )}
               >
                 <Link href={`/contact?intent=call&service=${bundle.id}`}>

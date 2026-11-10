@@ -13,9 +13,9 @@ function ServiceLinkGroup({ heading, services }: { heading: string; services: Se
           <li key={s.id}>
             <a
               href={`#${s.slug}`}
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-gold transition-colors group"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-redline-deep transition-colors group"
             >
-              <CheckCircle size={14} className="text-gold/40 group-hover:text-gold transition-colors" />
+              <CheckCircle size={14} className="text-redline/50 group-hover:text-redline-deep transition-colors" />
               {s.title}
             </a>
           </li>
@@ -29,12 +29,12 @@ export default function ServicesSidebar() {
   return (
     <aside className="sticky top-24 space-y-6">
       {/* Audit CTA card */}
-      <div className="bg-midnight rounded-2xl p-6 text-white">
+      <div className="bg-ink p-6 text-paper">
         <h3 className="font-display font-bold text-lg mb-2">Not sure where to start?</h3>
-        <p className="text-white/60 text-sm mb-4">
+        <p className="text-paper/70 text-sm mb-4">
           Book a free 15-min consultation — or start with the AI Opportunity Audit and get a ranked action plan within 48 hours.
         </p>
-        <Button asChild className="w-full bg-gold text-midnight hover:bg-gold/90 font-semibold">
+        <Button asChild className="w-full bg-redline text-white hover:bg-redline-deep font-semibold">
           <Link href="/contact?intent=call&service=ai-audit">
             Book Free Consultation <ArrowRight size={14} className="ml-1" />
           </Link>
@@ -42,7 +42,7 @@ export default function ServicesSidebar() {
       </div>
 
       {/* Quick jump links */}
-      <div className="bg-card rounded-2xl p-6 border border-border">
+      <div className="bg-card rounded-none p-6 border border-border">
         <h3 className="font-semibold text-foreground text-sm mb-4 uppercase tracking-wider">Our Services</h3>
         <div className="space-y-5">
           <ServiceLinkGroup heading="AI Services" services={AI_SERVICES} />
@@ -50,9 +50,9 @@ export default function ServicesSidebar() {
             <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Packages</h4>
             <a
               href="#packages"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-gold transition-colors group"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-redline-deep transition-colors group"
             >
-              <CheckCircle size={14} className="text-gold/40 group-hover:text-gold transition-colors" />
+              <CheckCircle size={14} className="text-redline/50 group-hover:text-redline-deep transition-colors" />
               Popular Packages
             </a>
           </div>
@@ -60,15 +60,6 @@ export default function ServicesSidebar() {
         </div>
       </div>
 
-      {/* Trust badges */}
-      <div className="space-y-3">
-        {["50+ Projects Delivered", "3-Day Turnaround", "100% Satisfaction"].map((badge) => (
-          <div key={badge} className="flex items-center gap-2 text-sm text-muted-foreground">
-            <CheckCircle size={16} className="text-gold shrink-0" />
-            {badge}
-          </div>
-        ))}
-      </div>
     </aside>
   )
 }

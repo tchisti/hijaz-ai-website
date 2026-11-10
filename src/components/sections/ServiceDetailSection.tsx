@@ -1,131 +1,69 @@
-"use client"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Check, ArrowRight } from "lucide-react"
-import {
-  Bot,
-  Code2,
-  ShoppingBag,
-  Printer,
-  TrendingUp,
-  ClipboardCheck,
-  Workflow,
-  GraduationCap,
-  BarChart3,
-  ShieldCheck,
-} from "lucide-react"
-import type { ComponentType } from "react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { ArrowUpRight, Check } from "lucide-react"
 import type { Service } from "@/lib/constants"
-import { cn } from "@/lib/utils"
-
-const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className?: string }>> = {
-  Bot,
-  Code2,
-  ShoppingBag,
-  Printer,
-  TrendingUp,
-  ClipboardCheck,
-  Workflow,
-  GraduationCap,
-  BarChart3,
-  ShieldCheck,
-}
+import { Reveal } from "@/components/motion/Redline"
 
 interface Props {
   service: Service
   index: number
 }
 
+/** One service, laid out as a specification: description and scope left, a price block right */
 export default function ServiceDetailSection({ service, index }: Props) {
-  const Icon = ICON_MAP[service.icon] ?? Bot
-  const isEven = index % 2 === 0
-
   return (
-    <section
-      id={service.slug}
-      className={cn(
-        "relative py-20 border-b border-border last:border-0",
-        !isEven && "bg-muted/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
-      )}
-    >
+    <section id={service.slug} className="relative scroll-mt-20 border-b border-ink/25 py-14">
       {/* Legacy anchors (e.g. #digital-marketing) keep resolving here */}
       {service.aliasAnchors?.map((anchor) => (
         <span key={anchor} id={anchor} className="absolute top-0" aria-hidden />
       ))}
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
-        {/* Content side */}
-        <motion.div
-          initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className={cn(!isEven && "lg:order-2")}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-foreground/5 flex items-center justify-center">
-              <Icon size={20} className="text-foreground" />
-            </div>
-            <span className="text-gold font-medium text-sm uppercase tracking-widest">Service</span>
-            {service.badge && (
-              <Badge className="bg-gold text-midnight hover:bg-gold font-semibold uppercase tracking-wider text-[10px]">
-                {service.badge}
-              </Badge>
-            )}
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">{service.title}</h2>
-          <p className="text-muted-foreground leading-relaxed mb-6">{service.fullDesc}</p>
+      <Reveal className="grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+        <div>
+          <p className="label flex items-center gap-3 text-redline-deep">
+            {String(index + 1).padStart(2, "0")}
+            {service.badge && <span className="bg-redline px-2 py-0.5 text-white">{service.badge}</span>}
+          </p>
+          <h2 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">{service.title}</h2>
+          <p className="mt-4 text-lg leading-relaxed text-ink-soft">{service.fullDesc}</p>
 
-          {/* Benefits */}
-          <ul className="space-y-3 mb-6">
+          <ul className="mt-7 border-t border-ink/25">
             {service.benefits.map((benefit) => (
-              <li key={benefit} className="flex items-start gap-3">
-                <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-gold/10 flex items-center justify-center">
-                  <Check size={12} className="text-gold" />
-                </span>
-                <span className="text-sm text-muted-foreground">{benefit}</span>
+              <li key={benefit} className="flex gap-3 border-b border-ink/15 py-3">
+                <Check aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-redline" />
+                <span>{benefit}</span>
               </li>
             ))}
           </ul>
+        </div>
 
-          {/* Use cases */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {service.useCases.map((useCase) => (
-              <Badge key={useCase} variant="secondary" className="text-xs">{useCase}</Badge>
-            ))}
+        <aside className="self-start border border-ink bg-paper-bright">
+          <div className="border-b border-ink/25 p-5">
+            <p className="label text-ink-faint">Price</p>
+            <p className="mt-1.5 text-xl font-bold leading-snug">{service.pricingTeaser}</p>
+            <p className="mt-1 text-sm text-ink-soft">Fixed quote before work starts. Free 15-minute call included.</p>
           </div>
-
-          {/* Pricing teaser */}
-          <p className="text-sm text-muted-foreground mb-6">
-            <span className="font-semibold text-foreground">{service.pricingTeaser}</span> · Free 15-min consultation included
-          </p>
-
-          <Button asChild className="bg-midnight text-white hover:bg-midnight/90">
-            <Link href={`/contact?intent=call&service=${service.id}`}>
-              Get Started <ArrowRight size={16} className="ml-2" />
-            </Link>
-          </Button>
-        </motion.div>
-
-        {/* Visual side */}
-        <motion.div
-          initial={{ opacity: 0, x: isEven ? 20 : -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className={cn(!isEven && "lg:order-1")}
-        >
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-midnight to-blue-900 aspect-[4/3] flex items-center justify-center">
-            <Icon size={80} className="text-white/10" />
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-midnight/40" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <p className="font-display text-xl font-bold text-white">{service.title}</p>
-              <p className="text-gold text-sm mt-1">{service.pricingTeaser}</p>
-            </div>
+          <div className="border-b border-ink/25 p-5">
+            <p className="label text-ink-faint">Best for</p>
+            <ul className="mt-2 flex flex-wrap gap-1.5">
+              {service.useCases.map((useCase) => (
+                <li key={useCase} className="label border border-ink/30 px-2 py-1 text-ink">
+                  {useCase}
+                </li>
+              ))}
+            </ul>
           </div>
-        </motion.div>
-      </div>
+          <Link
+            href={`/contact?intent=call&service=${service.id}`}
+            className="group flex items-center justify-between bg-ink px-5 py-4 font-semibold text-paper transition-colors hover:bg-redline"
+          >
+            Get a fixed quote
+            <ArrowUpRight
+              aria-hidden="true"
+              size={18}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
+        </aside>
+      </Reveal>
     </section>
   )
 }

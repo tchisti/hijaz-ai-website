@@ -75,7 +75,7 @@ export default function ContactForm() {
   }, [setValue])
 
   const inputClass =
-    "w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring transition-colors"
+    "w-full px-4 py-3 rounded-none border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 focus:border-ring transition-colors"
 
   const onSubmit = async (data: FormData) => {
     setStatus("loading")
@@ -267,7 +267,7 @@ export default function ContactForm() {
 
       {/* Error state */}
       {status === "error" && (
-        <div className="flex items-center gap-2 p-4 bg-destructive/10 border border-destructive/20 rounded-xl text-sm text-destructive">
+        <div className="flex items-center gap-2 p-4 bg-destructive/10 border border-destructive/20 rounded-none text-sm text-destructive">
           <AlertCircle size={16} className="flex-shrink-0" />
           <span>{errorMessage || "Something went wrong. Please try again or email us directly at hello@hijaz.ai."}</span>
         </div>
@@ -282,7 +282,7 @@ export default function ContactForm() {
       <Button
         type="submit"
         disabled={status === "loading"}
-        className="w-full bg-midnight text-white hover:bg-midnight/90 font-semibold h-12 text-base"
+        className="w-full bg-ink text-paper hover:bg-redline font-semibold h-12 text-base"
       >
         {status === "loading" ? (
           <>

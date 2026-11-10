@@ -1,184 +1,170 @@
 import Link from "next/link"
 import { buildMetadata } from "@/lib/seo"
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd"
+import { BookCallButton, PageHero, SecondaryButton } from "@/components/layout/Sheet"
+import { Circled, Reveal } from "@/components/motion/Redline"
 import CTABanner from "@/components/sections/CTABanner"
-import { Button } from "@/components/ui/button"
-import { ChevronRight, Heart, Lightbulb, ShieldCheck, Users, ArrowRight } from "lucide-react"
-import { SITE_CONFIG } from "@/lib/constants"
+import { LOCATIONS, LOCATION_GROUPS } from "@/lib/locations"
+import { PROJECTS, SECTORS } from "@/lib/projects"
 
 export const metadata = buildMetadata({
-  title: "About Hijaz.ai — Toronto's AI & Digital Agency",
+  title: "About: A Technology Partner Run by Operators",
   description:
-    "Learn about Hijaz.ai — a Toronto-based AI automation and digital services agency serving SMBs across the GTA, North York, and Durham Region since 2022.",
+    "Hijaz.ai builds websites, online stores, AI and custom software in Toronto and Durham Region, and operates its own online businesses on the same stack.",
   canonical: "/about",
 })
 
-// Values data
-const VALUES = [
-  {
-    icon: Lightbulb,
-    title: "Innovation",
-    desc: "We stay ahead of the technology curve so our clients don't have to. AI, automation, and modern web tech are in our DNA.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Integrity",
-    desc: "No hidden fees, no vague timelines. We say what we'll do, and we do what we say — every single time.",
-  },
-  {
-    icon: Heart,
-    title: "Impact",
-    desc: "We measure our success by the real-world results our clients see: more leads, more bookings, more revenue.",
-  },
-  {
-    icon: Users,
-    title: "Community",
-    desc: "We're proud to serve the GTA. As a local team, we have a genuine stake in helping Toronto businesses thrive.",
-  },
-]
+const VENTURES = PROJECTS.filter((p) => p.operatedByUs && p.category === "store")
 
-// Team placeholder data
-const TEAM = [
-  { name: "Omar H.", role: "Founder & CEO", initials: "OH", bg: "bg-midnight" },
-  { name: "Sara K.", role: "Lead Developer", initials: "SK", bg: "bg-blue-700" },
-  { name: "James T.", role: "AI Engineer", initials: "JT", bg: "bg-gold" },
-  { name: "Priya M.", role: "Design Lead", initials: "PM", bg: "bg-emerald-700" },
+const PRINCIPLES = [
+  {
+    title: "It has to earn its keep",
+    body: "A website, an automation or an AI assistant is a cost until it brings in an order, a booking or an hour of someone's day. We scope every build around the thing it is meant to produce.",
+  },
+  {
+    title: "A fixed price, in writing",
+    body: "You approve a number before work starts and that is the number you pay. Hourly billing rewards slow work, so we do not use it.",
+  },
+  {
+    title: "Proof you can open",
+    body: "Everything in our portfolio is live and linked. We would rather you click through a working store than read a paragraph about one.",
+  },
+  {
+    title: "We stay after launch",
+    body: "Launch is the start of the useful part. Every build includes 30 days of support, and care plans keep it monitored, updated and improving.",
+  },
 ]
 
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-midnight py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <nav className="flex items-center justify-center gap-1.5 text-sm text-white/40 mb-8" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-gold transition-colors">Home</Link>
-            <ChevronRight size={14} />
-            <span className="text-white/70">About</span>
-          </nav>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mb-6">
-            Born to Help Toronto{" "}
-            <span className="text-gold">Businesses Thrive</span>
-          </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Every business deserves enterprise-level technology. We built Hijaz.ai to make that a reality — without the enterprise price tag.
-          </p>
-        </div>
-      </section>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "About", path: "/about" }]} />
 
-      {/* Our Story */}
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <span className="text-gold font-medium text-sm uppercase tracking-widest">Our Story</span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mt-2 mb-6">
-                We Started with a Simple Belief
-              </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Hijaz.ai was founded in Toronto with one clear mission: to give small and medium-sized businesses the same digital tools and AI capabilities that large enterprises take for granted.
-                </p>
-                <p>
-                  We watched too many great local businesses fall behind online — not because of a lack of quality, but because the technology gap was too wide. Clunky websites, no automation, zero digital presence. We knew we could change that.
-                </p>
-                <p>
-                  Today, we&apos;ve helped <strong className="text-foreground">50+ businesses</strong> across Toronto, North York, Durham Region, and the broader GTA automate their operations, build stunning digital presences, and generate consistent leads online.
-                </p>
-              </div>
+      <PageHero
+        label="About · Toronto & Durham Region, Ontario"
+        title="We build technology for businesses, and we run businesses on it."
+        intro="Hijaz.ai is a business technology partner. We design and build websites, online stores, AI assistants and custom software for small and mid-sized companies, and we operate our own online businesses on the same stack."
+        breadcrumb={[{ name: "About" }]}
+      >
+        <div className="flex flex-wrap gap-3">
+          <BookCallButton />
+          <SecondaryButton href="/work">See the work</SecondaryButton>
+        </div>
+      </PageHero>
+
+      {/* Story */}
+      <section className="border-b border-ink/15">
+        <div className="mx-auto grid max-w-7xl gap-14 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:py-24">
+          <Reveal>
+            <h2 className="headline text-[clamp(2.1rem,5vw,4rem)]">
+              Operators <Circled>first.</Circled> Builders because of it.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="space-y-5 text-lg leading-relaxed text-ink-soft">
+              <p>
+                We run online stores for specialty food and leather goods. They need storefronts, checkout, shipping
+                rules, search visibility and customer support that work together, and we build all of it ourselves.
+              </p>
+              <p>
+                The same team builds for other businesses: local services in Durham Region, community organizations in
+                Toronto, manufacturers and exporters, and specialist software for the energy sector.
+              </p>
+              <p>
+                <strong className="font-semibold text-ink">
+                  The difference is that we carry the same risk you do.
+                </strong>{" "}
+                When a checkout step loses a sale or a page drops out of search, it costs us money in our own
+                businesses first. What we recommend to you is what survived that.
+              </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <dl className="mt-10 grid grid-cols-3 border-y border-ink/25">
               {[
-                { value: "50+", label: "Businesses Served" },
-                { value: "GTA", label: "Local Expertise" },
-                { value: "3-Day", label: "Avg. Turnaround" },
-                { value: "4.9★", label: "Client Rating" },
-              ].map((stat) => (
-                <div key={stat.label} className="bg-card rounded-2xl p-6 text-center border border-border">
-                  <p className="font-display text-3xl font-bold text-foreground">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
+                { value: PROJECTS.length, label: "builds in production" },
+                { value: SECTORS.length, label: "industries shipped" },
+                { value: LOCATIONS.length, label: "cities served" },
+              ].map((item, i) => (
+                <div key={item.label} className={`py-4 ${i > 0 ? "border-l border-ink/25 pl-4" : ""}`}>
+                  <dd className="font-display text-4xl font-extrabold tabular-nums tracking-tight [font-stretch:118%] sm:text-5xl">
+                    {item.value}
+                  </dd>
+                  <dt className="label mt-1 text-ink-soft">{item.label}</dt>
                 </div>
               ))}
-            </div>
-          </div>
+            </dl>
+          </Reveal>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-24 bg-muted/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <span className="text-gold font-medium text-sm uppercase tracking-widest">What Drives Us</span>
-            <h2 className="font-display text-4xl font-bold text-foreground mt-2">Our Core Values</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {VALUES.map((value) => (
-              <div key={value.title} className="bg-card rounded-2xl p-8 border border-border text-center hover:shadow-md hover:border-gold/30 transition-all">
-                <div className="w-14 h-14 rounded-2xl bg-midnight/5 flex items-center justify-center mx-auto mb-4">
-                  <value.icon size={24} className="text-foreground" />
-                </div>
-                <h3 className="font-display font-semibold text-lg text-foreground mb-2">{value.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{value.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <span className="text-gold font-medium text-sm uppercase tracking-widest">The Team</span>
-            <h2 className="font-display text-4xl font-bold text-foreground mt-2">People Behind the Work</h2>
-            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-              A tight-knit team of AI engineers, designers, and digital strategists — all based in the Greater Toronto Area.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {TEAM.map((member) => (
-              <div key={member.name} className="text-center group">
-                <div className={`w-24 h-24 rounded-full ${member.bg} flex items-center justify-center mx-auto mb-4 text-white text-2xl font-display font-bold shadow-lg group-hover:scale-105 transition-transform`}>
-                  {member.initials}
-                </div>
-                <p className="font-semibold text-foreground">{member.name}</p>
-                <p className="text-sm text-muted-foreground">{member.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Serving the Community */}
-      <section className="py-20 bg-midnight">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
-            Proudly Serving{" "}
-            <span className="text-gold">the Greater Toronto Area</span>
+      {/* Ventures */}
+      <section className="surface-blueprint">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
+          <p className="label text-highlight">Businesses we operate</p>
+          <h2 className="headline mt-3 max-w-3xl text-[clamp(2rem,4.6vw,3.6rem)] text-white">
+            Our own money is on the same stack.
           </h2>
-          <p className="text-white/60 mb-8 max-w-xl mx-auto">
-            We&apos;re a local agency with deep roots in the GTA. Whether you&apos;re in downtown Toronto, North York, Scarborough, or Durham Region — we&apos;re your neighbours.
-          </p>
-          <div className="flex flex-wrap gap-2 justify-center mb-10">
-            {SITE_CONFIG.serviceAreas.map((area) => (
-              <span key={area} className="px-3 py-1.5 rounded-full bg-white/10 text-white/70 text-sm border border-white/10">
-                {area}
-              </span>
+          <ul className="mt-10 grid border-l border-t border-chalk/30 md:grid-cols-3">
+            {VENTURES.map((v) => (
+              <li key={v.slug} className="border-b border-r border-chalk/30">
+                <Link href={`/work/${v.slug}`} className="group block h-full p-6 transition-colors hover:bg-chalk hover:text-blueprint-deep">
+                  <p className="label text-chalk/60 group-hover:text-blueprint">{v.domain}</p>
+                  <h3 className="mt-2 text-2xl font-extrabold text-white group-hover:text-blueprint-deep">{v.name}</h3>
+                  <p className="mt-2 leading-snug text-chalk/75 group-hover:text-blueprint-deep/80">{v.descriptor}</p>
+                </Link>
+              </li>
             ))}
-          </div>
-          <Button asChild className="bg-gold text-foreground hover:bg-gold/90 font-semibold">
-            <Link href="/contact">Work With a Team That Actually Cares <ArrowRight size={16} className="ml-2" /></Link>
-          </Button>
+          </ul>
         </div>
       </section>
 
-      {/* Trust logos row (placeholder) */}
-      <section className="py-12 bg-muted/50 border-y border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm text-muted-foreground mb-8 uppercase tracking-widest font-medium">Trusted by businesses across the GTA</p>
-          <div className="flex flex-wrap items-center justify-center gap-8">
-            {["Bloom Café", "GTA Realty", "Wellness Clinic", "North Print Co.", "Spice Bazaar", "Durham Dental"].map((name) => (
-              <div key={name} className="px-6 py-3 bg-card border border-border rounded-xl text-muted-foreground text-sm font-medium hover:border-gold/30 transition-colors">
-                {name}
+      {/* Principles */}
+      <section className="border-b border-ink/15">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
+          <p className="label text-redline-deep">How we work</p>
+          <h2 className="headline mt-3 text-[clamp(2rem,4.6vw,3.6rem)]">Four rules we hold ourselves to.</h2>
+          <ol className="mt-10 grid border-l border-t border-ink/25 sm:grid-cols-2">
+            {PRINCIPLES.map((p, i) => (
+              <li key={p.title} className="border-b border-r border-ink/25 p-7">
+                <Reveal delay={0.05 * i}>
+                  <p className="label text-redline-deep">0{i + 1}</p>
+                  <h3 className="mt-2 text-2xl font-extrabold">{p.title}</h3>
+                  <p className="mt-3 leading-relaxed text-ink-soft">{p.body}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Where */}
+      <section className="border-b border-ink/15 bg-paper-deep">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+          <h2 className="headline max-w-3xl text-[clamp(1.9rem,4.2vw,3.2rem)]">
+            Based in the Toronto area. Working across Canada.
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
+            We meet in person across Toronto and Durham Region, including Ajax, Pickering, Whitby, Oshawa and
+            Clarington, and deliver remotely to the rest of Ontario and Canada.
+          </p>
+          <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {LOCATION_GROUPS.map((group) => (
+              <div key={group.label}>
+                <h3 className="text-lg font-extrabold">{group.label}</h3>
+                <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-ink-soft">
+                  {group.slugs.map((slug) => {
+                    const loc = LOCATIONS.find((l) => l.slug === slug)
+                    return loc ? (
+                      <li key={slug}>
+                        <Link
+                          href={`/locations/${slug}`}
+                          className="underline decoration-ink/25 underline-offset-4 hover:text-redline-deep hover:decoration-redline"
+                        >
+                          {loc.name}
+                        </Link>
+                      </li>
+                    ) : null
+                  })}
+                </ul>
               </div>
             ))}
           </div>

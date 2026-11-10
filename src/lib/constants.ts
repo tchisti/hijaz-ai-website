@@ -1,7 +1,10 @@
 export interface SiteConfig {
   name: string
   tagline: string
+  positioning: string
+  description: string
   url: string
+  bookingUrl: string
   email: string
   phone: string
   whatsappNumber: string
@@ -51,34 +54,9 @@ export interface Bundle {
   popular?: boolean
 }
 
-export interface Testimonial {
-  name: string
-  role: string
-  company: string
-  avatar: string
-  rating: number
-  text: string
-}
-
-export interface PortfolioProject {
-  id: string
-  title: string
-  industry: string
-  tags: string[]
-  image: string
-  outcome: string
-  description: string
-}
-
 export interface FaqItem {
   question: string
   answer: string
-}
-
-export interface Stat {
-  value: number
-  suffix: string
-  label: string
 }
 
 export interface BlogPost {
@@ -93,32 +71,39 @@ export interface BlogPost {
 }
 
 // Site configuration
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "14375809680"
+
 export const SITE_CONFIG: SiteConfig = {
   name: "Hijaz.ai",
-  tagline: "Smart Solutions. Powerful Presence.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://hijaz.ai",
+  tagline: "Technology that earns its keep.",
+  positioning: "Business technology partner",
+  description:
+    "Hijaz.ai is a business technology partner based in Toronto and Durham Region, Ontario. We build websites, online stores, AI assistants and custom software for businesses across Canada, and run our own e-commerce companies on the same stack.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.hijaz.ai",
+  bookingUrl: "https://cal.com/tchisti/15min",
   email: "hello@hijaz.ai",
   phone: "+1 (437) 580-9680",
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "14165550123",
+  whatsappNumber: WHATSAPP_NUMBER,
   address: "Toronto, Ontario, Canada",
-  businessHours: "Mon–Fri: 9am–6pm EST",
+  businessHours: "Mon–Fri: 9am–6pm ET",
   serviceAreas: [
-    "Toronto", "North York", "Scarborough", "Etobicoke",
-    "Durham Region", "Pickering", "Ajax", "Whitby", "Oshawa", "GTA"
+    "Toronto", "Scarborough", "North York", "Etobicoke",
+    "Ajax", "Pickering", "Whitby", "Oshawa", "Clarington",
+    "Durham Region", "Greater Toronto Area", "Ontario", "Canada",
   ],
   social: {
     instagram: "https://instagram.com/hijaz.ai",
     linkedin: "https://linkedin.com/company/hijaz-ai",
     facebook: "https://facebook.com/hijaz.ai",
-    whatsapp: "https://wa.me/14165550123",
+    whatsapp: `https://wa.me/${WHATSAPP_NUMBER}`,
   },
 }
 
 // Navigation links
 export const NAV_LINKS: NavLink[] = [
-  { label: "Home", href: "/" },
+  { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
+  { label: "Locations", href: "/locations" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -387,122 +372,43 @@ export const FOOTER_SERVICE_LINKS: NavLink[] = FOOTER_SERVICE_IDS.map(({ id, lab
   href: SERVICES.find((s) => s.id === id)?.href ?? "/services",
 }))
 
-// Testimonials data
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    name: "Sara M.",
-    role: "Owner",
-    company: "Bloom Café, Toronto",
-    avatar: "/images/testimonials/sara.jpg",
-    rating: 5,
-    text: "Hijaz.ai built our website in under a week and set up an AI chatbot that handles our reservation inquiries automatically. We've saved at least 15 hours a week on phone calls.",
-  },
-  {
-    name: "James O.",
-    role: "Founder",
-    company: "GTA Real Estate Group",
-    avatar: "/images/testimonials/james.jpg",
-    rating: 5,
-    text: "The AI receptionist they built for us has captured 3x more leads than our old contact form. The team is incredibly responsive and really understands the GTA market.",
-  },
-  {
-    name: "Priya K.",
-    role: "Director",
-    company: "Wellness Clinic North York",
-    avatar: "/images/testimonials/priya.jpg",
-    rating: 5,
-    text: "Our Shopify store went live in 5 days and the branding package they delivered was outstanding. Professional team, fast delivery, and they actually listen to what you need.",
-  },
-]
-
-// Portfolio projects
-export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
-  {
-    id: "bloom-cafe",
-    title: "Bloom Café",
-    industry: "Food & Beverage",
-    tags: ["Web", "AI"],
-    image: "/images/portfolio/bloom-cafe.jpg",
-    outcome: "↑ 3x online reservations in 60 days",
-    description: "Custom website + AI receptionist for a Toronto café chain.",
-  },
-  {
-    id: "gta-realty",
-    title: "GTA Realty Group",
-    industry: "Real Estate",
-    tags: ["Web", "AI"],
-    image: "/images/portfolio/gta-realty.jpg",
-    outcome: "↑ 200% lead capture rate",
-    description: "Lead generation website with AI chatbot integration.",
-  },
-  {
-    id: "wellness-clinic",
-    title: "Wellness Clinic",
-    industry: "Healthcare",
-    tags: ["Web", "E-Commerce"],
-    image: "/images/portfolio/wellness-clinic.jpg",
-    outcome: "Launched in 5 business days",
-    description: "Booking-enabled website and product e-commerce store.",
-  },
-  {
-    id: "north-print",
-    title: "North Print Co.",
-    industry: "Printing",
-    tags: ["Print", "Branding"],
-    image: "/images/portfolio/north-print.jpg",
-    outcome: "Complete rebrand in 2 weeks",
-    description: "Full brand identity: logo, cards, signage, and vehicle wrap.",
-  },
-  {
-    id: "spice-bazaar",
-    title: "Spice Bazaar",
-    industry: "Retail",
-    tags: ["E-Commerce"],
-    image: "/images/portfolio/spice-bazaar.jpg",
-    outcome: "↑ $40K revenue in first 3 months",
-    description: "Shopify store launch with SEO and Google Ads campaign.",
-  },
-  {
-    id: "durham-dental",
-    title: "Durham Dental",
-    industry: "Healthcare",
-    tags: ["Web", "AI"],
-    image: "/images/portfolio/durham-dental.jpg",
-    outcome: "↑ 80% fewer missed appointments",
-    description: "Appointment-booking website with SMS reminder automation.",
-  },
-]
-
-// FAQ data
+// FAQ — written answer-first so search engines and AI assistants can quote them directly
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "How long does it take to build a website?",
-    answer: "Most business websites are delivered within 3–7 business days. Complex web applications or e-commerce stores may take 2–4 weeks depending on scope.",
+    question: "What does Hijaz.ai do?",
+    answer:
+      "Hijaz.ai is a business technology partner based in Toronto and Durham Region, Ontario. We design and build websites, online stores, AI assistants, workflow automation and custom software for small and mid-sized businesses, then keep them running after launch.",
   },
   {
-    question: "Do you serve businesses outside Toronto?",
-    answer: "Yes! While we specialize in the Greater Toronto Area — including North York, Scarborough, Durham Region, Pickering, Ajax, and Oshawa — we work with clients across Ontario and beyond remotely.",
+    question: "Which areas does Hijaz.ai serve?",
+    answer:
+      "We work on-site with businesses in Toronto and Durham Region, including Ajax, Pickering, Whitby, Oshawa and Clarington, and across the Greater Toronto Area. We work remotely with businesses in the rest of Ontario, including Ottawa, Hamilton, London and Kitchener-Waterloo, and across Canada.",
   },
   {
-    question: "What makes your AI chatbot different from other solutions?",
-    answer: "Our AI assistants are custom-trained on your specific business data, FAQs, and workflows — not generic bots. They integrate with your calendar, CRM, and communication tools to actually automate tasks, not just answer questions.",
+    question: "How much does a business website cost in Toronto or Durham Region?",
+    answer:
+      "Our business websites start from $1,200 CAD and Shopify stores from $800 CAD. Every project is quoted as a fixed price before work starts, so the number you approve is the number you pay. AI services start with a $499 CAD audit that is credited toward any project.",
   },
   {
-    question: "Do you offer ongoing support and maintenance?",
-    answer: "Absolutely. All our websites come with 30 days of free post-launch support. We also offer monthly maintenance packages that include updates, security monitoring, backups, and performance optimization.",
+    question: "How long does it take to launch?",
+    answer:
+      "Most business websites are delivered within 3 to 7 business days once content is ready. Online stores, web applications and AI automations usually take 2 to 4 weeks, depending on integrations such as payments, booking, inventory or a CRM.",
   },
   {
-    question: "What is your pricing model?",
-    answer: "We offer transparent, project-based pricing with no hidden fees. Most projects start with a free consultation to scope your needs. AI automation and digital marketing services are available as monthly subscriptions.",
+    question: "What makes Hijaz.ai different from a web design agency?",
+    answer:
+      "We operate our own online businesses, including ZamZam Shop Co., Adam Leather and Himalayan Saffron, on the same technology we build for clients. Payments, shipping, search rankings and customer support are problems we deal with in our own companies every day, so what we recommend has already been tested with our own money.",
   },
-]
-
-// Stats
-export const STATS: Stat[] = [
-  { value: 50, suffix: "+", label: "Projects Delivered" },
-  { value: 3, suffix: "-Day", label: "Website Turnaround" },
-  { value: 100, suffix: "%", label: "Satisfaction Guarantee" },
-  { value: 4.9, suffix: "/5", label: "Average Rating" },
+  {
+    question: "Can you add AI to the systems we already use?",
+    answer:
+      "Yes. Most AI work we do connects to tools a business already has: a website, Shopify, Google Workspace, QuickBooks, a booking system or a CRM. We start with an audit that ranks the opportunities by payback, then build the highest-value one first.",
+  },
+  {
+    question: "Do you provide support after launch?",
+    answer:
+      "Yes. Every build includes 30 days of post-launch support. After that, monthly care plans cover updates, security, monitoring and continuous improvements, including keeping AI tools current as the underlying models change.",
+  },
 ]
 
 // Blog posts metadata

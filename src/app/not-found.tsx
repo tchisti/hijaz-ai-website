@@ -5,7 +5,7 @@ import { NAV_LINKS } from "@/lib/constants"
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+    <div className="grid-paper flex min-h-[80vh] items-center justify-center px-4 py-20">
       <div className="max-w-lg text-center">
         {/* 404 number */}
         <p className="font-display text-[120px] sm:text-[160px] font-bold text-foreground/10 leading-none select-none">
@@ -20,24 +20,24 @@ export default function NotFound() {
             Let&apos;s get you back on track.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Button asChild className="bg-midnight text-white hover:bg-midnight/90">
+            <Button asChild className="bg-ink text-paper hover:bg-redline">
               <Link href="/"><Home size={16} className="mr-2" />Go Home</Link>
             </Button>
-            <Button asChild variant="outline" className="border-border text-foreground hover:bg-midnight hover:text-white">
+            <Button asChild variant="outline" className="border-border text-foreground hover:bg-ink hover:text-paper">
               <Link href="/contact"><ArrowLeft size={16} className="mr-2" />Contact Us</Link>
             </Button>
           </div>
           {/* Helpful nav */}
-          <div className="bg-card rounded-2xl p-6 border border-border text-left">
+          <div className="bg-card rounded-none p-6 border border-border text-left">
             <p className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
-              <Search size={14} className="text-gold" />
+              <Search size={14} className="text-redline-deep" />
               Try one of these pages:
             </p>
             <ul className="grid grid-cols-2 gap-2">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}
-                    className="text-sm text-muted-foreground hover:text-gold transition-colors flex items-center gap-1">
+                    className="text-sm text-muted-foreground hover:text-redline-deep transition-colors flex items-center gap-1">
                     → {link.label}
                   </Link>
                 </li>

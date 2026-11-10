@@ -3,141 +3,109 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { Menu, X, Sun, Moon } from "lucide-react"
-import { NAV_LINKS } from "@/lib/constants"
-import { Button } from "@/components/ui/button"
+import { Menu, X, ArrowUpRight } from "lucide-react"
+import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export default function Header() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [dark, setDark] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener("scroll", onScroll)
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Read preference on mount
-  useEffect(() => {
-    const saved = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const isDark = saved === "dark" || (!saved && prefersDark)
-    setDark(isDark)
-    document.documentElement.classList.toggle("dark", isDark)
-  }, [])
+  // Close the mobile menu on navigation
+  useEffect(() => setMobileOpen(false), [pathname])
 
-  // Apply + persist on toggle
-  const toggleDark = () => {
-    const next = !dark
-    setDark(next)
-    document.documentElement.classList.toggle("dark", next)
-    localStorage.setItem("theme", next ? "dark" : "light")
-  }
-
-  const navLinks = NAV_LINKS.filter((l) => l.href !== "/")
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-      scrolled
-        ? "backdrop-blur-xl border-b"
-        : "border-b border-transparent",
-    )}
-    style={{
-      background: scrolled
-        ? "var(--header-bg-scrolled)"
-        : "var(--header-bg-rest)",
-      borderColor: scrolled ? "var(--header-border)" : "transparent",
-      boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.15)" : "none",
-    }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center font-display text-xl font-bold">
-            <span style={{ color: "var(--text-strong)" }}>Hijaz</span>
-            <span style={{ color: "var(--gold-primary)" }}>.ai</span>
-          </Link>
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300",
+        scrolled || mobileOpen ? "border-ink/15 bg-paper/95 backdrop-blur" : "border-transparent bg-paper/0"
+      )}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <Link href="/" className="flex items-baseline gap-2" aria-label="Hijaz.ai home">
+          <span className="font-display text-[1.35rem] font-extrabold tracking-tight text-ink [font-stretch:118%]">
+            Hijaz<span className="text-redline">.ai</span>
+          </span>
+          <span className="label hidden text-ink-soft lg:inline">{SITE_CONFIG.positioning}</span>
+        </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-all duration-200",
-                  pathname === link.href
-                    ? "text-[#C9A84C]"
-                    : "text-foreground/50 hover:text-[#C9A84C]"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={cn(
+                "relative py-1 text-sm font-medium transition-colors",
+                isActive(link.href) ? "text-ink" : "text-ink-soft hover:text-ink"
+              )}
+            >
+              {link.label}
+              {isActive(link.href) && (
+                <span aria-hidden="true" className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-redline" />
+              )}
+            </Link>
+          ))}
+        </nav>
 
-          {/* Right side actions */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={toggleDark}
-              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {dark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            <Button
-              asChild
-              className="hidden md:inline-flex font-semibold text-sm"
-              style={{
-                background: "linear-gradient(135deg, #C9A84C, #E8C46A)",
-                color: "#03050F",
-                border: "none",
-                boxShadow: "0 0 20px rgba(201,168,76,0.25)",
-              }}
-            >
-              <a href="https://cal.com/tchisti/15min" target="_blank" rel="noopener noreferrer">Book a Free Call</a>
-            </Button>
-            <button
-              className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav"
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+        <div className="flex items-center gap-2">
+          <a
+            href={SITE_CONFIG.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group hidden items-center gap-1.5 bg-ink px-4 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-redline sm:inline-flex"
+          >
+            Book a call
+            <ArrowUpRight size={15} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+          <button
+            className="p-2 text-ink md:hidden"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-
-        {/* Mobile menu */}
-        {mobileOpen && (
-          <div id="mobile-nav" className="md:hidden border-t border-border py-4 space-y-1 animate-in slide-in-from-top-2">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className={cn(
-                  "block px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                  pathname === link.href
-                    ? "text-gold bg-gold/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-2">
-              <Button asChild className="w-full bg-midnight text-white dark:bg-gold dark:text-midnight">
-                <a href="https://cal.com/tchisti/15min" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>Book a Free Call</a>
-              </Button>
-            </div>
-          </div>
-        )}
       </div>
+
+      {mobileOpen && (
+        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-ink/15 bg-paper px-5 pb-6 pt-2 md:hidden">
+          <ul>
+            {NAV_LINKS.map((link, i) => (
+              <li key={link.href} className="border-b border-ink/10">
+                <Link
+                  href={link.href}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className="flex items-baseline justify-between py-4 font-display text-2xl font-bold tracking-tight text-ink"
+                >
+                  {link.label}
+                  <span className="label text-ink-faint">0{i + 1}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={SITE_CONFIG.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 flex items-center justify-center gap-2 bg-redline px-5 py-4 font-semibold text-white"
+          >
+            Book a 15-minute call <ArrowUpRight size={17} aria-hidden="true" />
+          </a>
+        </nav>
+      )}
     </header>
   )
 }
