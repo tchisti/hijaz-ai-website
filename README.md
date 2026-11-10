@@ -70,9 +70,10 @@ cp .env.example .env.local
 
 | Variable | Description |
 |----------|-------------|
-| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | EmailJS service ID |
-| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | EmailJS template ID |
-| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | EmailJS public key |
+| `EMAILJS_SERVICE_ID` | EmailJS service ID (server side, used by `/api/contact`) |
+| `EMAILJS_TEMPLATE_ID` | EmailJS template ID |
+| `EMAILJS_PUBLIC_KEY` | EmailJS public key |
+| `EMAILJS_PRIVATE_KEY` | EmailJS private key, only if "Use Private Key" is enabled |
 | `NEXT_PUBLIC_GA4_ID` | Google Analytics 4 measurement ID |
 | `NEXT_PUBLIC_CLARITY_ID` | Microsoft Clarity project ID |
 | `NEXT_PUBLIC_SITE_URL` | Production URL (`https://www.hijaz.ai`) |
