@@ -19,6 +19,7 @@ export function GET() {
     "## Key facts",
     "",
     `- Positioning: ${SITE_CONFIG.positioning}. Tagline: "${SITE_CONFIG.tagline}"`,
+    `- Operated by: ${SITE_CONFIG.legalName}.`,
     `- Based in: ${SITE_CONFIG.address}. On-site across Toronto and Durham Region; remote across Canada.`,
     `- Contact: ${SITE_CONFIG.email}, ${SITE_CONFIG.phone}. Hours: ${SITE_CONFIG.businessHours}.`,
     `- Book a call: ${SITE_CONFIG.bookingUrl}`,

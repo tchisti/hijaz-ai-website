@@ -64,6 +64,7 @@ export function OrganizationJsonLd() {
         "@type": "ProfessionalService",
         "@id": ORG_ID,
         name: SITE_CONFIG.name,
+        legalName: SITE_CONFIG.legalName,
         slogan: SITE_CONFIG.tagline,
         description: SITE_CONFIG.description,
         url: SITE_CONFIG.url,

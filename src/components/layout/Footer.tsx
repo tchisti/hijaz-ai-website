@@ -124,7 +124,8 @@ export default function Footer() {
         {/* Title block */}
         <div className="label mt-12 grid grid-cols-2 border border-chalk/30 text-chalk/70 sm:grid-cols-4">
           <div className="border-b border-r border-chalk/30 p-3 sm:border-b-0">
-            <span className="block text-chalk/45">Drawn by</span>Hijaz.ai
+            <span className="block text-chalk/45">Drawn by</span>
+            {SITE_CONFIG.legalName}
           </div>
           <div className="border-b border-chalk/30 p-3 sm:border-b-0 sm:border-r">
             <span className="block text-chalk/45">Location</span>Toronto · Durham, ON
@@ -139,7 +140,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="mt-5 text-xs text-chalk/50">
-          &copy; {year} {SITE_CONFIG.name}. All rights reserved. Built and operated in Canada.
+          &copy; {year} {SITE_CONFIG.legalName}. All rights reserved. Built and operated in Canada.
         </p>
       </div>
     </footer>
