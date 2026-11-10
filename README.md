@@ -16,7 +16,9 @@ Official website for [Hijaz.ai](https://www.hijaz.ai), a business technology par
 
 | Route | Description |
 |-------|-------------|
-| `/` | Home: hero, selected work, capabilities, operators, process, service areas, FAQ |
+| `/` | Home: hero, logo strip, selected work, capabilities, industries, commitments, process, service areas, FAQ, enquiry form |
+| `/industries` | Industries we help |
+| `/industries/[slug]` | One page per industry: problems, what we build, a priced first project, FAQ, enquiry form |
 | `/work` | All selected builds, grouped by type |
 | `/work/[slug]` | One page per build, linked to the live product |
 | `/services` | Services with starting prices, and packages |
@@ -37,7 +39,8 @@ The site is drawn as an engineering sheet: paper and ink, marked up in red, with
 
 ## Editing content
 
-- **Selected work**: `src/lib/projects.ts`. Set `featured: true` to show a build on the home page. Screenshots live in `public/images/work`
+- **Selected work**: `src/lib/projects.ts`. Set `featured: true` to show a build on the home page and `inLogoStrip: true` to add it to the logo strip. Screenshots live in `public/images/work`, brand marks in `public/images/logos`
+- **Industries**: `src/lib/industries.ts`. Proof on each page is limited to the live builds in `projectSlugs`
 - **Service areas**: `src/lib/locations.ts`. Each city needs its own market notes, proof and FAQ
 - **Services, prices, FAQ, contact details**: `src/lib/constants.ts`
 - **SEO and off-site plan**: `docs/seo-geo-playbook.md`

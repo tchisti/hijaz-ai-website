@@ -1,19 +1,20 @@
 import { buildMetadata } from "@/lib/seo"
 import Hero from "@/components/home/Hero"
-import WorkMarquee from "@/components/home/WorkMarquee"
+import LogoStrip from "@/components/home/LogoStrip"
 import SelectedWork from "@/components/home/SelectedWork"
 import Capabilities from "@/components/home/Capabilities"
-import Operators from "@/components/home/Operators"
+import Industries from "@/components/home/Industries"
+import WhyUs from "@/components/home/WhyUs"
 import Process from "@/components/home/Process"
 import ServiceArea from "@/components/home/ServiceArea"
 import FAQAccordion from "@/components/sections/FAQAccordion"
-import CTABanner from "@/components/sections/CTABanner"
+import EnquirySection from "@/components/sections/EnquirySection"
 
 export const metadata = buildMetadata({
   title: "Hijaz.ai | Business Technology Partner in Toronto & Durham Region",
   absoluteTitle: true,
   description:
-    "Websites, online stores, AI assistants and custom software for businesses in Toronto, Durham Region and across Canada. Built by operators. Fixed prices.",
+    "Websites, online stores, AI assistants and custom software for businesses in Toronto, Durham Region and across Canada. Fixed prices, live in days.",
   canonical: "/",
   keywords: [
     "business technology partner Toronto",
@@ -31,14 +32,15 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <WorkMarquee />
+      <LogoStrip />
       <SelectedWork />
       <Capabilities />
-      <Operators />
+      <Industries />
+      <WhyUs />
       <Process />
       <ServiceArea />
-      <FAQAccordion />
-      <CTABanner />
+      <FAQAccordion number="08" />
+      <EnquirySection context="Homepage enquiry" />
     </>
   )
 }

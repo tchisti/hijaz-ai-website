@@ -122,6 +122,12 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
                     </li>
                   ))}
                 </ul>
+                <Link
+                  href="/industries"
+                  className="label mt-4 inline-block text-redline-deep underline decoration-redline/40 underline-offset-4 hover:text-ink"
+                >
+                  See every industry we help
+                </Link>
               </div>
             </div>
           </Reveal>

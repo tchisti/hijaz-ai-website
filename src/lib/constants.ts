@@ -78,7 +78,7 @@ export const SITE_CONFIG: SiteConfig = {
   tagline: "Technology that earns its keep.",
   positioning: "Business technology partner",
   description:
-    "Hijaz.ai is a business technology partner based in Toronto and Durham Region, Ontario. We build websites, online stores, AI assistants and custom software for businesses across Canada, and run our own e-commerce companies on the same stack.",
+    "Hijaz.ai is a business technology partner based in Toronto and Durham Region, Ontario. We build websites, online stores, AI assistants and custom software for businesses across Canada, quoted at a fixed price before work starts.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.hijaz.ai",
   bookingUrl: "https://cal.com/tchisti/15min",
   email: "hello@hijaz.ai",
@@ -103,9 +103,9 @@ export const SITE_CONFIG: SiteConfig = {
 export const NAV_LINKS: NavLink[] = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
+  { label: "Industries", href: "/industries" },
   { label: "Locations", href: "/locations" },
   { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ]
 
@@ -397,7 +397,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "What makes Hijaz.ai different from a web design agency?",
     answer:
-      "We operate our own online businesses, including ZamZam Shop Co., Adam Leather and Himalayan Saffron, on the same technology we build for clients. Payments, shipping, search rankings and customer support are problems we deal with in our own companies every day, so what we recommend has already been tested with our own money.",
+      "Three things. Every project is quoted as a fixed price in writing before work starts. One team handles the whole system, from the website and store to AI and automation, so nothing falls between suppliers. And every build is scoped around a result you can measure: an enquiry, a booking, an order or an hour saved.",
   },
   {
     question: "Can you add AI to the systems we already use?",

@@ -12,7 +12,7 @@ export default function ServiceArea() {
   return (
     <section className="surface-blueprint">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-        <SheetHeader number="06" title="Where we work" tone="blueprint" />
+        <SheetHeader number="07" title="Where we work" tone="blueprint" />
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <Reveal>

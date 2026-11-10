@@ -43,9 +43,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     { label: "Type", value: CATEGORY_LABELS[project.category] },
     { label: "Sector", value: project.sector },
     { label: "Location", value: project.location },
-    project.operatedByUs
-      ? { label: "Relationship", value: project.category === "store" ? "A business we operate" : "An in-house product" }
-      : { label: "Status", value: "Live" },
+    { label: "Status", value: "Live in production" },
   ]
 
   return (

@@ -17,8 +17,8 @@ const ORDER: ProjectCategory[] = ["store", "site", "software"]
 
 const INTROS: Record<ProjectCategory, string> = {
   store:
-    "Stores that take real orders. Three of these are businesses we operate ourselves, so the checkout, shipping and search work has been paid for with our own money.",
-  site: "Websites built to produce an enquiry, a booking or a quote request, for local services, community organizations and manufacturers.",
+    "Stores that take real orders, with payments, shipping rules and product pages built to be found.",
+  site: "Websites built to produce an enquiry, a booking or a quote request, for local services, manufacturers and exporters.",
   software:
     "AI advisors, guided workflows, simulators and dashboards. Specialist knowledge that used to live in PDFs and spreadsheets, delivered as tools that open in a browser.",
 }

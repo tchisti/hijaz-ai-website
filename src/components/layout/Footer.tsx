@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { SITE_CONFIG, NAV_LINKS, FOOTER_SERVICE_LINKS } from "@/lib/constants"
 import { LOCATIONS, LOCATION_GROUPS } from "@/lib/locations"
-import { FEATURED_PROJECTS } from "@/lib/projects"
+import { INDUSTRIES } from "@/lib/industries"
 
 function Column({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -59,19 +59,14 @@ export default function Footer() {
                 </li>
               ))}
             </Column>
-            <Column title="Selected work">
-              {FEATURED_PROJECTS.map((p) => (
-                <li key={p.slug}>
-                  <Link href={`/work/${p.slug}`} className={linkCls}>
-                    {p.name}
+            <Column title="Industries">
+              {INDUSTRIES.map((i) => (
+                <li key={i.slug}>
+                  <Link href={`/industries/${i.slug}`} className={linkCls}>
+                    {i.name}
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/work" className="text-highlight hover:text-white">
-                  All work
-                </Link>
-              </li>
             </Column>
             <Column title="Company">
               {NAV_LINKS.map((link) => (
@@ -81,6 +76,11 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/blog" className={linkCls}>
+                  Blog
+                </Link>
+              </li>
               <li>
                 <a href={SITE_CONFIG.social.linkedin} target="_blank" rel="noopener noreferrer" className={linkCls}>
                   LinkedIn

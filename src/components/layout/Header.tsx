@@ -36,10 +36,10 @@ export default function Header() {
           <span className="font-display text-[1.35rem] font-extrabold tracking-tight text-ink [font-stretch:118%]">
             Hijaz<span className="text-redline">.ai</span>
           </span>
-          <span className="label hidden text-ink-soft lg:inline">{SITE_CONFIG.positioning}</span>
+          <span className="label hidden text-ink-soft xl:inline">{SITE_CONFIG.positioning}</span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -63,13 +63,13 @@ export default function Header() {
             href={SITE_CONFIG.bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group hidden items-center gap-1.5 bg-ink px-4 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-redline sm:inline-flex"
+            className="group inline-flex items-center gap-1.5 bg-ink px-3.5 py-2 text-sm font-semibold text-paper transition-colors hover:bg-redline sm:px-4 sm:py-2.5"
           >
             Book a call
             <ArrowUpRight size={15} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
           <button
-            className="p-2 text-ink md:hidden"
+            className="p-2 text-ink lg:hidden"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -81,7 +81,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-ink/15 bg-paper px-5 pb-6 pt-2 md:hidden">
+        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-ink/15 bg-paper px-5 pb-6 pt-2 lg:hidden">
           <ul>
             {NAV_LINKS.map((link, i) => (
               <li key={link.href} className="border-b border-ink/10">

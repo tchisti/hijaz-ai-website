@@ -8,8 +8,9 @@ What the site now does for search and AI visibility, and the off-site work that 
 |---|---|---|
 | One business entity in structured data (`ProfessionalService` + `WebSite`), with `areaServed` for every city, an offer catalogue with CAD prices, opening hours and contact | `src/components/seo/JsonLd.tsx`, rendered on every page | Tells Google and AI assistants who the business is, where it works and what it sells, once, consistently |
 | 22 city pages with their own market context, service order, relevant builds and FAQ | `/locations/[slug]`, data in `src/lib/locations.ts` | Ranks for "web design Ajax", "AI automation Toronto" and similar. Each page says honestly whether we work on-site or remotely |
-| 13 project pages, each a `CreativeWork` linked to the live build | `/work/[slug]`, data in `src/lib/projects.ts` | Proof pages that rank for long-tail queries and give other sites something specific to link to |
-| FAQ in native `<details>` with `FAQPage` schema | Home and every city page | Answers are in the HTML that crawlers read, written answer-first so they can be quoted |
+| 12 project pages, each a `CreativeWork` linked to the live build | `/work/[slug]`, data in `src/lib/projects.ts` | Proof pages that rank for long-tail queries and give other sites something specific to link to |
+| 12 industry pages with the sector's problems, what we build, a priced first project, FAQ and an enquiry form | `/industries/[slug]`, data in `src/lib/industries.ts` | Ranks for sector searches such as "dental website design Ontario" and converts the visit into an enquiry on the same page |
+| FAQ in native `<details>` with `FAQPage` schema | Home, city and industry pages | Answers are in the HTML that crawlers read, written answer-first so they can be quoted |
 | `/llms.txt` generated from the same data as the pages | `src/app/llms.txt/route.ts` | A plain-language summary for AI assistants. Adoption is still uneven, so treat it as cheap insurance, not a ranking lever |
 | `robots.txt` naming GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others as allowed | `src/app/robots.ts` | Makes the intent to be cited explicit |
 | `sitemap.xml` generated at build | `src/app/sitemap.ts` | Every page, project and city is discoverable |
@@ -33,12 +34,13 @@ Phrases come from Google autocomplete for Canada (real searches people type). Se
 | `/locations/vaughan`, `/markham`, `/mississauga`, `/brampton` | web design + city | web development + city |
 | `/locations/ottawa`, `/montreal`, `/vancouver`, `/calgary`, `/edmonton` | AI automation agency + city | AI companies in + city |
 | `/services` | AI automation agency Canada | Shopify developer Canada, AI receptionist for small business, workflow automation for small business |
-| `/work/*` | brand name + "website" | sector phrases, such as "oil mill machinery website", "masjid prayer times website" |
+| `/industries/*` | sector + "website design" + region | clinic, contractor, restaurant, law firm, manufacturing, logistics, salon and auto shop phrases listed per industry in `src/lib/industries.ts` |
+| `/work/*` | brand name + "website" | sector phrases, such as "oil mill machinery website" |
 
 Blog topics worth writing next, one per month, each linking to the matching city and service page:
 
 1. How much does a website cost in Durham Region in 2026 (real price ranges)
-2. Shopify or custom store: what we learned running three of our own
+2. Shopify or custom store: how to choose, with real cost ranges
 3. How to get a local business cited by ChatGPT and Google AI Overviews
 4. AI receptionist for a clinic or trade: what it handles and what it should hand off
 5. Shipping across Canada from Ontario: rate rules that protect margin
@@ -80,8 +82,8 @@ Paid or exchanged links are a penalty risk and are not worth it. These are the o
 1. **Your own properties.** You control more than a dozen live sites. A footer credit on each, "Site by Hijaz.ai" linking to the matching `/work/<slug>` page, is a legitimate, relevant link. Start with zamzamshop.ca, adamleather.com, himalayansaffron.com and nationalmachinerystores.com, which are on their own domains.
 2. **Client sites.** Make the footer credit a standard line in every project agreement.
 3. **The engineering tools.** The carbon storage tools are the kind of free resource that industry bodies, universities and newsletters link to. Add a "Built by Hijaz.ai" link in each tool's footer and submit them to relevant resource lists.
-4. **Community organizations.** A masjid, school or charity site you built will often list supporters or vendors.
-5. **Local press and newsletters.** Durham Region and Toronto business outlets run "local founder" stories. The operator angle, an agency that runs its own stores, is the pitch.
+4. **Schools, charities and associations.** Sites you build for them will often list supporters or vendors.
+5. **Local press and newsletters.** Durham Region and Toronto business outlets run "local founder" stories. Fixed prices in writing and published starting prices are the angle.
 6. **Guest answers.** Write one useful, specific answer a month on a Canadian small-business forum or publication, with a link to the relevant guide.
 
 ## 6. Getting cited by AI assistants

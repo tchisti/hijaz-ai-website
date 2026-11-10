@@ -1,4 +1,5 @@
 import { FAQ_ITEMS, SERVICES, SITE_CONFIG } from "@/lib/constants"
+import { INDUSTRIES } from "@/lib/industries"
 import { LOCATION_GROUPS, LOCATIONS } from "@/lib/locations"
 import { PROJECTS } from "@/lib/projects"
 import { absoluteUrl } from "@/lib/seo"
@@ -29,6 +30,12 @@ export function GET() {
       (s) => `- [${s.title}](${absoluteUrl(s.href)}): ${s.shortDesc} ${s.pricingTeaser}.`
     ),
     "",
+    "## Industries",
+    "",
+    ...INDUSTRIES.map(
+      (i) => `- [${i.name}](${absoluteUrl(`/industries/${i.slug}`)}): ${i.headline}. For ${i.audience.toLowerCase()}.`
+    ),
+    "",
     "## Selected work",
     "",
     ...PROJECTS.map((p) => `- [${p.name}](${absoluteUrl(`/work/${p.slug}`)}): ${p.summary}`),
@@ -50,6 +57,7 @@ export function GET() {
     "",
     `- [Home](${absoluteUrl("/")})`,
     `- [Services and pricing](${absoluteUrl("/services")})`,
+    `- [Industries](${absoluteUrl("/industries")})`,
     `- [Work](${absoluteUrl("/work")})`,
     `- [Locations](${absoluteUrl("/locations")})`,
     `- [About](${absoluteUrl("/about")})`,

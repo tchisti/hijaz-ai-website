@@ -26,8 +26,10 @@ export interface Project {
   url: string
   domain: string
   image: string
-  /** True for businesses operated by the Hijaz group itself */
-  operatedByUs?: boolean
+  /** Brand mark, shown in the homepage logo strip; a monogram is drawn when absent */
+  logo?: string
+  /** Shown in the homepage logo strip */
+  inLogoStrip?: boolean
   /** Shown on the homepage */
   featured?: boolean
 }
@@ -39,31 +41,6 @@ export const CATEGORY_LABELS: Record<ProjectCategory, string> = {
 }
 
 export const PROJECTS: Project[] = [
-  {
-    slug: "zamzam-shop",
-    name: "ZamZam Shop Co.",
-    descriptor: "Specialty food store shipping to every province",
-    category: "store",
-    sector: "Retail & e-commerce",
-    location: "Toronto, Ontario",
-    summary:
-      "A custom online store selling sealed Zamzam water, Madinah dates and Kashmiri saffron across Canada. Built on Next.js with Stripe checkout and run day to day by our own team.",
-    brief:
-      "Sell a regulated, heavy, high-trust product nationwide from Toronto, and answer the buyer's first question, whether it is authentic, before they reach the cart.",
-    built: [
-      "Custom storefront with Stripe checkout and province-based shipping rules",
-      "Authenticity guide that walks buyers through checking the factory seal",
-      "Wholesale inquiry channel alongside retail",
-      "Search-optimized product and guide pages for Canada-wide queries",
-    ],
-    capabilities: ["Next.js", "Stripe", "Firebase", "Technical SEO"],
-    note: "Stripe checkout · ships to every province",
-    url: "https://www.zamzamshop.ca",
-    domain: "zamzamshop.ca",
-    image: "/images/work/zamzam-shop.webp",
-    operatedByUs: true,
-    featured: true,
-  },
   {
     slug: "adam-leather",
     name: "Adam Leather",
@@ -86,79 +63,8 @@ export const PROJECTS: Project[] = [
     url: "https://adamleather.com",
     domain: "adamleather.com",
     image: "/images/work/adam-leather.webp",
-    operatedByUs: true,
-    featured: true,
-  },
-  {
-    slug: "himalayan-saffron",
-    name: "Himalayan Saffron",
-    descriptor: "Lab-tested saffron store for Canada and the US",
-    category: "store",
-    sector: "Retail & e-commerce",
-    location: "Toronto, Ontario",
-    summary:
-      "An online store for ISO 3632 Grade I Kashmiri saffron, shipping to Canada and the United States. The site is built around proof: sourcing, batch traceability and a published certificate of analysis.",
-    brief:
-      "Sell a product that is widely counterfeited. The site has to prove origin and purity to a sceptical buyer in the time it takes to scroll one page.",
-    built: [
-      "Storefront structured around sourcing, lab testing and batch traceability",
-      "Publicly accessible certificate of analysis",
-      "Shop-by-use and shop-by-occasion merchandising",
-      "Email capture with a first-order offer and recipe guide",
-    ],
-    capabilities: ["Next.js", "E-commerce", "Conversion design", "Email capture"],
-    note: "Batch traceability · public lab certificate",
-    url: "https://himalayansaffron.com",
-    domain: "himalayansaffron.com",
-    image: "/images/work/himalayan-saffron.webp",
-    operatedByUs: true,
-  },
-  {
-    slug: "masjid-al-hidaya",
-    name: "Masjid Al-Hidaya",
-    descriptor: "Live prayer times and donations for a Scarborough masjid",
-    category: "site",
-    sector: "Faith & community",
-    location: "Scarborough, Toronto",
-    summary:
-      "A community website for Masjid Al-Hidaya on Birchmount Road in Scarborough. It shows today's prayer, adhan and iqamah times with a live countdown, plus Jumu'ah, announcements, events and donations.",
-    brief:
-      "Give a congregation one reliable place to check when prayer starts today, on a phone, in seconds, and keep announcements, events and giving in the same place.",
-    built: [
-      "Daily prayer timetable with begin, adhan and iqamah times and a live countdown",
-      "Gregorian and Hijri dates, Jumu'ah schedule and a monthly timetable",
-      "Announcements and upcoming events sections",
-      "Donation path for supporting the masjid online",
-    ],
-    capabilities: ["Next.js", "Scheduling logic", "Mobile-first design", "Online giving"],
-    note: "Live prayer times · announcements · donations",
-    url: "https://masjid-al-hidaya.vercel.app",
-    domain: "masjid-al-hidaya.vercel.app",
-    image: "/images/work/masjid-al-hidaya.webp",
-    featured: true,
-  },
-  {
-    slug: "durham-drive-academy",
-    name: "Durham Drive Academy",
-    descriptor: "Driving school website for Durham Region",
-    category: "site",
-    sector: "Local services",
-    location: "Durham Region, Ontario",
-    summary:
-      "A lead-generation website for a driving school serving Oshawa, Whitby, Ajax and the rest of Durham Region. Course packages, instructors and lesson booking are laid out for learners at every licence stage.",
-    brief:
-      "Turn local searches for driving lessons into booked students, and make the price and the next step obvious on the first screen.",
-    built: [
-      "Programs laid out for each licence stage, starting with beginner driver education",
-      "Transparent course packages with pricing",
-      "Instructor profiles and a book-a-lesson path on every section",
-      "Local SEO structure targeting Durham Region towns",
-    ],
-    capabilities: ["Next.js", "Local SEO", "Lead generation", "Booking flow"],
-    note: "Course packages lead straight to lesson booking",
-    url: "https://v0-driving-school-website-two-sigma.vercel.app",
-    domain: "Durham Region build",
-    image: "/images/work/durham-drive-academy.webp",
+    logo: "/images/logos/adam-leather.png",
+    inLogoStrip: true,
     featured: true,
   },
   {
@@ -183,6 +89,59 @@ export const PROJECTS: Project[] = [
     url: "https://nationalmachinerystores.com",
     domain: "nationalmachinerystores.com",
     image: "/images/work/national-machinery.webp",
+    logo: "/images/logos/national-machinery-stores.png",
+    inLogoStrip: true,
+    featured: true,
+  },
+  {
+    slug: "durham-drive-academy",
+    name: "Durham Drive Academy",
+    descriptor: "Driving school website for Durham Region",
+    category: "site",
+    sector: "Local services",
+    location: "Durham Region, Ontario",
+    summary:
+      "A lead-generation website for a driving school serving Oshawa, Whitby, Ajax and the rest of Durham Region. Course packages, instructors and lesson booking are laid out for learners at every licence stage.",
+    brief:
+      "Turn local searches for driving lessons into booked students, and make the price and the next step obvious on the first screen.",
+    built: [
+      "Programs laid out for each licence stage, starting with beginner driver education",
+      "Transparent course packages with pricing",
+      "Instructor profiles and a book-a-lesson path on every section",
+      "Local SEO structure targeting Durham Region towns",
+    ],
+    capabilities: ["Next.js", "Local SEO", "Lead generation", "Booking flow"],
+    note: "Course packages lead straight to lesson booking",
+    url: "https://v0-driving-school-website-two-sigma.vercel.app",
+    domain: "Durham Region build",
+    image: "/images/work/durham-drive-academy.webp",
+    inLogoStrip: true,
+    featured: true,
+  },
+  {
+    slug: "himalayan-saffron",
+    name: "Himalayan Saffron",
+    descriptor: "Lab-tested saffron store for Canada and the US",
+    category: "store",
+    sector: "Retail & e-commerce",
+    location: "Toronto, Ontario",
+    summary:
+      "An online store for ISO 3632 Grade I Kashmiri saffron, shipping to Canada and the United States. The site is built around proof: sourcing, batch traceability and a published certificate of analysis.",
+    brief:
+      "Sell a product that is widely counterfeited. The site has to prove origin and purity to a sceptical buyer in the time it takes to scroll one page.",
+    built: [
+      "Storefront structured around sourcing, lab testing and batch traceability",
+      "Publicly accessible certificate of analysis",
+      "Shop-by-use and shop-by-occasion merchandising",
+      "Email capture with a first-order offer and recipe guide",
+    ],
+    capabilities: ["Next.js", "E-commerce", "Conversion design", "Email capture"],
+    note: "Batch traceability · public lab certificate",
+    url: "https://himalayansaffron.com",
+    domain: "himalayansaffron.com",
+    image: "/images/work/himalayan-saffron.webp",
+    logo: "/images/logos/himalayan-saffron.png",
+    inLogoStrip: true,
     featured: true,
   },
   {
@@ -207,6 +166,8 @@ export const PROJECTS: Project[] = [
     url: "https://cosmic-bag-industries.vercel.app",
     domain: "cosmic-bag-industries.vercel.app",
     image: "/images/work/cosmic-bag.webp",
+    inLogoStrip: true,
+    featured: true,
   },
   {
     slug: "ccus-compass",
@@ -230,56 +191,9 @@ export const PROJECTS: Project[] = [
     url: "https://ccus-space.vercel.app",
     domain: "ccus-space.vercel.app",
     image: "/images/work/ccus-compass.webp",
-    operatedByUs: true,
+    logo: "/images/logos/ccus-compass.png",
+    inLogoStrip: true,
     featured: true,
-  },
-  {
-    slug: "subsurfaceai",
-    name: "SubsurfaceAI",
-    descriptor: "Product website for an AI platform in energy",
-    category: "site",
-    sector: "Energy & regulation",
-    location: "Toronto, Ontario",
-    summary:
-      "The marketing site for SubsurfaceAI, an AI intelligence platform for carbon storage and low-carbon energy projects. It presents the product suite, consulting services and pricing, and routes visitors into the live tools.",
-    brief:
-      "Explain a technical AI product to a specialist buyer and move them into a live tool or a consultation.",
-    built: [
-      "Product pages for each AI tool, with live and upcoming status",
-      "Consulting, case study and pricing sections",
-      "Site search and sign-in entry points",
-      "Blog for technical thought leadership",
-    ],
-    capabilities: ["Product marketing site", "Site search", "Content structure"],
-    note: "Product site that routes into live AI tools",
-    url: "https://subsurfaceai-website.vercel.app",
-    domain: "subsurfaceai-website.vercel.app",
-    image: "/images/work/subsurfaceai.webp",
-    operatedByUs: true,
-  },
-  {
-    slug: "d065-application-assistant",
-    name: "D065 Application Assistant",
-    descriptor: "Guided builder for a regulatory application",
-    category: "software",
-    sector: "Energy & regulation",
-    location: "Alberta, Canada",
-    summary:
-      "A guided application builder for Alberta's Directive 065 carbon storage scheme applications. It turns a long regulatory directive into a section-by-section template, a compliance checklist and downloadable documents.",
-    brief:
-      "Take a regulatory process that normally lives in PDFs and turn it into a tool that tells an applicant what to write, in what order, and what is still missing.",
-    built: [
-      "Section-by-section application template mapped to the directive",
-      "Interactive compliance checklist that flags incomplete sections",
-      "Word and PDF document generation",
-      "Submission guide and companion calculators",
-    ],
-    capabilities: ["Guided workflow", "Document generation", "Compliance checklist"],
-    note: "A regulatory directive turned into a guided workflow",
-    url: "https://aer-d065-assistant.vercel.app",
-    domain: "aer-d065-assistant.vercel.app",
-    image: "/images/work/d065-assistant.webp",
-    operatedByUs: true,
   },
   {
     slug: "nisku-co2-simulator",
@@ -303,8 +217,78 @@ export const PROJECTS: Project[] = [
     url: "https://nisku-co-2-simulator.vercel.app",
     domain: "nisku-co-2-simulator.vercel.app",
     image: "/images/work/nisku-simulator.webp",
-    operatedByUs: true,
     featured: true,
+  },
+  {
+    slug: "zamzam-shop",
+    name: "ZamZam Shop Co.",
+    descriptor: "Specialty food store shipping to every province",
+    category: "store",
+    sector: "Retail & e-commerce",
+    location: "Toronto, Ontario",
+    summary:
+      "A custom online store selling sealed Zamzam water, Madinah dates and Kashmiri saffron across Canada. Built on Next.js with Stripe checkout and province-based shipping.",
+    brief:
+      "Sell a regulated, heavy, high-trust product nationwide from Toronto, and answer the buyer's first question, whether it is authentic, before they reach the cart.",
+    built: [
+      "Custom storefront with Stripe checkout and province-based shipping rules",
+      "Authenticity guide that walks buyers through checking the factory seal",
+      "Wholesale inquiry channel alongside retail",
+      "Search-optimized product and guide pages for Canada-wide queries",
+    ],
+    capabilities: ["Next.js", "Stripe", "Firebase", "Technical SEO"],
+    note: "Stripe checkout · ships to every province",
+    url: "https://www.zamzamshop.ca",
+    domain: "zamzamshop.ca",
+    image: "/images/work/zamzam-shop.webp",
+  },
+  {
+    slug: "subsurfaceai",
+    name: "SubsurfaceAI",
+    descriptor: "Product website for an AI platform in energy",
+    category: "site",
+    sector: "Energy & regulation",
+    location: "Toronto, Ontario",
+    summary:
+      "The marketing site for SubsurfaceAI, an AI intelligence platform for carbon storage and low-carbon energy projects. It presents the product suite, consulting services and pricing, and routes visitors into the live tools.",
+    brief:
+      "Explain a technical AI product to a specialist buyer and move them into a live tool or a consultation.",
+    built: [
+      "Product pages for each AI tool, with live and upcoming status",
+      "Consulting, case study and pricing sections",
+      "Site search and sign-in entry points",
+      "Blog for technical thought leadership",
+    ],
+    capabilities: ["Product marketing site", "Site search", "Content structure"],
+    note: "Product site that routes into live AI tools",
+    url: "https://subsurfaceai-website.vercel.app",
+    domain: "subsurfaceai-website.vercel.app",
+    image: "/images/work/subsurfaceai.webp",
+    logo: "/images/logos/subsurfaceai.png",
+    inLogoStrip: true,
+  },
+  {
+    slug: "d065-application-assistant",
+    name: "D065 Application Assistant",
+    descriptor: "Guided builder for a regulatory application",
+    category: "software",
+    sector: "Energy & regulation",
+    location: "Alberta, Canada",
+    summary:
+      "A guided application builder for Alberta's Directive 065 carbon storage scheme applications. It turns a long regulatory directive into a section-by-section template, a compliance checklist and downloadable documents.",
+    brief:
+      "Take a regulatory process that normally lives in PDFs and turn it into a tool that tells an applicant what to write, in what order, and what is still missing.",
+    built: [
+      "Section-by-section application template mapped to the directive",
+      "Interactive compliance checklist that flags incomplete sections",
+      "Word and PDF document generation",
+      "Submission guide and companion calculators",
+    ],
+    capabilities: ["Guided workflow", "Document generation", "Compliance checklist"],
+    note: "A regulatory directive turned into a guided workflow",
+    url: "https://aer-d065-assistant.vercel.app",
+    domain: "aer-d065-assistant.vercel.app",
+    image: "/images/work/d065-assistant.webp",
   },
   {
     slug: "ccs-regulatory-guide",
@@ -328,7 +312,6 @@ export const PROJECTS: Project[] = [
     url: "https://north-america-ccs-regulatory-dashbo.vercel.app",
     domain: "north-america-ccs-regulatory-dashbo.vercel.app",
     image: "/images/work/ccs-regulatory.webp",
-    operatedByUs: true,
   },
   {
     slug: "co2-pipeline-analyzer",
@@ -352,13 +335,12 @@ export const PROJECTS: Project[] = [
     url: "https://tchisti.github.io/CO2-_phase_envelope_V7/",
     domain: "CO₂ pipeline tool",
     image: "/images/work/phase-envelope.webp",
-    operatedByUs: true,
   },
 ]
 
 export const FEATURED_PROJECTS = PROJECTS.filter((p) => p.featured)
 
-export const SECTORS = Array.from(new Set(PROJECTS.map((p) => p.sector)))
+export const LOGO_STRIP_PROJECTS = PROJECTS.filter((p) => p.inLogoStrip)
 
 export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((p) => p.slug === slug)

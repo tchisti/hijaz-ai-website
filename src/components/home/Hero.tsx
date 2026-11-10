@@ -1,14 +1,12 @@
 import HeroSheet from "@/components/home/HeroSheet"
 import { Reveal, Underline } from "@/components/motion/Redline"
 import { BookCallButton, SecondaryButton } from "@/components/layout/Sheet"
-import { FEATURED_PROJECTS, PROJECTS, SECTORS } from "@/lib/projects"
-
-const OPERATED = PROJECTS.filter((p) => p.operatedByUs && p.category === "store").length
+import { FEATURED_PROJECTS, PROJECTS } from "@/lib/projects"
 
 const PROOF = [
-  { value: String(PROJECTS.length), label: "builds in production" },
-  { value: String(SECTORS.length), label: "industries shipped" },
-  { value: String(OPERATED), label: "stores we run ourselves" },
+  { value: String(PROJECTS.length), label: "builds live in production" },
+  { value: "3–7", label: "days to launch a website" },
+  { value: "48h", label: "to a written plan and price" },
 ]
 
 export default function Hero() {
@@ -34,16 +32,17 @@ export default function Hero() {
           <div>
             <Reveal delay={0.18}>
               <p className="max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl">
-                We build the websites, online stores, AI assistants and software that businesses run on. Then we prove
-                it the hard way:{" "}
-                <strong className="font-semibold text-ink">we run our own companies on the same stack.</strong>
+                Websites, online stores, AI assistants and custom software for growing businesses.{" "}
+                <strong className="font-semibold text-ink">
+                  Scoped to a result, quoted at a fixed price, and built to pay for itself.
+                </strong>
               </p>
             </Reveal>
 
             <Reveal delay={0.28}>
               <div className="mt-9 flex flex-wrap gap-3">
                 <BookCallButton />
-                <SecondaryButton href="#work">See the work</SecondaryButton>
+                <SecondaryButton href="#enquire">Get a fixed quote</SecondaryButton>
               </div>
               <p className="label mt-4 text-ink-faint">Free · 15 minutes · A fixed price before any work starts</p>
             </Reveal>

@@ -59,7 +59,7 @@ export const LOCATIONS: Location[] = [
       "Ajax sits between Pickering and Whitby on the Highway 401 corridor, and most of its businesses compete for customers who also shop in both. A business here is usually found through a map search on a phone, so the work that pays back first is a fast site, an accurate Google Business Profile and a way to answer enquiries after hours.",
     sectors: ["Trades and home services", "Storage and logistics", "Clinics and wellness", "Restaurants and retail"],
     serviceIds: ["web-development", "ai-automation", "ai-marketing", "shopify"],
-    projectSlugs: ["durham-drive-academy", "zamzam-shop"],
+    projectSlugs: ["durham-drive-academy", "adam-leather"],
     nearby: ["pickering", "whitby", "oshawa", "toronto"],
     faqs: [
       {
@@ -89,7 +89,7 @@ export const LOCATIONS: Location[] = [
       "Pickering is the western gateway to Durham Region, bordering Scarborough, so its businesses draw customers from both Durham and Toronto. Energy and utilities are major employers and the city continues to add housing and commercial space. For a local business that means new residents searching for services for the first time, and whoever is easiest to find and book online gets the call.",
     sectors: ["Professional services", "Home services", "Health and dental clinics", "Retail and hospitality"],
     serviceIds: ["web-development", "ai-automation", "ai-workflows", "ai-marketing"],
-    projectSlugs: ["durham-drive-academy", "masjid-al-hidaya"],
+    projectSlugs: ["durham-drive-academy", "adam-leather"],
     nearby: ["ajax", "whitby", "toronto", "markham"],
     faqs: [
       {
@@ -184,7 +184,7 @@ export const LOCATIONS: Location[] = [
       {
         question: "Can a farm or rural business in Clarington sell online?",
         answer:
-          "Yes. We build online stores with local pickup, delivery zones and Canada-wide shipping rules. We run our own specialty food stores that ship nationally, so we know the shipping and packaging questions first-hand.",
+          "Yes. We build online stores with local pickup, delivery zones and Canada-wide shipping rules. We have built specialty food stores that ship nationally, so the shipping and packaging questions are familiar ground.",
       },
       {
         question: "Do you cover Bowmanville, Courtice and Newcastle?",
@@ -208,15 +208,15 @@ export const LOCATIONS: Location[] = [
       "Hijaz.ai is a Toronto-based business technology partner. We build websites, online stores, AI assistants and custom software for businesses across the city, including Scarborough, North York, Etobicoke and downtown.",
     market:
       "Toronto is Canada's largest city and its most crowded market: whatever you sell, several competitors are a search away. Ranking for a broad term like a service plus Toronto is slow and expensive. The faster route is to win a neighbourhood and a specific service first, then convert better than the competition with instant answers, online booking and follow-up. That is the order we build in.",
-    sectors: ["Retail and e-commerce", "Professional services", "Clinics and wellness", "Community organizations"],
+    sectors: ["Retail and e-commerce", "Professional services", "Clinics and wellness", "Restaurants and hospitality"],
     serviceIds: ["ai-audit", "web-development", "shopify", "ai-automation"],
-    projectSlugs: ["zamzam-shop", "adam-leather", "masjid-al-hidaya", "himalayan-saffron"],
+    projectSlugs: ["adam-leather", "himalayan-saffron", "subsurfaceai"],
     nearby: ["pickering", "markham", "vaughan", "mississauga"],
     faqs: [
       {
         question: "Is Hijaz.ai based in Toronto?",
         answer:
-          "Yes. Hijaz.ai is based in the Toronto area and works on-site across Toronto and Durham Region. The online stores we operate ourselves ship from Toronto.",
+          "Yes. Hijaz.ai is based in the Toronto area and works on-site across Toronto and Durham Region.",
       },
       {
         question: "How can a small Toronto business compete with larger companies in search?",
@@ -226,7 +226,7 @@ export const LOCATIONS: Location[] = [
       {
         question: "Do you work with Scarborough, North York and Etobicoke businesses?",
         answer:
-          "Yes. We have built for organizations in Scarborough and work across all of Toronto's districts in person.",
+          "Yes. We work in person across all of Toronto's districts, including Scarborough, North York, Etobicoke and downtown.",
       },
     ],
   },
@@ -244,7 +244,7 @@ export const LOCATIONS: Location[] = [
       "Markham has one of the highest concentrations of technology employers in Canada and a large, multilingual consumer market. Buyers here are comfortable online and compare options carefully, so a site that is slow, vague on price or English-only loses them. We build fast, clear sites and AI assistants that can answer in more than one language.",
     sectors: ["Technology and professional services", "Retail and restaurants", "Health and dental clinics", "Education and tutoring"],
     serviceIds: ["ai-automation", "web-development", "shopify", "ai-dashboards"],
-    projectSlugs: ["ccus-compass", "zamzam-shop"],
+    projectSlugs: ["ccus-compass", "adam-leather"],
     nearby: ["toronto", "vaughan", "pickering"],
     faqs: [
       {
@@ -332,7 +332,7 @@ export const LOCATIONS: Location[] = [
       "Brampton is one of Canada's fastest-growing and youngest large cities, with a strong base in transportation, logistics and food processing and thousands of family-run businesses. Much of the customer conversation here already happens on WhatsApp and by phone. We build AI assistants that answer on those channels, in the languages your customers use, and pass the lead to you.",
     sectors: ["Trucking and logistics", "Food and grocery", "Immigration and professional services", "Retail"],
     serviceIds: ["ai-automation", "web-development", "shopify", "ai-marketing"],
-    projectSlugs: ["national-machinery-stores", "zamzam-shop"],
+    projectSlugs: ["national-machinery-stores", "himalayan-saffron"],
     nearby: ["mississauga", "vaughan", "toronto"],
     faqs: [
       {
@@ -343,7 +343,7 @@ export const LOCATIONS: Location[] = [
       {
         question: "Do you build online stores for food and grocery businesses?",
         answer:
-          "Yes. We operate specialty food stores ourselves, so we build with shipping weight, shelf life and local delivery in mind.",
+          "Yes. We have built specialty food stores, so we plan for shipping weight, shelf life and local delivery from the start.",
       },
     ],
   },
@@ -445,7 +445,7 @@ export const LOCATIONS: Location[] = [
       {
         question: "Can you build an online store that sells to both Canada and the United States?",
         answer:
-          "Yes. The stores we operate ship to both countries, so we have worked through cross-border shipping rates, currency display and customer expectations in practice.",
+          "Yes. Stores we have built ship to both countries, so cross-border shipping rates, currency display and customer expectations are already worked through.",
       },
     ],
   },
@@ -464,7 +464,7 @@ export const LOCATIONS: Location[] = [
       "Kingston's economy is shaped by Queen's University, health care, the military and public sector, and a strong tourism season on the waterfront. Demand swings with the academic year and the summer. Businesses here get the most from online booking, seasonal campaigns and automated follow-up that brings one-time visitors back.",
     sectors: ["Tourism and hospitality", "Health care", "Student services", "Independent retail"],
     serviceIds: ["web-development", "ai-automation", "ai-marketing", "ai-workflows"],
-    projectSlugs: ["durham-drive-academy", "masjid-al-hidaya"],
+    projectSlugs: ["durham-drive-academy", "himalayan-saffron"],
     nearby: ["ottawa", "oshawa"],
     faqs: [
       {
@@ -520,13 +520,13 @@ export const LOCATIONS: Location[] = [
       "Montreal is Canada's second-largest city and a recognized centre for artificial intelligence research, aerospace and creative industries. Selling here means selling in French first. We build bilingual sites and stores and help Ontario brands that want to reach Quebec customers do it properly.",
     sectors: ["E-commerce brands", "Creative and media", "Aerospace supply", "Food and hospitality"],
     serviceIds: ["shopify", "web-development", "ai-automation", "ai-workflows"],
-    projectSlugs: ["zamzam-shop", "adam-leather"],
+    projectSlugs: ["adam-leather", "himalayan-saffron"],
     nearby: ["ottawa"],
     faqs: [
       {
         question: "Do you ship-enable online stores for Quebec?",
         answer:
-          "Yes. The stores we operate ship to every province, including Quebec, and we set up French-language storefronts for brands selling there.",
+          "Yes. Stores we have built ship to every province, including Quebec, and we set up French-language storefronts for brands selling there.",
       },
     ],
   },
@@ -589,16 +589,16 @@ export const LOCATIONS: Location[] = [
     intro:
       "Hijaz.ai builds online stores, websites and AI automation for Vancouver businesses, delivered remotely.",
     market:
-      "Vancouver is Canada's Pacific gateway, with the country's largest port, a strong film and technology sector and a consumer market that favours independent and sustainable brands. Direct-to-consumer brands here compete on story and trust. We build stores where sourcing, proof and product are part of the same page, because that is how we sell our own.",
+      "Vancouver is Canada's Pacific gateway, with the country's largest port, a strong film and technology sector and a consumer market that favours independent and sustainable brands. Direct-to-consumer brands here compete on story and trust. We build stores where sourcing, proof and product are part of the same page.",
     sectors: ["Direct-to-consumer brands", "Import and export", "Technology", "Hospitality"],
     serviceIds: ["shopify", "web-development", "ai-marketing", "ai-automation"],
-    projectSlugs: ["himalayan-saffron", "adam-leather", "zamzam-shop"],
+    projectSlugs: ["himalayan-saffron", "adam-leather"],
     nearby: ["calgary"],
     faqs: [
       {
         question: "Do you build for brands that sell premium or specialty products?",
         answer:
-          "Yes. We operate premium leather and specialty food brands ourselves. Those stores are built around origin, testing and traceability, which is what a premium buyer looks for before paying more.",
+          "Yes. We have built stores for premium leather and specialty food brands. They are structured around origin, testing and traceability, which is what a premium buyer looks for before paying more.",
       },
     ],
   },
@@ -640,13 +640,13 @@ export const LOCATIONS: Location[] = [
       "Halifax is the economic centre of Atlantic Canada, with a major port, a naval and defence presence, several universities and a growing ocean-technology sector. Local businesses often serve the whole region from one location, and many sell seasonal or specialty products that travel well online.",
     sectors: ["Ocean and marine", "Tourism and hospitality", "Specialty food", "Professional services"],
     serviceIds: ["web-development", "shopify", "ai-automation", "ai-marketing"],
-    projectSlugs: ["zamzam-shop", "himalayan-saffron"],
+    projectSlugs: ["himalayan-saffron", "adam-leather"],
     nearby: ["montreal", "ottawa"],
     faqs: [
       {
         question: "Can you help an Atlantic business sell across Canada?",
         answer:
-          "Yes. We run stores that ship to every province and territory, and we set up shipping rules, taxes and search-optimized pages for national reach.",
+          "Yes. We have built stores that ship to every province and territory, and we set up shipping rules, taxes and search-optimized pages for national reach.",
       },
     ],
   },

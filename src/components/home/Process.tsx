@@ -28,7 +28,7 @@ export default function Process() {
   return (
     <section className="grid-paper border-b border-ink/15">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-        <SheetHeader number="05" title="How it works" />
+        <SheetHeader number="06" title="How it works" />
 
         <Reveal>
           <h2 className="headline mt-10 max-w-4xl text-[clamp(2.2rem,5.6vw,4.4rem)]">

@@ -1,5 +1,6 @@
 import { SITE_CONFIG, SERVICES } from "@/lib/constants"
 import { LOCATIONS } from "@/lib/locations"
+import type { Industry } from "@/lib/industries"
 import type { Project } from "@/lib/projects"
 import { absoluteUrl } from "@/lib/seo"
 
@@ -267,6 +268,22 @@ export function BlogPostingJsonLd({
     author: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
     inLanguage: "en-CA",
+  }
+  return <JsonLd data={data} />
+}
+
+/** What we offer a given sector, described as a service aimed at that business audience */
+export function IndustryJsonLd({ industry }: { industry: Industry }) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Websites, AI and automation for ${industry.name}`,
+    serviceType: industry.builds.map((b) => b.title),
+    description: `${industry.headline}. ${industry.intro}`,
+    url: absoluteUrl(`/industries/${industry.slug}`),
+    provider: { "@id": ORG_ID },
+    areaServed: SITE_CONFIG.serviceAreas,
+    audience: { "@type": "BusinessAudience", audienceType: industry.audience },
   }
   return <JsonLd data={data} />
 }
