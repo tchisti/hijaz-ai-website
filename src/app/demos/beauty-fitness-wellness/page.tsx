@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
-import { Marcellus, Nunito_Sans } from "next/font/google"
+import localFont from "next/font/local"
 import { ArrowRight, Car, Mail, MapPin, Phone, TrainFront } from "lucide-react"
 import ConceptBar from "@/components/demos/ConceptBar"
 import DemoForm from "@/components/demos/DemoForm"
@@ -8,8 +8,24 @@ import BookingStepper from "@/components/demos/beauty-fitness-wellness/BookingSt
 import { Sprig, SprigRule } from "@/components/demos/beauty-fitness-wellness/Sprig"
 import { HOURS, MENU, WEEKDAYS, clock, duration } from "@/components/demos/beauty-fitness-wellness/menu"
 
-const display = Marcellus({ weight: "400", subsets: ["latin"], variable: "--f-display", display: "swap" })
-const body = Nunito_Sans({ subsets: ["latin"], variable: "--f-body", display: "swap" })
+// Marcellus, served from files in the repo so the build never depends on a font host
+const display = localFont({
+  src: [
+    { path: "../../../fonts/demos/marcellus-normal-400.woff2", style: "normal", weight: "400" },
+  ],
+  variable: "--f-display",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+})
+// Nunito Sans, served from files in the repo so the build never depends on a font host
+const body = localFont({
+  src: [
+    { path: "../../../fonts/demos/nunito-sans-normal-200-1000.woff2", style: "normal", weight: "200 1000" },
+  ],
+  variable: "--f-body",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
 
 export const metadata: Metadata = {
   title: "Juniper Hair & Skin Studio | Pickering, Ontario",

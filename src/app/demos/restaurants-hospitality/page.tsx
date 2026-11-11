@@ -1,20 +1,31 @@
 import type { Metadata } from "next"
 import type { CSSProperties, ReactNode } from "react"
-import { Bodoni_Moda, Karla } from "next/font/google"
+import localFont from "next/font/local"
 import ConceptBar from "@/components/demos/ConceptBar"
 import DemoForm from "@/components/demos/DemoForm"
 import MenuTabs from "@/components/demos/restaurants-hospitality/MenuTabs"
 import ReservationPicker from "@/components/demos/restaurants-hospitality/ReservationPicker"
 import SiteHeader from "@/components/demos/restaurants-hospitality/SiteHeader"
 
-const display = Bodoni_Moda({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
+// Bodoni Moda, served from files in the repo so the build never depends on a font host
+const display = localFont({
+  src: [
+    { path: "../../../fonts/demos/bodoni-moda-normal-400-900.woff2", style: "normal", weight: "400 900" },
+    { path: "../../../fonts/demos/bodoni-moda-italic-400-900.woff2", style: "italic", weight: "400 900" },
+  ],
   variable: "--f-display",
   display: "swap",
+  fallback: ["Georgia", "serif"],
 })
-const body = Karla({ subsets: ["latin"], variable: "--f-body", display: "swap" })
+// Karla, served from files in the repo so the build never depends on a font host
+const body = localFont({
+  src: [
+    { path: "../../../fonts/demos/karla-normal-200-800.woff2", style: "normal", weight: "200 800" },
+  ],
+  variable: "--f-body",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
 
 export const metadata: Metadata = {
   title: "Ember & Rye: wood-fired kitchen and bar in Oshawa (concept build)",

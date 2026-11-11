@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { DM_Sans, Fraunces } from "next/font/google"
+import localFont from "next/font/local"
 import {
   ArrowRight,
   Check,
@@ -26,14 +26,25 @@ import AppointmentPicker, { RequestedSlot } from "@/components/demos/healthcare-
 import HoursTable from "@/components/demos/healthcare-clinics/HoursTable"
 import SiteHeader from "@/components/demos/healthcare-clinics/SiteHeader"
 
-const display = Fraunces({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["SOFT", "opsz"],
+// Fraunces, served from files in the repo so the build never depends on a font host
+const display = localFont({
+  src: [
+    { path: "../../../fonts/demos/fraunces-normal-100-900.woff2", style: "normal", weight: "100 900" },
+    { path: "../../../fonts/demos/fraunces-italic-100-900.woff2", style: "italic", weight: "100 900" },
+  ],
   variable: "--f-display",
   display: "swap",
+  fallback: ["Georgia", "serif"],
 })
-const body = DM_Sans({ subsets: ["latin"], variable: "--f-body", display: "swap" })
+// DM Sans, served from files in the repo so the build never depends on a font host
+const body = localFont({
+  src: [
+    { path: "../../../fonts/demos/dm-sans-normal-100-1000.woff2", style: "normal", weight: "100 1000" },
+  ],
+  variable: "--f-body",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
 
 export const metadata: Metadata = {
   title: "Oakline Dental Studio, a family dentist in Whitby (concept build)",

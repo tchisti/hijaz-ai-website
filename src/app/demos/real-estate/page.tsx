@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import type { CSSProperties, ReactNode } from "react"
-import { Cormorant_Garamond, Jost } from "next/font/google"
+import localFont from "next/font/local"
 import { ArrowDown, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react"
 import ConceptBar from "@/components/demos/ConceptBar"
 import DemoForm from "@/components/demos/DemoForm"
@@ -9,8 +9,25 @@ import Listings from "@/components/demos/real-estate/Listings"
 import MortgageCalculator from "@/components/demos/real-estate/MortgageCalculator"
 import SiteHeader from "@/components/demos/real-estate/SiteHeader"
 
-const display = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600"], style: ["normal", "italic"], variable: "--f-display", display: "swap" })
-const body = Jost({ subsets: ["latin"], weight: ["300", "400", "500"], variable: "--f-body", display: "swap" })
+// Cormorant Garamond, served from files in the repo so the build never depends on a font host
+const display = localFont({
+  src: [
+    { path: "../../../fonts/demos/cormorant-garamond-normal-500-600.woff2", style: "normal", weight: "500 600" },
+    { path: "../../../fonts/demos/cormorant-garamond-italic-500-600.woff2", style: "italic", weight: "500 600" },
+  ],
+  variable: "--f-display",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+})
+// Jost, served from files in the repo so the build never depends on a font host
+const body = localFont({
+  src: [
+    { path: "../../../fonts/demos/jost-normal-300-500.woff2", style: "normal", weight: "300 500" },
+  ],
+  variable: "--f-body",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
 
 export const metadata: Metadata = {
   title: "Kestrel & Rowe Realty | Homes in Whitby and Durham Region (concept)",

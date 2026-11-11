@@ -43,7 +43,7 @@ The site is drawn as an engineering sheet: paper and ink, marked up in red, with
 
 - **Selected work**: `src/lib/projects.ts`. Set `featured: true` to show a build on the home page and `inLogoStrip: true` to add it to the logo strip. Screenshots live in `public/images/work`, brand marks in `public/images/logos`
 - **Industries**: `src/lib/industries.ts`. Proof on each page is limited to the live builds in `projectSlugs`
-- **Concept builds**: `src/lib/concepts.ts` lists them; each site lives in `src/app/demos/<industry-slug>/` with its components in `src/components/demos/<industry-slug>/`. Every demo renders `ConceptBar` first and uses `DemoForm`, which tells the visitor the business is invented and sends the enquiry to Hijaz.ai. Keep them out of `PROJECTS`, the logo strip and the sitemap
+- **Concept builds**: `src/lib/concepts.ts` lists them; each site lives in `src/app/demos/<industry-slug>/` with its components in `src/components/demos/<industry-slug>/`. Each demo loads its typefaces with `next/font/local` from `src/fonts/demos` (open-licensed fonts, latin subset), so the build does not fetch them from a font host. Every demo renders `ConceptBar` first and uses `DemoForm`, which tells the visitor the business is invented and sends the enquiry to Hijaz.ai. Keep them out of `PROJECTS`, the logo strip and the sitemap
 - **Service areas**: `src/lib/locations.ts`. Each city needs its own market notes, proof and FAQ
 - **Services, prices, FAQ, contact details**: `src/lib/constants.ts`
 - **SEO and off-site plan**: `docs/seo-geo-playbook.md`

@@ -1,15 +1,40 @@
 import type { CSSProperties, ReactNode } from "react"
 import type { Metadata } from "next"
-import { Chakra_Petch, Manrope, Share_Tech_Mono } from "next/font/google"
+import localFont from "next/font/local"
 import { ArrowRight, Camera, CarFront, Clock, KeyRound, Mail, MapPin, MessageSquareText, Phone, ReceiptText, Timer, Truck } from "lucide-react"
 import ConceptBar from "@/components/demos/ConceptBar"
 import DemoForm from "@/components/demos/DemoForm"
 import ServiceEstimator from "@/components/demos/automotive/ServiceEstimator"
 import WarningLights from "@/components/demos/automotive/WarningLights"
 
-const display = Chakra_Petch({ subsets: ["latin"], weight: ["600", "700"], variable: "--f-display", display: "swap" })
-const body = Manrope({ subsets: ["latin"], variable: "--f-body", display: "swap" })
-const mono = Share_Tech_Mono({ subsets: ["latin"], weight: "400", variable: "--f-mono", display: "swap" })
+// Chakra Petch, served from files in the repo so the build never depends on a font host
+const display = localFont({
+  src: [
+    { path: "../../../fonts/demos/chakra-petch-normal-600.woff2", style: "normal", weight: "600" },
+    { path: "../../../fonts/demos/chakra-petch-normal-700.woff2", style: "normal", weight: "700" },
+  ],
+  variable: "--f-display",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
+// Manrope, served from files in the repo so the build never depends on a font host
+const body = localFont({
+  src: [
+    { path: "../../../fonts/demos/manrope-normal-200-800.woff2", style: "normal", weight: "200 800" },
+  ],
+  variable: "--f-body",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
+// Share Tech Mono, served from files in the repo so the build never depends on a font host
+const mono = localFont({
+  src: [
+    { path: "../../../fonts/demos/share-tech-mono-normal-400.woff2", style: "normal", weight: "400" },
+  ],
+  variable: "--f-mono",
+  display: "swap",
+  fallback: ["ui-monospace", "monospace"],
+})
 
 export const metadata: Metadata = {
   title: "Gearbox Auto Service, a concept site for an Ajax repair and tire shop",

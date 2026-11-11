@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import type { CSSProperties, ReactNode } from "react"
-import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google"
+import localFont from "next/font/local"
 import { ArrowRight, Check, Clock, Mail, MapPin, Phone, Plus, Timer } from "lucide-react"
 import ConceptBar from "@/components/demos/ConceptBar"
 import DemoForm from "@/components/demos/DemoForm"
@@ -8,8 +8,24 @@ import EstimateCard from "@/components/demos/trades-home-services/EstimateCard"
 import { Fitting, PipeRun, PriceTag, Van } from "@/components/demos/trades-home-services/Parts"
 import { BTN_COPPER, BTN_WHITE, EMAIL, PHONE, SERVICES, TEL, money } from "@/components/demos/trades-home-services/data"
 
-const display = Bricolage_Grotesque({ subsets: ["latin"], weight: ["700", "800"], variable: "--f-display", display: "swap" })
-const body = Source_Sans_3({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--f-body", display: "swap" })
+// Bricolage Grotesque, served from files in the repo so the build never depends on a font host
+const display = localFont({
+  src: [
+    { path: "../../../fonts/demos/bricolage-grotesque-normal-700-800.woff2", style: "normal", weight: "700 800" },
+  ],
+  variable: "--f-display",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
+// Source Sans 3, served from files in the repo so the build never depends on a font host
+const body = localFont({
+  src: [
+    { path: "../../../fonts/demos/source-sans-3-normal-400-700.woff2", style: "normal", weight: "400 700" },
+  ],
+  variable: "--f-body",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
 
 export const metadata: Metadata = {
   title: "Copperline Plumbing & Heating | Ajax and Durham Region (concept site)",

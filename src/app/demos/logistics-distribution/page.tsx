@@ -1,15 +1,43 @@
 import type { Metadata } from "next"
 import { Fragment, type CSSProperties, type ReactNode } from "react"
-import { Barlow, Barlow_Condensed, JetBrains_Mono } from "next/font/google"
+import localFont from "next/font/local"
 import { ArrowRight, Mail, Phone } from "lucide-react"
 import ConceptBar from "@/components/demos/ConceptBar"
 import DemoForm from "@/components/demos/DemoForm"
 import LaneMap from "@/components/demos/logistics-distribution/LaneMap"
 import ShipmentTracker from "@/components/demos/logistics-distribution/ShipmentTracker"
 
-const display = Barlow_Condensed({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--f-display", display: "swap" })
-const body = Barlow({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--f-body", display: "swap" })
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--f-mono", display: "swap" })
+// Barlow Condensed, served from files in the repo so the build never depends on a font host
+const display = localFont({
+  src: [
+    { path: "../../../fonts/demos/barlow-condensed-normal-600.woff2", style: "normal", weight: "600" },
+    { path: "../../../fonts/demos/barlow-condensed-normal-700.woff2", style: "normal", weight: "700" },
+    { path: "../../../fonts/demos/barlow-condensed-normal-800.woff2", style: "normal", weight: "800" },
+  ],
+  variable: "--f-display",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
+// Barlow, served from files in the repo so the build never depends on a font host
+const body = localFont({
+  src: [
+    { path: "../../../fonts/demos/barlow-normal-400.woff2", style: "normal", weight: "400" },
+    { path: "../../../fonts/demos/barlow-normal-500.woff2", style: "normal", weight: "500" },
+    { path: "../../../fonts/demos/barlow-normal-600.woff2", style: "normal", weight: "600" },
+  ],
+  variable: "--f-body",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+})
+// JetBrains Mono, served from files in the repo so the build never depends on a font host
+const mono = localFont({
+  src: [
+    { path: "../../../fonts/demos/jetbrains-mono-normal-100-800.woff2", style: "normal", weight: "100 800" },
+  ],
+  variable: "--f-mono",
+  display: "swap",
+  fallback: ["ui-monospace", "monospace"],
+})
 
 export const metadata: Metadata = {
   title: "Corridor Freight Lines | LTL, truckload and cross-dock, Windsor to Montreal",
