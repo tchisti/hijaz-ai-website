@@ -7,8 +7,10 @@ import { BreadcrumbJsonLd, FAQJsonLd, IndustryJsonLd } from "@/components/seo/Js
 import { BookCallButton, PageHero, PrimaryButton, SecondaryButton } from "@/components/layout/Sheet"
 import { Reveal } from "@/components/motion/Redline"
 import IndustryIcon from "@/components/industries/IndustryIcon"
+import ConceptCard from "@/components/work/ConceptCard"
 import ProjectCard from "@/components/work/ProjectCard"
 import EnquirySection from "@/components/sections/EnquirySection"
+import { getConceptBuild } from "@/lib/concepts"
 import { SERVICES } from "@/lib/constants"
 import { INDUSTRIES, getIndustry } from "@/lib/industries"
 import { PROJECTS } from "@/lib/projects"
@@ -41,6 +43,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
     .map((s) => PROJECTS.find((p) => p.slug === s))
     .filter((p): p is (typeof PROJECTS)[number] => Boolean(p))
   const others = INDUSTRIES.filter((i) => i.slug !== industry.slug)
+  const concept = getConceptBuild(industry.slug)
 
   return (
     <>
@@ -169,6 +172,30 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 <ProjectCard key={p.slug} project={p} />
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* A concept build for this sector: an invented business, labelled as such */}
+      {concept && (
+        <section className="border-b border-ink/15 bg-paper-deep">
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_1.25fr] lg:items-center lg:py-24">
+            <div>
+              <p className="label text-redline-deep">See it built</p>
+              <h2 className="headline mt-3 text-[clamp(2rem,4.6vw,3.6rem)]">
+                A working example for {industry.name.toLowerCase()}
+              </h2>
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-ink-soft">{concept.summary}</p>
+              <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
+                {concept.name} is an invented business. We designed and built the site to show what a first project in
+                this sector looks like, so you can click through it before you talk to us.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <PrimaryButton href={`/demos/${concept.slug}`}>Open the concept site</PrimaryButton>
+                <SecondaryButton href="#enquire">Get one like this</SecondaryButton>
+              </div>
+            </div>
+            <ConceptCard concept={concept} large />
           </div>
         </section>
       )}
