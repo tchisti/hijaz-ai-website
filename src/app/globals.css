@@ -174,3 +174,37 @@ h4 {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Concept builds (/demos) ──────────────────────────────────────────────────
+   Each demo is a self-contained design. This resets the Hijaz.ai heading styles
+   inside a demo and exposes the three font slots a demo fills with next/font:
+   --f-display, --f-body and --f-mono. */
+.demo {
+  font-family: var(--f-body), system-ui, sans-serif;
+  font-stretch: normal;
+}
+.demo h1,
+.demo h2,
+.demo h3,
+.demo h4 {
+  font-family: inherit;
+  font-stretch: normal;
+  letter-spacing: normal;
+}
+.demo .f-display {
+  font-family: var(--f-display), Georgia, serif;
+}
+.demo .f-body {
+  font-family: var(--f-body), system-ui, sans-serif;
+}
+.demo .f-mono {
+  font-family: var(--f-mono), ui-monospace, monospace;
+}
+.demo ::selection {
+  background: var(--demo-selection, #111);
+  color: var(--demo-selection-text, #fff);
+}
+.demo :focus-visible {
+  outline: 2px solid var(--demo-focus, currentColor);
+  outline-offset: 3px;
+}

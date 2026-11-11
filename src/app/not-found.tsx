@@ -2,9 +2,11 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Home, ArrowLeft, Search } from "lucide-react"
 import { NAV_LINKS } from "@/lib/constants"
+import SiteShell from "@/components/layout/SiteShell"
 
 export default function NotFound() {
   return (
+    <SiteShell>
     <div className="grid-paper flex min-h-[80vh] items-center justify-center px-4 py-20">
       <div className="max-w-lg text-center">
         {/* 404 number */}
@@ -47,5 +49,6 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+    </SiteShell>
   )
 }
