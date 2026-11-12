@@ -18,7 +18,8 @@ Official website for [Hijaz.ai](https://www.hijaz.ai), a business technology par
 |-------|-------------|
 | `/` | Home: hero, logo strip, selected work, capabilities, industries, commitments, process, service areas, FAQ, enquiry form |
 | `/industries` | Industries we help |
-| `/industries/[slug]` | One page per industry: problems, what we build, a priced first project, FAQ, enquiry form |
+| `/industries/[slug]` | One page per industry: problems, what we build, a priced first project, a concept build where there is one, FAQ, enquiry form |
+| `/demos/[industry]` | Concept builds: demonstration sites with invented businesses, one per industry that has no live build. Noindex, outside the sitemap, no Hijaz.ai header or footer |
 | `/work` | All selected builds, grouped by type |
 | `/work/[slug]` | One page per build, linked to the live product |
 | `/services` | Services with starting prices, and packages |
@@ -36,11 +37,13 @@ The site is drawn as an engineering sheet: paper and ink, marked up in red, with
 - **Tokens**: `tailwind.config.ts` (`paper`, `ink`, `redline`, `blueprint`, `chalk`, `highlight`) and `src/app/globals.css`
 - **Motion**: `src/components/motion/Redline.tsx` (underline, circle, dimension line, stamp, reveal). All respect `prefers-reduced-motion`
 - **Page furniture**: `src/components/layout/Sheet.tsx` (sheet headers, page hero, buttons)
+- **Layouts**: `src/app/layout.tsx` is the bare document. The Hijaz.ai header and footer come from `src/app/(site)/layout.tsx` via `SiteShell`, so `/demos` pages render without them
 
 ## Editing content
 
 - **Selected work**: `src/lib/projects.ts`. Set `featured: true` to show a build on the home page and `inLogoStrip: true` to add it to the logo strip. Screenshots live in `public/images/work`, brand marks in `public/images/logos`
 - **Industries**: `src/lib/industries.ts`. Proof on each page is limited to the live builds in `projectSlugs`
+- **Concept builds**: `src/lib/concepts.ts` lists them; each site lives in `src/app/demos/<industry-slug>/` with its components in `src/components/demos/<industry-slug>/`. Each demo loads its typefaces with `next/font/local` from `src/fonts/demos` (open-licensed fonts, latin subset), so the build does not fetch them from a font host. Every demo renders `ConceptBar` first and uses `DemoForm`, which tells the visitor the business is invented and sends the enquiry to Hijaz.ai. Keep them out of `PROJECTS`, the logo strip and the sitemap
 - **Service areas**: `src/lib/locations.ts`. Each city needs its own market notes, proof and FAQ
 - **Services, prices, FAQ, contact details**: `src/lib/constants.ts`
 - **SEO and off-site plan**: `docs/seo-geo-playbook.md`
