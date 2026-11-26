@@ -1,5 +1,28 @@
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
+import { SITE_CONFIG } from "@/lib/constants"
+
+// Shown when delivery fails, so the visitor still has a way to reach us
+const DELIVERY_FAILED_MESSAGE = `We couldn't send your message. Please email ${SITE_CONFIG.email} or call ${SITE_CONFIG.phone}.`
+
+const EMAILJS_TIMEOUT_MS = 10_000
+
+/**
+ * EmailJS settings, read on the server. The NEXT_PUBLIC_ names are accepted as a
+ * fallback so an environment set up from older documentation still delivers enquiries.
+ * Server-side sending needs "Allow EmailJS API for non-browser applications" switched
+ * on under Account > Security in the EmailJS dashboard.
+ */
+function getEmailjsConfig() {
+  const config = {
+    service_id: process.env.EMAILJS_SERVICE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+    template_id: process.env.EMAILJS_TEMPLATE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+    user_id: process.env.EMAILJS_PUBLIC_KEY ?? process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    accessToken: process.env.EMAILJS_PRIVATE_KEY || undefined,
+  }
+  const missing = (["service_id", "template_id", "user_id"] as const).filter((key) => !config[key])
+  return { config, missing }
+}
 
 // Rate limiting store (in production, use Redis or similar)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>()
@@ -123,42 +146,40 @@ export async function POST(request: NextRequest) {
 
     const data = result.data
 
-    // Server-side EmailJS call (keeps API keys private)
-    // Note: For production, consider using Resend, SendGrid, or direct SMTP
-    const emailjsResponse = await fetch(
-      "https://api.emailjs.com/api/v1.0/email/send",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // The NEXT_PUBLIC_ names are accepted as a fallback so an environment
-          // set up from older documentation still delivers enquiries
-          service_id: process.env.EMAILJS_SERVICE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-          template_id: process.env.EMAILJS_TEMPLATE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-          user_id: process.env.EMAILJS_PUBLIC_KEY ?? process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-          accessToken: process.env.EMAILJS_PRIVATE_KEY,
-          template_params: {
-            from_name: data.name,
-            from_email: data.email,
-            phone: data.phone || "Not provided",
-            service: data.service,
-            details: data.details,
-            budget: data.budget || "Not specified",
-            submission_ip: ip,
-            submission_time: new Date().toISOString(),
-          },
-        }),
-      }
-    )
+    const { config, missing } = getEmailjsConfig()
+    if (missing.length > 0) {
+      console.error(`EmailJS is not configured, missing: ${missing.join(", ")}`)
+      return NextResponse.json({ error: DELIVERY_FAILED_MESSAGE }, { status: 503 })
+    }
 
-    if (!emailjsResponse.ok) {
-      console.error("EmailJS error:", await emailjsResponse.text())
-      return NextResponse.json(
-        { error: "Failed to send message. Please try again." },
-        { status: 500 }
-      )
+    // Sent from the server so the keys stay private
+    const emailjsResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal: AbortSignal.timeout(EMAILJS_TIMEOUT_MS),
+      body: JSON.stringify({
+        ...config,
+        template_params: {
+          from_name: data.name,
+          from_email: data.email,
+          phone: data.phone || "Not provided",
+          service: data.service,
+          details: data.details,
+          budget: data.budget || "Not specified",
+          submission_ip: ip,
+          submission_time: new Date().toISOString(),
+        },
+      }),
+    }).catch((error: unknown) => {
+      console.error("EmailJS request failed:", error)
+      return null
+    })
+
+    if (!emailjsResponse?.ok) {
+      if (emailjsResponse) {
+        console.error(`EmailJS error ${emailjsResponse.status}:`, await emailjsResponse.text())
+      }
+      return NextResponse.json({ error: DELIVERY_FAILED_MESSAGE }, { status: 502 })
     }
 
     return NextResponse.json(

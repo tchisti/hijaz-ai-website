@@ -82,6 +82,8 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_SITE_URL` | Production URL (`https://www.hijaz.ai`) |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp number with country code |
 
+`/api/contact` sends through the EmailJS REST API from the server, so in the EmailJS dashboard under **Account > Security** switch on **"Allow EmailJS API for non-browser applications"**. Without it every enquiry fails with "API access from non-browser environments is currently disabled". Switch on **"Use Private Key"** there too and set `EMAILJS_PRIVATE_KEY`, so the public key alone cannot be used to send through your account.
+
 ### Development
 
 ```bash
